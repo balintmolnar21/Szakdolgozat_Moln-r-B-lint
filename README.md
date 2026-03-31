@@ -1,7 +1,6 @@
 # „Social media” hangulatelemző szoftver
 
 ## Saját adatok
-> Ezt a részt töltsd ki a saját adataiddal.
 
 - **Név:** Molnár Bálint Ottó
 - **Neptun-kód:** VP35W1
