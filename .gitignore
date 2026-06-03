@@ -33,10 +33,24 @@ build/
 # Logs
 *.log
 
-# Model / temporary output files
+# Temporary files
 *.tmp
 *.temp
 
-# Generated data / results (csak ha nem akarod feltölteni)
+# Generated data / results
 results/
 output/
+outputs/charts/*
+outputs/exports/*
+outputs/reports/*
+
+# Raw and processed data
+data/raw/*
+data/processed/*
+
+# Keep folder structure in Git
+!outputs/charts/.gitkeep
+!outputs/exports/.gitkeep
+!outputs/reports/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
