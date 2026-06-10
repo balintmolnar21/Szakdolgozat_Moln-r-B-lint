@@ -43,7 +43,7 @@ Szakdolgozat_Moln-r-B-lint/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
-
+```
 ## 1. iteráció – CSV-alapú validációs adathalmaz beolvasása
 
 ### Cél
