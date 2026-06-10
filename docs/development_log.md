@@ -81,3 +81,4 @@ Komment tartalma   → comment_text
 Kézi címke         → manual_label
 Modell címke       → model_label
 Megjegyzés         → note
+```
