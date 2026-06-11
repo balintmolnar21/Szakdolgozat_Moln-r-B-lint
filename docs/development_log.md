@@ -109,3 +109,12 @@ image_context_text
 video_context_text
 note
 ```
+A különböző változók jelentése:
+```text
+post_id              → a poszt azonosítója, például P1, P2, P3
+post_type            → a poszt típusa, például image vagy video
+post_text            → a Facebook-poszt eredeti szövege
+image_context_text   → képes poszt esetén a kép manuális szöveges leírása
+video_context_text   → videós poszt esetén a videó manuális leirata vagy felirata
+note                 → technikai vagy adatkezelési megjegyzés
+```
