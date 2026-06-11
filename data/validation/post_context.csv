@@ -1,21 +1,32 @@
-post_id,post_type,post_text,image_context_text,video_context_text,note	
-"P1,image,""Ma az utolsó plakátok is gazdára találtak.??"	
-"Köszönöm!??"",""A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall."",,Képes poszt"	 a kép tartalma manuális szöveges leírásként kerül tárolásra.
-"P2,image,""Köszönöm!??"	
-A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.	
-Pedig a valódi köszönet nekik jár.	
-Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.	
-Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.	
-"Köszönöm nektek!??"",""A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall."",,Képes poszt"	 a kép tartalma manuális szöveges leírásként kerül tárolásra.
-"P3,image,Választás előtti utolsó piac!????,""A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat."",,Képes poszt"	 a kép tartalma manuális szöveges leírásként kerül tárolásra.
-"P4,video,Így szegényítette el a Fidesz a nyugdíjasokat.??,,""Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik."	
-Csak jobb lenne nem?	
-"Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra."",Videós poszt"	 a videó tartalma manuális szöveges leiratként kerül tárolásra.
-"P5,image,""A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.??"	
-Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.	
-Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.	
-Ez nem természeti törvény, hanem politikai döntések következménye.	
-Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.	
-Csak erős baloldal tudja képviselni a magyar vidéket.	
-Erős baloldal!	
-"Erős magyar vidék! ??"",""A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall."",,Képes poszt"	 a kép tartalma manuális szöveges leírásként kerül tárolásra.
+﻿"post_id","post_type","post_text","image_context_text","video_context_text","note"
+"P1","image","Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
+"P2","image","Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
+"P3","image","Választás előtti utolsó piac!🍎💙","A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
+"P4","video","Így szegényítette el a Fidesz a nyugdíjasokat.👇","","Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.","Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra."
+"P5","image","A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
