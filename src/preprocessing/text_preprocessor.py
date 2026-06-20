@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+from preprocessing.emoji_lib import replace_emojis
 
 
 def normalize_whitespace(text: str) -> str:
@@ -19,6 +20,7 @@ def clean_text(text: str | None) -> str:
     text = str(text)
     text = replace_urls(text)
     text = normalize_whitespace(text)
+    text = replace_emojis(text)
 
     return text
 
@@ -62,6 +64,9 @@ if __name__ == "__main__":
 
 
     https://example.com
+    
+    
+    Jó hangulat volt! 😀💙👇
     """
 
     cleaned_sample_text = clean_text(sample_text)
