@@ -118,3 +118,24 @@ image_context_text   → képes poszt esetén a kép manuális szöveges leírá
 video_context_text   → videós poszt esetén a videó manuális leirata vagy felirata
 note                 → technikai vagy adatkezelési megjegyzés
 ```
+
+## 3. iteráció – Szöveg-előfeldolgozó modul és emoji-tokenizálás kialakítása
+
+### Cél
+
+A 3. fejlesztési iteráció célja a rendszer szöveg-előfeldolgozó rétegének kialakítása volt. Az előző iteráció végére a program már képes volt a validációs kommenthalmaz és a posztkontextus-adathalmaz beolvasására, majd ezek `post_id` alapján történő összekapcsolására. Ennek eredményeként minden kommenthez elérhetővé vált a hozzá tartozó poszt szövege, képes poszt esetén a kép manuális szöveges leírása, videós poszt esetén pedig a videó manuális leirata.
+
+Az így létrejött adathalmaz azonban még nyers szöveges mezőket tartalmazott. A közösségi médiából származó szövegek gyakran tartalmaznak emojikat, URL-eket, többszörös szóközöket, sortöréseket, rövid és informális megfogalmazásokat, valamint olyan karaktereket, amelyek közvetlenül nem minden esetben ideálisak modellalapú feldolgozásra. Emiatt szükségessé vált egy külön előfeldolgozó modul létrehozása, amely a nyers szövegekből egységesebb, a későbbi hangulatelemzés számára jobban kezelhető bemenetet állít elő.
+
+Az iteráció fontos tervezési célja volt, hogy az előfeldolgozás ne írja felül az eredeti adatokat. Ehelyett a rendszer új, `cleaned_` előtaggal ellátott oszlopokat hoz létre. Ez lehetővé teszi, hogy az eredeti és a tisztított szövegek egymás mellett megmaradjanak, így a fejlesztés és validáció során pontosan ellenőrizhető, milyen változtatásokat végzett az előfeldolgozás.
+
+### Megvalósított fájlstruktúra
+
+Az iteráció során a projektben létrejött a szöveg-előfeldolgozásért felelős új modulstruktúra:
+
+```text
+src/preprocessing/
+├── __init__.py
+├── emoji_library.py
+└── text_preprocessor.py
+```
