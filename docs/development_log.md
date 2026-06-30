@@ -139,3 +139,23 @@ src/preprocessing/
 ├── emoji_library.py
 └── text_preprocessor.py
 ```
+
+## 4. iteráció – huBERT-alapú sentiment modell integrálása
+
+### Cél
+
+A 4. fejlesztési iteráció célja a magyar nyelvű, huBERT-alapú sentiment elemző modell integrálása volt a rendszerbe. Az előző iterációk során elkészült az adatok beolvasása, a posztkontextus kezelése, valamint a szöveges mezők előfeldolgozása. A rendszer így már rendelkezett olyan tisztított szöveges oszlopokkal, amelyek alkalmasak voltak a modellalapú hangulatelemzés bemeneteként történő felhasználásra.
+
+Ebben az iterációban a cél az volt, hogy a rendszer képes legyen egy előre betanított magyar nyelvű Transformer-alapú modellt betölteni, a megtisztított kommenteket elemezni, majd minden kommenthez automatikus hangulatcímkét és konfidenciaértéket rendelni.
+
+A fejlesztés során a hangsúly első lépésben a kommentek hangulatelemzésén volt, ugyanakkor a sentiment elemző modult általános szövegelemző komponensként alakítottuk ki. Ez lehetővé teszi, hogy később ugyanaz a modul ne csak kommentekre, hanem posztszövegre, képi kontextus manuális leírására és videós leiratra is alkalmazható legyen.
+
+### Megvalósított fájlstruktúra
+
+Az iteráció során létrejött a sentiment elemzésért felelős új modul:
+
+```text
+src/sentiment/
+├── __init__.py
+└── hubert_sentiment_analyzer.py
+```
