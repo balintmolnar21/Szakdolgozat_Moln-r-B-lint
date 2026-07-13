@@ -10,6 +10,35 @@
 
 
 ---
+## Fejlesztési környezet beállítása
+
+A projekt Python alapú alkalmazás, ezért a futtatásához Python 3.11 verzió használata javasolt.  
+A függőségek elkülönített virtuális környezetben kerülnek telepítésre, így nem keverednek a rendszer globálisan telepített Python-csomagjaival.
+
+### 1. Projekt mappájának megnyitása
+
+A terminálban először a projekt gyökérmappájába kell lépni:
+
+```bash
+cd "C:\Users\USER\Desktop\projektek_fejlesztes\diplomamunka\Szakdolgozat_Moln-r-B-lint"
+```
+### 2. .venv létrehozása és aktiválása
+ ```bash
+py -3.11 -m venv .venv
+```
+Majd:
+ ```bash
+.venv\Scripts\activate
+```
+Végül pedig a requirements.txt telepítése
+ ```bash
+py -m pip install --upgrade pip
+```
+ ```bash
+py -m pip install -r requirements.txt
+```
+
+---
 
 ## Projektleírás
 
