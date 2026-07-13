@@ -159,3 +159,165 @@ src/sentiment/
 ├── __init__.py
 └── hubert_sentiment_analyzer.py
 ```
+
+## 5. iteráció – Posztkontextus és kommentek együttes sentiment elemzése
+
+### Cél
+
+Az ötödik fejlesztési iteráció célja az volt, hogy a rendszer a kommentek mellett a hozzájuk tartozó posztkontextust is sentiment elemzésnek vesse alá. A fejlesztés során a meglévő huBERT-alapú sentiment elemző modul kibővítésre került, hogy több szövegoszlopon is képes legyen egymás után elemzést végezni.
+
+A rendszer ebben az iterációban már az alábbi szöveges mezőket elemzi:
+
+```text
+cleaned_comment_text
+cleaned_post_text
+cleaned_image_context_text
+cleaned_video_context_text
+```
+
+Ez lehetővé teszi, hogy a kommentek hangulata mellett a poszt szövege, a képi kontextus szöveges leírása és a videós leirat is külön sentiment címkét kapjon.
+
+### Érintett fájlok
+
+Az iteráció során az alábbi fájlok módosultak:
+
+```text
+src/data_model/schema.py
+src/sentiment/hubert_sentiment_analyzer.py
+src/main.py
+README.md
+```
+
+Új külön pipeline-fájl nem készült. A feldolgozási sorrendet továbbra is a `main.py` kezeli, míg a sentiment elemzés modelllogikája a `hubert_sentiment_analyzer.py` fájlban maradt.
+
+### Adatséma bővítése
+
+A `schema.py` fájlban új oszlopok kerültek bevezetésre a posztkontextus sentiment eredményeinek tárolására:
+
+```text
+post_sentiment_label
+post_sentiment_confidence
+post_original_model_label
+
+image_context_sentiment_label
+image_context_sentiment_confidence
+image_context_original_model_label
+
+video_context_sentiment_label
+video_context_sentiment_confidence
+video_context_original_model_label
+```
+
+Ezek az oszlopok külön tárolják a poszt szövegének, a képi kontextus leírásának és a videós leiratnak a modell által adott címkéjét, konfidenciaértékét és eredeti modellcímkéjét.
+
+### Sentiment elemző modul bővítése
+
+A `hubert_sentiment_analyzer.py` fájlban a `HuBERTSentimentAnalyzer` osztály egy új metódussal bővült:
+
+```python
+analyze_multiple_dataframe_columns(...)
+```
+
+Ez a metódus konfigurációs lista alapján több DataFrame-oszlopon futtatja le a sentiment elemzést. A megoldás a korábban elkészült `analyze_dataframe_column()` metódust használja újra, így a modellfuttatási logika nem ismétlődik.
+
+A lokális tesztblokk is frissítésre került, így már nemcsak egyedi mintaszövegeken, hanem többoszlopos DataFrame-példán is ellenőrizhető a sentiment elemző működése.
+
+### A main.py módosítása
+
+A `main.py` fájlban létrejött egy `sentiment_analysis_configs` konfigurációs lista, amely meghatározza, hogy mely szövegoszlopokat kell elemezni, és az eredményeket mely oszlopokba kell menteni.
+
+A feldolgozási folyamat az iteráció után:
+
+```text
+validációs kommentadatok beolvasása
+→ posztkontextus beolvasása
+→ kommentek és posztkontextus összekapcsolása
+→ szöveg-előfeldolgozás
+→ huBERT sentiment modell betöltése
+→ kommentek sentiment elemzése
+→ posztszöveg sentiment elemzése
+→ képi kontextus sentiment elemzése
+→ videós leirat sentiment elemzése
+→ egységes Excel-adatbázis exportálása
+```
+
+A fő kimeneti fájl:
+
+```text
+data/processed/full_sentiment_analysis.xlsx
+```
+
+### Egységes sentiment adatbázis
+
+Az iteráció eredményeként létrejön egy egységes Excel-alapú adathalmaz, amelyben egy sor továbbra is egy kommentet jelent, de minden komment mellett szerepel a hozzá tartozó poszt szöveges kontextusa és annak sentiment eredménye is.
+
+Az Excel többek között tartalmazza:
+
+```text
+post_id
+post_type
+post_text
+cleaned_post_text
+post_sentiment_label
+
+image_context_text
+cleaned_image_context_text
+image_context_sentiment_label
+
+video_context_text
+cleaned_video_context_text
+video_context_sentiment_label
+
+comment_id
+comment_text
+cleaned_comment_text
+manual_label
+model_label
+confidence
+original_model_label
+```
+
+Ez az egységes adatszerkezet megalapozza a későbbi statisztikai összesítést, validációt és kontextusalapú értelmezést.
+
+### Képi és videós kontextus kezelése
+
+A képes posztok esetében a rendszer jelenleg nem magát a képfájlt elemzi, hanem a `post_context.csv` fájlban megadott szöveges képleírást. A későbbiekben ez a képleírás automatikus képelemző modell kimenetével is kiváltható lesz.
+
+Videós posztok esetében a rendszer a videóhoz tartozó szöveges leiratot vagy manuálisan megadott összefoglalót elemzi. Ez illeszkedik a prototípus céljához, mert a rendszer fókusza továbbra is a magyar nyelvű szöveges tartalmak sentiment elemzésén van.
+
+### Fontos tervezési döntés
+
+A kommentek `model_label` értéke nem kerül átírásra a poszt hangulata alapján. A rendszer külön kezeli:
+
+```text
+model_label
+→ a komment önálló sentiment címkéje
+
+post_sentiment_label
+→ a poszt szövegének sentiment címkéje
+
+image_context_sentiment_label
+→ a képi kontextus szöveges leírásának sentiment címkéje
+
+video_context_sentiment_label
+→ a videós leirat sentiment címkéje
+```
+
+Ez azért fontos, mert a kommenthangulat és a poszthangulat külön elemzési szintet képvisel. A kettő összevetése majd egy későbbi kontextuselemző modul feladata lesz.
+
+### README bővítése
+
+A `README.md` fájl kiegészült a virtuális környezet létrehozásának, aktiválásának, a `requirements.txt` alapján történő függőségtelepítésnek és a program futtatásának parancsaival. Ez megkönnyíti a projekt reprodukálását és a konzulensi ellenőrzést.
+
+### Eredmény
+
+Az ötödik iteráció eredményeként a rendszer képes a kommentek, a poszt szövege, a képi kontextus leírása és a videós leirat sentiment elemzésére, majd ezek eredményét egy közös Excel-fájlban tárolja.
+
+A létrejött fő kimenet:
+
+```text
+data/processed/full_sentiment_analysis.xlsx
+```
+
+Ez az állomány a következő fejlesztési fázis, a statisztikai összesítés alapját képezi.
+
