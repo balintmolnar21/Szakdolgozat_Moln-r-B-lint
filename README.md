@@ -30,6 +30,7 @@ Majd:
  ```bash
 .venv\Scripts\activate
 ```
+### 3. Bővítmények telepítése
 Végül pedig a requirements.txt telepítése
  ```bash
 py -m pip install --upgrade pip
