@@ -120,8 +120,33 @@ class HuBERTSentimentAnalyzer:
                 df.at[index, original_label_column] = result.original_label
 
         return df
+    
+    def analyze_multiple_dataframe_columns(
+        self,
+        df,
+        analysis_configs: list[dict],
+        limit: int | None = None,
+    ):
+        
+        analyzed_df = df.copy()
 
+        for config in analysis_configs:
+            analyzed_df = self.analyze_dataframe_column(
+                df=analyzed_df,
+                source_column=config["source_column"],
+                label_column=config["label_column"],
+                confidence_column=config["confidence_column"],
+                original_label_column=config.get("original_label_column"),
+                limit=limit,
+            )
+
+        return analyzed_df
+
+
+#Tesztelésre
 if __name__ == "__main__":
+    import pandas as pd
+
     analyzer = HuBERTSentimentAnalyzer()
 
     sample_texts = [
@@ -132,6 +157,8 @@ if __name__ == "__main__":
         "Ez elfogadhatatlan és felháborító.",
     ]
 
+    print("Egyedi szövegek sentiment elemzésének tesztje:")
+
     for text in sample_texts:
         result = analyzer.predict(text)
 
@@ -140,3 +167,85 @@ if __name__ == "__main__":
         print("Normalizált címke:", result.label)
         print("Eredeti modellcímke:", result.original_label)
         print("Konfidencia:", round(result.confidence, 4))
+
+    print("\n" + "-" * 80)
+    print("Több DataFrame-oszlop sentiment elemzésének tesztje:")
+
+    test_df = pd.DataFrame(
+        {
+            "cleaned_comment_text": [
+                "Nagyon jó kezdeményezés, gratulálok!",
+                "Ez teljesen elfogadhatatlan.",
+                "Értem, köszönöm az információt.",
+            ],
+            "cleaned_post_text": [
+                "Köszönöm mindenkinek a támogatást! [kék szív emoji]",
+                "Ez a döntés sok embernek okozott nehézséget.",
+                "Tájékoztatás a következő esemény időpontjáról.",
+            ],
+            "cleaned_image_context_text": [
+                "A képen mosolygó emberek láthatók egy közösségi eseményen.",
+                "A képen komoly hangulatú politikai kampányjelenet látható.",
+                "",
+            ],
+            "cleaned_video_context_text": [
+                "",
+                "A videó a nyugdíjasokat érintő problémákról és elszegényedésről szól.",
+                "A videóban általános tájékoztató jellegű információk hangzanak el.",
+            ],
+        }
+    )
+
+    sentiment_analysis_configs = [
+        {
+            "source_column": "cleaned_comment_text",
+            "label_column": "model_label",
+            "confidence_column": "confidence",
+            "original_label_column": "original_model_label",
+        },
+        {
+            "source_column": "cleaned_post_text",
+            "label_column": "post_sentiment_label",
+            "confidence_column": "post_sentiment_confidence",
+            "original_label_column": "post_original_model_label",
+        },
+        {
+            "source_column": "cleaned_image_context_text",
+            "label_column": "image_context_sentiment_label",
+            "confidence_column": "image_context_sentiment_confidence",
+            "original_label_column": "image_context_original_model_label",
+        },
+        {
+            "source_column": "cleaned_video_context_text",
+            "label_column": "video_context_sentiment_label",
+            "confidence_column": "video_context_sentiment_confidence",
+            "original_label_column": "video_context_original_model_label",
+        },
+    ]
+
+    analyzed_df = analyzer.analyze_multiple_dataframe_columns(
+        df=test_df,
+        analysis_configs=sentiment_analysis_configs,
+        limit=None,
+    )
+
+    preview_columns = [
+        "cleaned_comment_text",
+        "model_label",
+        "confidence",
+        "original_model_label",
+        "cleaned_post_text",
+        "post_sentiment_label",
+        "post_sentiment_confidence",
+        "post_original_model_label",
+        "cleaned_image_context_text",
+        "image_context_sentiment_label",
+        "image_context_sentiment_confidence",
+        "image_context_original_model_label",
+        "cleaned_video_context_text",
+        "video_context_sentiment_label",
+        "video_context_sentiment_confidence",
+        "video_context_original_model_label",
+    ]
+
+    print(analyzed_df[preview_columns])
