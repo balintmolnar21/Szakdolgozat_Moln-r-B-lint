@@ -144,6 +144,7 @@ class HuBERTSentimentAnalyzer:
 
 
 #Tesztelésre
+'''
 if __name__ == "__main__":
     import pandas as pd
 
@@ -249,3 +250,4 @@ if __name__ == "__main__":
     ]
 
     print(analyzed_df[preview_columns])
+    '''
