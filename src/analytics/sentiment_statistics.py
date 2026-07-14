@@ -17,22 +17,7 @@ def validate_required_columns(
     df: pd.DataFrame,
     required_columns: set[str],
 ) -> None:
-    """
-    Ellenőrzi, hogy a DataFrame tartalmazza-e a statisztikai
-    számításokhoz szükséges oszlopokat.
-
-    Parameters
-    ----------
-    df:
-        Az ellenőrizendő pandas DataFrame.
-    required_columns:
-        A kötelező oszlopok neveit tartalmazó halmaz.
-
-    Raises
-    ------
-    ValueError:
-        Ha egy vagy több kötelező oszlop hiányzik.
-    """
+    
     missing_columns = required_columns.difference(df.columns)
 
     if missing_columns:
@@ -47,31 +32,7 @@ def validate_required_columns(
 def prepare_sentiment_dataframe(
     df: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Előkészíti az egységes sentiment adathalmazt a statisztikai
-    számításokhoz.
-
-    A függvény:
-    - másolatot készít az eredeti DataFrame-ről;
-    - kisbetűssé és whitespace-mentessé alakítja a modellcímkéket;
-    - numerikus típussá alakítja a konfidenciaértékeket;
-    - ellenőrzi a hiányzó vagy ismeretlen sentiment címkéket.
-
-    Parameters
-    ----------
-    df:
-        Az egységes sentiment elemzési DataFrame.
-
-    Returns
-    -------
-    pd.DataFrame
-        A statisztikai számításokra előkészített DataFrame.
-
-    Raises
-    ------
-    ValueError:
-        Ha hiányzó vagy nem támogatott sentiment címke található.
-    """
+    
     required_columns = {
         "post_id",
         "model_label",
@@ -123,27 +84,7 @@ def prepare_sentiment_dataframe(
 def determine_dominant_sentiment(
     sentiment_counts: dict[str, int],
 ) -> str:
-    """
-    Meghatározza a sentiment darabszámok alapján a domináns hangulatot.
-
-    Ha egyetlen kategória rendelkezik a legmagasabb darabszámmal,
-    akkor annak neve kerül visszaadásra.
-
-    Ha több kategória azonos legmagasabb darabszámmal rendelkezik,
-    akkor az eredmény 'mixed'.
-
-    Ha minden kategória darabszáma nulla, akkor az eredmény 'no_data'.
-
-    Parameters
-    ----------
-    sentiment_counts:
-        A sentiment kategóriákhoz tartozó darabszámok.
-
-    Returns
-    -------
-    str
-        A domináns sentiment címke, 'mixed' vagy 'no_data'.
-    """
+    
     if not sentiment_counts:
         return "no_data"
 
@@ -168,24 +109,7 @@ def get_first_available_value(
     group_df: pd.DataFrame,
     column_name: str,
 ) -> Any:
-    """
-    Egy csoport adott oszlopából visszaadja az első nem hiányzó értéket.
-
-    Ez azért szükséges, mert a teljes adatbázisban ugyanaz a posztkontextus
-    minden hozzá tartozó komment sorában ismétlődik.
-
-    Parameters
-    ----------
-    group_df:
-        Egy adott poszthoz tartozó rekordok DataFrame-je.
-    column_name:
-        A kiválasztandó oszlop neve.
-
-    Returns
-    -------
-    Any
-        Az első elérhető érték. Hiányzó oszlop vagy érték esetén None.
-    """
+    
     if column_name not in group_df.columns:
         return None
 
@@ -209,28 +133,7 @@ def get_first_available_value(
 def calculate_post_statistics(
     full_dataset_df: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Posztonkénti sentiment statisztikákat készít.
-
-    Egy kimeneti sor egy Facebook-posztot jelent. A számítás tartalmazza:
-    - a kommentek teljes számát;
-    - a pozitív, negatív és semleges kommentek számát;
-    - a sentiment kategóriák százalékos arányát;
-    - a domináns kommenthangulatot;
-    - az átlagos kommentkonfidenciát;
-    - a poszt-, kép- és videókontextus sentiment adatait.
-
-    Parameters
-    ----------
-    full_dataset_df:
-        Az ötödik fejlesztési fázisban létrehozott teljes sentiment
-        adathalmaz.
-
-    Returns
-    -------
-    pd.DataFrame
-        A posztonkénti statisztikákat tartalmazó DataFrame.
-    """
+    
     prepared_df = prepare_sentiment_dataframe(full_dataset_df)
 
     post_statistics_records: list[dict[str, Any]] = []
@@ -345,23 +248,7 @@ def calculate_post_statistics(
 def calculate_overall_statistics(
     full_dataset_df: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    A teljes sentiment adathalmazra vonatkozó összesített
-    statisztikákat készít.
-
-    A kimeneti DataFrame egyetlen sort tartalmaz.
-
-    Parameters
-    ----------
-    full_dataset_df:
-        A teljes, kommentenkénti sentiment adathalmaz.
-
-    Returns
-    -------
-    pd.DataFrame
-        A teljes adathalmaz aggregált mutatóit tartalmazó,
-        egysoros DataFrame.
-    """
+    
     prepared_df = prepare_sentiment_dataframe(full_dataset_df)
 
     label_counts = prepared_df["model_label"].value_counts()
@@ -440,23 +327,7 @@ def format_excel_worksheet(
     freeze_panes: str = "A2",
     maximum_column_width: int = 60,
 ) -> None:
-    """
-    Alapvető formázást végez egy openpyxl munkalapon.
-
-    A függvény:
-    - rögzíti a fejlécsort;
-    - bekapcsolja az automatikus szűrést;
-    - a tartalom alapján beállítja az oszlopszélességeket.
-
-    Parameters
-    ----------
-    worksheet:
-        Az openpyxl munkalap objektuma.
-    freeze_panes:
-        A rögzítendő cellapozíció.
-    maximum_column_width:
-        Az automatikusan beállítható legnagyobb oszlopszélesség.
-    """
+   
     worksheet.freeze_panes = freeze_panes
 
     if worksheet.max_row > 0 and worksheet.max_column > 0:
@@ -488,31 +359,7 @@ def export_sentiment_workbook(
     overall_statistics_df: pd.DataFrame,
     output_file: str | Path,
 ) -> Path:
-    """
-    Egyetlen, három munkalapos Excel-fájlba exportálja
-    a részletes és összesített sentiment adatokat.
-
-    Munkalapok:
-    - full_dataset
-    - post_statistics
-    - overall_statistics
-
-    Parameters
-    ----------
-    full_dataset_df:
-        A kommentenkénti teljes sentiment adathalmaz.
-    post_statistics_df:
-        A posztonkénti összesített statisztika.
-    overall_statistics_df:
-        A teljes adathalmaz összesített statisztikája.
-    output_file:
-        A létrehozandó Excel-fájl elérési útja.
-
-    Returns
-    -------
-    Path
-        A létrehozott Excel-fájl útvonala.
-    """
+    
     output_path = Path(output_file)
 
     output_path.parent.mkdir(
