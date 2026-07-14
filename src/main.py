@@ -7,12 +7,18 @@ from data_input.csv_loader import (
 from preprocessing.text_preprocessor import preprocess_text_fields
 from sentiment.hubert_sentiment_analyzer import HuBERTSentimentAnalyzer
 
+from analytics.sentiment_statistics import (
+    calculate_post_statistics,
+    calculate_overall_statistics,
+    export_sentiment_workbook,
+)
+
 
 def main():
     validation_file = "data/validation/validacios_teszthalmaz.csv"
     post_context_file = "data/validation/post_context.csv"
 
-    output_file = "data/processed/full_sentiment_analysis.xlsx"
+    output_file = "data/processed/sentiment_analysis_results.xlsx"
 
     print("Validációs kommentadatok beolvasása...")
     comments_df = load_validation_dataset(validation_file)
@@ -67,21 +73,51 @@ def main():
     full_sentiment_df = analyzer.analyze_multiple_dataframe_columns(
         df=preprocessed_df,
         analysis_configs=sentiment_analysis_configs,
-        # limit=10,  # teszteléshez használható; teljes futtatáshoz legyen None
+        # limit=10,  # teszteléshez használható
         limit=None,
     )
 
-    full_sentiment_df.to_excel(output_file, index=False)
+    print("Posztonkénti statisztikák számítása...")
+    post_statistics_df = calculate_post_statistics(
+        full_sentiment_df
+    )
 
-    print("Kommentek és posztkontextus sikeresen beolvasva, összekapcsolva, előfeldolgozva és elemezve.")
+    print("Teljes adathalmaz statisztikáinak számítása...")
+    overall_statistics_df = calculate_overall_statistics(
+        full_sentiment_df
+    )
+
+    print("Három munkalapos Excel-fájl létrehozása...")
+    created_output_file = export_sentiment_workbook(
+        full_dataset_df=full_sentiment_df,
+        post_statistics_df=post_statistics_df,
+        overall_statistics_df=overall_statistics_df,
+        output_file=output_file,
+    )
+
+    print(
+        "Kommentek és posztkontextus sikeresen beolvasva, "
+        "összekapcsolva, előfeldolgozva, elemezve és összesítve."
+    )
     print(f"Kommentek száma: {len(comments_df)}")
     print(f"Posztkontextusok száma: {len(post_context_df)}")
     print(f"Összekapcsolt adatsorok száma: {len(merged_df)}")
     print(f"Előfeldolgozott adatsorok száma: {len(preprocessed_df)}")
     print(f"Teljes sentiment adatsorok száma: {len(full_sentiment_df)}")
-    print(f"\nAz egységes sentiment elemzési adatbázis mentve ide: {output_file}")
+    print(
+        f"Posztonkénti statisztikai sorok száma: "
+        f"{len(post_statistics_df)}"
+    )
+    print(
+        f"Teljes adathalmaz statisztikai sorainak száma: "
+        f"{len(overall_statistics_df)}"
+    )
+    print(
+        "\nAz egységes, három munkalapos sentiment eredményfájl "
+        f"mentve ide: {created_output_file}"
+    )
 
-    preview_columns = [
+    full_dataset_preview_columns = [
         "post_id",
         "post_type",
         "post_sentiment_label",
@@ -97,13 +133,48 @@ def main():
         "original_model_label",
     ]
 
-    available_preview_columns = [
-        column for column in preview_columns
+    available_full_dataset_preview_columns = [
+        column
+        for column in full_dataset_preview_columns
         if column in full_sentiment_df.columns
     ]
 
-    print("\nElső 10 elemzett rekord:")
-    print(full_sentiment_df[available_preview_columns].head(10))
+    post_statistics_preview_columns = [
+        "post_id",
+        "post_type",
+        "comment_count",
+        "positive_count",
+        "negative_count",
+        "neutral_count",
+        "positive_ratio",
+        "negative_ratio",
+        "neutral_ratio",
+        "dominant_comment_sentiment",
+        "average_comment_confidence",
+    ]
+
+    available_post_statistics_preview_columns = [
+        column
+        for column in post_statistics_preview_columns
+        if column in post_statistics_df.columns
+    ]
+
+    print("\nA teljes sentiment adathalmaz első 10 rekordja:")
+    print(
+        full_sentiment_df[
+            available_full_dataset_preview_columns
+        ].head(10)
+    )
+
+    print("\nPosztonkénti statisztikák:")
+    print(
+        post_statistics_df[
+            available_post_statistics_preview_columns
+        ]
+    )
+
+    print("\nTeljes adathalmaz statisztikája:")
+    print(overall_statistics_df)
 
 
 if __name__ == "__main__":
