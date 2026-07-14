@@ -319,5 +319,349 @@ A létrejött fő kimenet:
 data/processed/full_sentiment_analysis.xlsx
 ```
 
-Ez az állomány a következő fejlesztési fázis, a statisztikai összesítés alapját képezi.
+## 6. iteráció – Statisztikai összesítés és több munkalapos Excel-kimenet
+
+### Cél
+
+A hatodik fejlesztési iteráció célja az volt, hogy a korábban elkészült részletes sentiment adathalmazból automatikusan előálljanak a posztonkénti és a teljes adathalmazra vonatkozó statisztikai összesítések.
+
+A fejlesztés eredményeként a rendszer már nemcsak kommentenként tárolja a modell által adott sentiment címkéket és konfidenciaértékeket, hanem képes kiszámítani:
+
+```text
+a pozitív kommentek számát,
+a negatív kommentek számát,
+a semleges kommentek számát,
+a sentiment kategóriák százalékos arányát,
+a domináns kommenthangulatot,
+az átlagos modellkonfidenciát,
+a posztok és kommentek teljes számát.
+```
+
+Az eredmények egyetlen Excel-munkafüzetbe kerülnek, három külön munkalapon.
+
+### Érintett fájlok
+
+A fejlesztés során az alábbi fájlok jöttek létre vagy módosultak:
+
+```text
+src/analytics/__init__.py
+src/analytics/sentiment_statistics.py
+src/main.py
+```
+
+A statisztikai logika külön `analytics` modulba került. Ez azért indokolt, mert ebben a fejlesztési fázisban már nem történik új modellpredikció, hanem a korábban létrehozott sentiment eredmények feldolgozása és összesítése valósul meg.
+
+A `main.py` továbbra is a teljes feldolgozási sorrendet vezérli.
+
+### Az analytics modul kialakítása
+
+A statisztikai műveletekhez létrejött az alábbi modul:
+
+```text
+src/analytics/sentiment_statistics.py
+```
+
+A modul fő feladatai:
+
+```text
+a szükséges oszlopok ellenőrzése,
+a sentiment címkék előkészítése,
+a posztonkénti statisztikák kiszámítása,
+a teljes adathalmaz összesítése,
+a domináns sentiment meghatározása,
+a három munkalapos Excel-fájl exportálása.
+```
+
+A modul a pandas könyvtár DataFrame-műveleteire épül, az Excel-fájl létrehozásához pedig az `openpyxl` motort használja.
+
+### Adatellenőrzés és előkészítés
+
+A `validate_required_columns()` függvény ellenőrzi, hogy a feldolgozandó DataFrame tartalmazza-e a statisztikai számításokhoz szükséges mezőket.
+
+A kötelező oszlopok:
+
+```text
+post_id
+model_label
+confidence
+```
+
+Ha valamelyik mező hiányzik, a rendszer jól értelmezhető hibaüzenettel leáll. Ez megelőzi, hogy a statisztikai számítás hiányos vagy hibás adatokon fusson le.
+
+A `prepare_sentiment_dataframe()` függvény előkészíti az adatokat az összesítéshez. Ennek során:
+
+```text
+másolat készül az eredeti DataFrame-ről,
+a model_label értékei kisbetűs és whitespace-mentes formára kerülnek,
+a confidence oszlop numerikus típussá alakul,
+ellenőrzésre kerülnek a hiányzó címkék,
+ellenőrzésre kerülnek az ismeretlen sentiment kategóriák.
+```
+
+A rendszer az alábbi normalizált sentiment címkéket fogadja el:
+
+```text
+positive
+negative
+neutral
+```
+
+### Domináns sentiment meghatározása
+
+A `determine_dominant_sentiment()` függvény megállapítja, hogy egy adott poszt vagy a teljes adathalmaz esetében melyik sentiment kategória fordul elő a legnagyobb számban.
+
+Például:
+
+```text
+positive: 17
+negative: 6
+neutral: 5
+```
+
+esetén az eredmény:
+
+```text
+positive
+```
+
+Ha két vagy több kategória azonos legmagasabb darabszámmal rendelkezik, az eredmény:
+
+```text
+mixed
+```
+
+Ha nincs feldolgozható adat, az eredmény:
+
+```text
+no_data
+```
+
+Ez a megoldás elkerüli, hogy a rendszer döntetlen esetén önkényesen válasszon sentiment címkét.
+
+### Posztonkénti statisztikák
+
+A `calculate_post_statistics()` függvény a teljes sentiment adathalmazt `post_id` alapján csoportosítja.
+
+Minden poszthoz egyetlen statisztikai rekord készül, amely többek között az alábbi adatokat tartalmazza:
+
+```text
+post_id
+post_type
+post_link
+comment_count
+
+positive_count
+negative_count
+neutral_count
+
+positive_ratio
+negative_ratio
+neutral_ratio
+
+dominant_comment_sentiment
+average_comment_confidence
+```
+
+A darabszámok a `model_label` oszlop alapján kerülnek meghatározásra.
+
+A százalékos arányok számítása:
+
+```text
+kategória darabszáma / összes komment száma × 100
+```
+
+Az eredmények két tizedesjegyre kerekítve kerülnek tárolásra.
+
+A posztonkénti statisztikai táblázat a posztkontextushoz tartozó sentiment mezőket is megtartja:
+
+```text
+post_sentiment_label
+post_sentiment_confidence
+image_context_sentiment_label
+image_context_sentiment_confidence
+video_context_sentiment_label
+video_context_sentiment_confidence
+```
+
+Ez azért fontos, mert a következő fejlesztési fázis kontextuselemző modulja ezekre az adatokra tud majd építeni.
+
+### Ismétlődő posztkontextus kezelése
+
+A részletes adathalmazban ugyanaz a posztkontextus minden hozzá tartozó komment sorában megismétlődik.
+
+A `get_first_available_value()` függvény ezért egy adott poszt csoportján belül kiválasztja az első elérhető, nem üres értéket például a következő mezőkből:
+
+```text
+post_type
+post_link
+post_sentiment_label
+image_context_sentiment_label
+video_context_sentiment_label
+```
+
+Így a posztonkénti összesítésben minden kontextusadat csak egyszer jelenik meg.
+
+### Teljes adathalmaz statisztikája
+
+A `calculate_overall_statistics()` függvény a teljes kommenthalmazra készít összesítést.
+
+A kimeneti DataFrame egyetlen sort tartalmaz, amelyben szerepel:
+
+```text
+post_count
+total_comment_count
+
+total_positive_count
+total_negative_count
+total_neutral_count
+
+total_positive_ratio
+total_negative_ratio
+total_neutral_ratio
+
+overall_dominant_sentiment
+overall_average_confidence
+```
+
+A `post_count` az egyedi posztazonosítók száma, míg a `total_comment_count` a teljes feldolgozott kommentmennyiséget jelenti.
+
+Az `overall_average_confidence` a kommentekhez tartozó modellkonfidencia-értékek átlaga.
+
+### Több munkalapos Excel-kimenet
+
+A `export_sentiment_workbook()` függvény egyetlen Excel-munkafüzetbe exportálja a részletes és összesített adatokat.
+
+A létrejövő fájl:
+
+```text
+data/processed/sentiment_analysis_results.xlsx
+```
+
+A munkafüzet három lapot tartalmaz:
+
+```text
+full_dataset
+post_statistics
+overall_statistics
+```
+
+A `full_dataset` munkalap a teljes kommentenkénti sentiment adatbázist tartalmazza.
+
+A `post_statistics` munkalap posztonként egy sort tartalmaz, a kommentek darabszámával, arányaival, domináns hangulatával és a posztkontextus sentiment adataival.
+
+Az `overall_statistics` munkalap a teljes adathalmaz összesített mutatóit tartalmazza egyetlen sorban.
+
+### Excel-formázás
+
+A `format_excel_worksheet()` függvény alapvető formázást végez minden munkalapon.
+
+A formázás részei:
+
+```text
+a fejlécsor rögzítése,
+az automatikus szűrés bekapcsolása,
+az oszlopszélességek automatikus beállítása.
+```
+
+A rögzített fejléc megkönnyíti a nagyobb táblázatok áttekintését, az automatikus szűrés pedig lehetővé teszi a munkalapok közvetlen Excelen belüli szűrését.
+
+### A main.py módosítása
+
+A `main.py` új importokkal egészült ki:
+
+```python
+from analytics.sentiment_statistics import (
+    calculate_post_statistics,
+    calculate_overall_statistics,
+    export_sentiment_workbook,
+)
+```
+
+A sentiment elemzés után a program először elkészíti a posztonkénti statisztikát:
+
+```python
+post_statistics_df = calculate_post_statistics(
+    full_sentiment_df
+)
+```
+
+Ezután elkészíti a teljes adathalmaz összesítését:
+
+```python
+overall_statistics_df = calculate_overall_statistics(
+    full_sentiment_df
+)
+```
+
+Végül létrehozza a három munkalapos Excel-fájlt:
+
+```python
+created_output_file = export_sentiment_workbook(
+    full_dataset_df=full_sentiment_df,
+    post_statistics_df=post_statistics_df,
+    overall_statistics_df=overall_statistics_df,
+    output_file=output_file,
+)
+```
+
+A korábbi közvetlen Excel-mentés helyett tehát már egy összetettebb exportfolyamat fut le.
+
+### A teljes feldolgozási folyamat
+
+A hatodik iteráció után a rendszer működési sorrendje:
+
+```text
+validációs kommentadatok beolvasása
+→ posztkontextus-adatok beolvasása
+→ kommentek és posztkontextus összekapcsolása
+→ szöveg-előfeldolgozás
+→ huBERT sentiment modell betöltése
+→ kommentek és kontextusszövegek sentiment elemzése
+→ posztonkénti statisztikák számítása
+→ teljes adathalmaz statisztikáinak számítása
+→ három munkalapos Excel-fájl létrehozása
+```
+
+### Kimeneti adatok ellenőrzése
+
+A `main.py` a futtatás végén kiírja:
+
+```text
+a kommentek számát,
+a posztkontextusok számát,
+az összekapcsolt adatsorok számát,
+a teljes sentiment rekordok számát,
+a posztonkénti statisztikai sorok számát,
+a teljes adathalmaz statisztikai sorainak számát,
+a létrehozott fájl útvonalát.
+```
+
+A terminálban előnézetként megjelenik:
+
+```text
+a teljes sentiment adathalmaz első tíz sora,
+a posztonkénti statisztikai táblázat,
+a teljes adathalmaz összesítő rekordja.
+```
+
+Ez lehetővé teszi a feldolgozás gyors ellenőrzését az Excel-fájl megnyitása előtt.
+
+### Eredmény
+
+A hatodik fejlesztési iteráció eredményeként a rendszer képes a részletes komment- és posztkontextus-adatokból automatikusan statisztikai összesítéseket készíteni.
+
+A létrejövő Excel-munkafüzet egyszerre tartalmazza:
+
+```text
+a teljes rekord szintű adatbázist,
+a posztonkénti statisztikai eredményeket,
+a teljes adathalmaz összesített mutatóit.
+```
+
+A fejlesztés fő kimeneti fájlja:
+
+```text
+data/processed/sentiment_analysis_results.xlsx
+```
+
 
