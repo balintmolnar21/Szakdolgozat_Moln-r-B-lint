@@ -13,6 +13,8 @@ from analytics.sentiment_statistics import (
     export_sentiment_workbook,
 )
 
+from context_analysis.context_analyzer import analyze_post_contexts
+
 
 def main():
     validation_file = "data/validation/validacios_teszthalmaz.csv"
@@ -87,33 +89,49 @@ def main():
         full_sentiment_df
     )
 
-    print("Három munkalapos Excel-fájl létrehozása...")
+    print("Posztonkénti kontextuselemzés elkészítése...")
+    context_analysis_df = analyze_post_contexts(
+        post_statistics_df
+    )
+
+    print("Négy munkalapos Excel-fájl létrehozása...")
     created_output_file = export_sentiment_workbook(
         full_dataset_df=full_sentiment_df,
         post_statistics_df=post_statistics_df,
         overall_statistics_df=overall_statistics_df,
+        context_analysis_df=context_analysis_df,
         output_file=output_file,
     )
 
     print(
         "Kommentek és posztkontextus sikeresen beolvasva, "
-        "összekapcsolva, előfeldolgozva, elemezve és összesítve."
+        "összekapcsolva, előfeldolgozva, elemezve, összesítve "
+        "és kontextuálisan értelmezve."
     )
+
     print(f"Kommentek száma: {len(comments_df)}")
     print(f"Posztkontextusok száma: {len(post_context_df)}")
     print(f"Összekapcsolt adatsorok száma: {len(merged_df)}")
     print(f"Előfeldolgozott adatsorok száma: {len(preprocessed_df)}")
     print(f"Teljes sentiment adatsorok száma: {len(full_sentiment_df)}")
+
     print(
         f"Posztonkénti statisztikai sorok száma: "
         f"{len(post_statistics_df)}"
     )
+
     print(
         f"Teljes adathalmaz statisztikai sorainak száma: "
         f"{len(overall_statistics_df)}"
     )
+
     print(
-        "\nAz egységes, három munkalapos sentiment eredményfájl "
+        f"Kontextuselemzési sorok száma: "
+        f"{len(context_analysis_df)}"
+    )
+
+    print(
+        "\nAz egységes, négy munkalapos sentiment eredményfájl "
         f"mentve ide: {created_output_file}"
     )
 
@@ -159,6 +177,25 @@ def main():
         if column in post_statistics_df.columns
     ]
 
+    context_analysis_preview_columns = [
+        "post_id",
+        "post_type",
+        "post_sentiment_label",
+        "dominant_comment_sentiment",
+        "positive_ratio",
+        "negative_ratio",
+        "neutral_ratio",
+        "context_reaction_type",
+        "context_alignment",
+        "context_interpretation",
+    ]
+
+    available_context_analysis_preview_columns = [
+        column
+        for column in context_analysis_preview_columns
+        if column in context_analysis_df.columns
+    ]
+
     print("\nA teljes sentiment adathalmaz első 10 rekordja:")
     print(
         full_sentiment_df[
@@ -175,6 +212,13 @@ def main():
 
     print("\nTeljes adathalmaz statisztikája:")
     print(overall_statistics_df)
+
+    print("\nPosztonkénti kontextuselemzés:")
+    print(
+        context_analysis_df[
+            available_context_analysis_preview_columns
+        ]
+    )
 
 
 if __name__ == "__main__":
