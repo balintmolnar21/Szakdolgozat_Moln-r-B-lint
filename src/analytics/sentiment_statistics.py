@@ -357,6 +357,7 @@ def export_sentiment_workbook(
     full_dataset_df: pd.DataFrame,
     post_statistics_df: pd.DataFrame,
     overall_statistics_df: pd.DataFrame,
+    context_analysis_df: pd.DataFrame,
     output_file: str | Path,
 ) -> Path:
     
@@ -389,6 +390,12 @@ def export_sentiment_workbook(
             index=False,
         )
 
+        context_analysis_df.to_excel(
+            writer,
+            sheet_name="context_analysis",
+            index=False,
+        )
+
         format_excel_worksheet(
             writer.sheets["full_dataset"],
             maximum_column_width=60,
@@ -402,6 +409,10 @@ def export_sentiment_workbook(
         format_excel_worksheet(
             writer.sheets["overall_statistics"],
             maximum_column_width=35,
+        )
+        format_excel_worksheet(
+            writer.sheets["context_analysis"],
+            maximum_column_width=60,
         )
 
     return output_path
