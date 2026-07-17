@@ -665,3 +665,47 @@ data/processed/sentiment_analysis_results.xlsx
 ```
 
 
+## 7. iteráció – Kontextuselemző modul kialakítása
+
+### Cél
+
+A hetedik fejlesztési iteráció célja az volt, hogy a rendszer a korábban előállított posztszintű sentiment eredményeket és kommentstatisztikákat összevesse, majd ezek alapján szabályalapú kontextuális értelmezést készítsen.
+
+A korábbi fejlesztési fázisok eredményeként már rendelkezésre álltak az alábbi adatok:
+
+```text
+a poszt szövegének sentiment címkéje,
+a kommentek domináns sentiment címkéje,
+a pozitív kommentek aránya,
+a negatív kommentek aránya,
+a semleges kommentek aránya.
+```
+
+Ezek az adatok külön-külön már alkalmasak voltak a poszt és a kommentszekció általános hangulatának leírására, azonban önmagukban még nem mutatták meg, hogy a kommentek hangulata milyen kapcsolatban áll a poszt hangvételével. A fejlesztési lépés ezért arra irányult, hogy a rendszer ne csak statisztikai adatokat közöljön, hanem rövid, értelmezhető következtetést is készítsen a poszt és a kommentek sentimentje közötti viszonyról.
+
+A kontextuselemző modul szabályalapú működésű. Ez azt jelenti, hogy nem egy új mesterséges intelligencia modell hozza létre az értelmezést, hanem előre meghatározott logikai szabályok alapján történik a poszt és a kommentek hangulatának összehasonlítása. A megoldás előnye, hogy működése átlátható, minden eredményhez egyértelműen megadható, mely szabály vezetett az adott következtetéshez.
+
+A modul például külön kezeli azokat az eseteket, amikor:
+```text
+a poszt és a kommentek hangulata azonos irányú,
+a kommentek domináns hangulata ellentétes a poszt hangulatával,
+a kommentek megoszlása vegyes,
+a semleges kommentek vannak többségben,
+nem áll rendelkezésre elegendő vagy megfelelő adat.
+```
+A fejlesztés során fontos szempont volt, hogy a rendszer ne vonjon le túlzottan erős vagy bizonytalan következtetéseket. A sentiment elemzés önmagában nem alkalmas annak biztos megállapítására, hogy egy kommentelő egyetért-e a poszt állításával, vagy éppen elutasítja azt. Emiatt a létrehozott szöveges értelmezések óvatos megfogalmazást használnak, például:
+- utalhat,
+- jelezhet,
+- értelmezhető,
+- valószínűsíthető.
+
+A fejlesztési iteráció célja tehát nem egy teljes körű álláspont-felismerő rendszer létrehozása volt, hanem egy olyan egyszerű és jól magyarázható kontextuselemző réteg kialakítása, amely a már rendelkezésre álló sentiment eredményeket magasabb szintű, felhasználóbarát információvá alakítja.
+
+A modul kimeneteként minden poszthoz három új érték készül:
+A `context_reaction_type` egy rövid kategóriában foglalja össze a reakció jellegét, például támogató, kritikus, vegyes vagy bizonytalan reakcióként.
+
+A `context_alignment` azt jelzi, hogy a poszt és a kommentek hangulata azonos, ellentétes, vegyes vagy nem egyértelmű kapcsolatban áll-e egymással.
+
+A `context_interpretation` pedig egy rövid, ember számára olvasható szöveges magyarázatot tartalmaz, amelyben a rendszer összefoglalja a poszt hangvételét, a kommentek domináns sentimentjét, valamint a pozitív, negatív és semleges kommentek százalékos megoszlását.
+
+A fejlesztés eredményeként a rendszer a korábbi pusztán numerikus és kategóriaalapú kimenetek mellett már egyszerű kontextuális értelmezést is képes előállítani. Ez közvetlenül támogatja a későbbi összegző, vizualizációs és felhasználói felületi fejlesztéseket.
