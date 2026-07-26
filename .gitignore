@@ -40,7 +40,6 @@ build/
 # Generated data / results
 results/
 output/
-outputs/charts/*
 outputs/exports/*
 outputs/reports/*
 
