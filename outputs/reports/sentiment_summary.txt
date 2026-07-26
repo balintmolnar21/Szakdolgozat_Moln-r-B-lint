@@ -1,0 +1,33 @@
+SENTIMENTELEMZÉSI ÖSSZEFOGLALÓ RIPORT
+==========================================
+
+1. Feldolgozott adatok
+Feldolgozott posztok száma: 5
+Feldolgozott kommentek száma: 100
+
+2. Összesített sentimentmegoszlás
+Pozitív kommentek: 40 db (40.00%)
+Negatív kommentek: 44 db (44.00%)
+Semleges kommentek: 16 db (16.00%)
+Domináns összesített sentiment: negatív
+
+3. Posztonkénti kiemelt eredmények
+Legpozitívabb fogadtatású poszt: P1 (65.00% pozitív komment)
+Legnegatívabb fogadtatású poszt: P3 (70.00% negatív komment)
+
+4. Modellbizonyosság
+A kommentpredikciók átlagos konfidenciaértéke: 0.856
+
+5. Kontextuselemzés
+Leggyakoribb kontextusilleszkedés: azonos irányú
+Előfordulások száma: 2
+
+6. Posztonkénti kontextuális értelmezések
+- P1: A poszt és a kommentek hangulata azonos pozitív irányú.
+- P2: A pozitív poszt alatt a negatív kommentek dominálnak.
+- P3: A poszt és a kommentek hangulata azonos negatív irányú.
+- P4: A negatív poszt alatt a pozitív kommentek dominálnak.
+- P5: A kommentek fogadtatása vegyes.
+
+7. Értelmezési korlát
+A riport sentiment címkékből, statisztikai mutatókból és szabályalapú kontextuselemzésből készül. Az eredmények nem tekinthetők teljes álláspont-felismerésnek, ezért a posztok és kommentek közötti kapcsolat csak óvatosan értelmezhető.

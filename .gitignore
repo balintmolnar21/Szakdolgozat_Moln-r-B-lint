@@ -41,7 +41,7 @@ build/
 results/
 output/
 outputs/exports/*
-outputs/reports/*
+
 
 # Raw and processed data
 data/raw/*
