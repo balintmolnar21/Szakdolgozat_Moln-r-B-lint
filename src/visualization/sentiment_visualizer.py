@@ -67,9 +67,9 @@ def plot_overall_sentiment_distribution(
 ) -> Path:
     
     required_columns = {
-        "positive_count",
-        "negative_count",
-        "neutral_count",
+    "total_positive_count",
+    "total_negative_count",
+    "total_neutral_count",
     }
 
     validate_required_columns(
@@ -94,9 +94,9 @@ def plot_overall_sentiment_distribution(
     ]
 
     values = [
-        float(statistics_row["positive_count"]),
-        float(statistics_row["negative_count"]),
-        float(statistics_row["neutral_count"]),
+    float(statistics_row["total_positive_count"]),
+    float(statistics_row["total_negative_count"]),
+    float(statistics_row["total_neutral_count"]),
     ]
 
     plt.figure(figsize=(8, 5))
@@ -366,9 +366,9 @@ if __name__ == "__main__":
 
     sample_overall_statistics_df = pd.DataFrame(
         {
-            "positive_count": [40],
-            "negative_count": [44],
-            "neutral_count": [16],
+            "total_positive_count": [40],
+            "total_negative_count": [44],
+            "total_neutral_count": [16],
         }
     )
 
