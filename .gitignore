@@ -45,7 +45,6 @@ outputs/reports/*
 
 # Raw and processed data
 data/raw/*
-data/processed/*
 
 # Keep folder structure in Git
 !outputs/charts/.gitkeep
