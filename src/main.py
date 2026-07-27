@@ -15,12 +15,20 @@ from analytics.sentiment_statistics import (
 
 from context_analysis.context_analyzer import analyze_post_contexts
 
+from visualization.sentiment_visualizer import (
+    create_all_sentiment_charts,
+)
+
+from reporting.summary_report import create_summary_report
+
 
 def main():
     validation_file = "data/validation/validacios_teszthalmaz.csv"
     post_context_file = "data/validation/post_context.csv"
 
     output_file = "data/processed/sentiment_analysis_results.xlsx"
+    charts_output_directory = "outputs/charts"
+    reports_output_directory = "outputs/reports"
 
     print("Validációs kommentadatok beolvasása...")
     comments_df = load_validation_dataset(validation_file)
@@ -103,10 +111,26 @@ def main():
         output_file=output_file,
     )
 
+    print("Sentimentgrafikonok létrehozása...")
+    created_chart_files = create_all_sentiment_charts(
+        post_statistics_df=post_statistics_df,
+        overall_statistics_df=overall_statistics_df,
+        context_analysis_df=context_analysis_df,
+        output_directory=charts_output_directory,
+    )
+
+    print("Szöveges összefoglaló riport létrehozása...")
+    created_report_file = create_summary_report(
+        post_statistics_df=post_statistics_df,
+        overall_statistics_df=overall_statistics_df,
+        context_analysis_df=context_analysis_df,
+        output_directory=reports_output_directory,
+    )
+
     print(
         "Kommentek és posztkontextus sikeresen beolvasva, "
-        "összekapcsolva, előfeldolgozva, elemezve, összesítve "
-        "és kontextuálisan értelmezve."
+        "összekapcsolva, előfeldolgozva, elemezve, összesítve, "
+        "kontextuálisan értelmezve és vizualizálva."
     )
 
     print(f"Kommentek száma: {len(comments_df)}")
@@ -133,6 +157,16 @@ def main():
     print(
         "\nAz egységes, négy munkalapos sentiment eredményfájl "
         f"mentve ide: {created_output_file}"
+    )
+
+    print("\nLétrehozott grafikonok:")
+
+    for chart_file in created_chart_files:
+        print(f"- {chart_file}")
+
+    print(
+        "\nA szöveges összefoglaló riport mentve ide: "
+        f"{created_report_file}"
     )
 
     full_dataset_preview_columns = [
