@@ -9,3 +9,4 @@ requests
 emoji
 transformers
 torch
+streamlit
