@@ -39,16 +39,12 @@ build/
 
 # Generated data / results
 results/
-output/
-outputs/exports/*
 
 
 # Raw and processed data
 data/raw/*
 
 # Keep folder structure in Git
-!outputs/charts/.gitkeep
 !outputs/exports/.gitkeep
-!outputs/reports/.gitkeep
 !data/raw/.gitkeep
 !data/processed/.gitkeep
