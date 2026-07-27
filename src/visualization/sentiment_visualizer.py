@@ -348,9 +348,9 @@ if __name__ == "__main__":
     sample_post_statistics_df = pd.DataFrame(
         {
             "post_id": ["P1", "P2", "P3", "P4", "P5"],
-            "positive_count": [13, 4, 3, 12, 8],
-            "negative_count": [4, 13, 14, 5, 8],
-            "neutral_count": [3, 3, 3, 3, 4],
+            "total_positive_count": [13, 4, 3, 12, 8],
+            "total_negative_count": [4, 13, 14, 5, 8],
+            "total_neutral_count": [3, 3, 3, 3, 4],
             "positive_ratio": [65.0, 20.0, 15.0, 60.0, 40.0],
             "negative_ratio": [20.0, 65.0, 70.0, 25.0, 40.0],
             "neutral_ratio": [15.0, 15.0, 15.0, 15.0, 20.0],

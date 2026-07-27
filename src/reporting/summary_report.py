@@ -168,20 +168,21 @@ def build_summary_report_text(
     )
 
     validate_required_columns(
-        overall_statistics_df,
-        {
-            "post_count",
-            "comment_count",
-            "positive_count",
-            "negative_count",
-            "neutral_count",
-            "positive_ratio",
-            "negative_ratio",
-            "neutral_ratio",
-            "dominant_sentiment",
-        },
-        "overall_statistics_df",
-    )
+    overall_statistics_df,
+    {
+        "post_count",
+        "total_comment_count",
+        "total_positive_count",
+        "total_negative_count",
+        "total_neutral_count",
+        "total_positive_ratio",
+        "total_negative_ratio",
+        "total_neutral_ratio",
+        "overall_dominant_sentiment",
+        "overall_average_confidence",
+    },
+    "overall_statistics_df",
+)
 
     validate_required_columns(
         context_analysis_df,
@@ -222,23 +223,25 @@ def build_summary_report_text(
         )
     )
 
-    average_confidence = calculate_average_model_confidence(
-        post_statistics_df
-    )
+    
 
     post_count = int(overall_row["post_count"])
-    comment_count = int(overall_row["comment_count"])
+    comment_count = int(overall_row["total_comment_count"])
 
-    positive_count = int(overall_row["positive_count"])
-    negative_count = int(overall_row["negative_count"])
-    neutral_count = int(overall_row["neutral_count"])
+    positive_count = int(overall_row["total_positive_count"])
+    negative_count = int(overall_row["total_negative_count"])
+    neutral_count = int(overall_row["total_neutral_count"])
 
-    positive_ratio = float(overall_row["positive_ratio"])
-    negative_ratio = float(overall_row["negative_ratio"])
-    neutral_ratio = float(overall_row["neutral_ratio"])
+    positive_ratio = float(overall_row["total_positive_ratio"])
+    negative_ratio = float(overall_row["total_negative_ratio"])
+    neutral_ratio = float(overall_row["total_neutral_ratio"])
 
     dominant_sentiment = translate_sentiment(
-        overall_row["dominant_sentiment"]
+    overall_row["overall_dominant_sentiment"]
+    )
+
+    average_confidence = calculate_average_model_confidence(
+            post_statistics_df
     )
 
     translated_alignment = translate_alignment(
