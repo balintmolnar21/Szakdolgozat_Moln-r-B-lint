@@ -709,3 +709,109 @@ A `context_alignment` azt jelzi, hogy a poszt és a kommentek hangulata azonos, 
 A `context_interpretation` pedig egy rövid, ember számára olvasható szöveges magyarázatot tartalmaz, amelyben a rendszer összefoglalja a poszt hangvételét, a kommentek domináns sentimentjét, valamint a pozitív, negatív és semleges kommentek százalékos megoszlását.
 
 A fejlesztés eredményeként a rendszer a korábbi pusztán numerikus és kategóriaalapú kimenetek mellett már egyszerű kontextuális értelmezést is képes előállítani. Ez közvetlenül támogatja a későbbi összegző, vizualizációs és felhasználói felületi fejlesztéseket.
+
+
+## 8. iteráció – Riportkészítés és eredményvizualizáció
+
+### Cél
+
+A nyolcadik fejlesztési iteráció célja az volt, hogy a rendszer a korábban elkészített sentiment-, statisztikai és kontextuselemzési eredményeket grafikus és szöveges formában is megjelenítse.
+
+A korábbi eredmények alapján már rendelkezésre álltak:
+
+```text
+a kommentek sentiment címkéi,
+a posztonkénti sentiment arányok,
+az összesített statisztikák,
+a kontextuselemzés eredményei.
+```
+
+### Új modulok
+
+A fejlesztés során két új modul jött létre:
+
+```text
+src/visualization/sentiment_visualizer.py
+src/reporting/summary_report.py
+```
+
+A vizualizációs modul a grafikonok elkészítéséért, a riportkészítő modul pedig a szöveges összefoglaló előállításáért felel.
+
+### Grafikonok készítése
+
+A rendszer négy PNG-formátumú grafikont hoz létre:
+
+```text
+overall_sentiment_distribution.png
+post_sentiment_distribution.png
+average_confidence_by_post.png
+context_alignment_distribution.png
+```
+
+A grafikonok bemutatják:
+
+```text
+a teljes sentimenteloszlást,
+a posztonkénti sentimentarányokat,
+az átlagos modellbizonyosságot,
+a kontextusilleszkedési kategóriák megoszlását.
+```
+
+A fájlok mentési helye:
+
+```text
+outputs/charts/
+```
+
+### Szöveges riport
+
+A rendszer automatikusan létrehoz egy rövid összefoglaló riportot:
+
+```text
+outputs/reports/sentiment_summary.txt
+```
+
+A riport tartalmazza:
+
+```text
+a feldolgozott posztok és kommentek számát,
+a teljes sentimentmegoszlást,
+a domináns sentimentet,
+a legpozitívabb és legnegatívabb fogadtatású posztot,
+az átlagos modellbizonyosságot,
+a leggyakoribb kontextusilleszkedést,
+a posztonkénti kontextuális értelmezéseket.
+```
+
+### A main.py módosítása
+
+A `main.py` új függvényhívásokkal bővült:
+
+```python
+create_all_sentiment_charts(...)
+create_summary_report(...)
+```
+
+A teljes feldolgozási folyamat:
+
+```text
+adatbeolvasás
+→ előfeldolgozás
+→ sentiment elemzés
+→ statisztikai összesítés
+→ kontextuselemzés
+→ Excel-export
+→ grafikonok készítése
+→ szöveges riport készítése
+```
+
+### Kimenetek
+
+A rendszer a nyolcadik iteráció után az alábbi fájlokat hozza létre:
+
+```text
+data/processed/sentiment_analysis_results.xlsx
+outputs/charts/*.png
+outputs/reports/sentiment_summary.txt
+```
+
