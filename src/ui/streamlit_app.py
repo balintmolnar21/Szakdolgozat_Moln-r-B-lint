@@ -140,30 +140,78 @@ def display_output_information() -> None:
         )
     )
 
+def clear_previous_analysis() -> None:
+    """
+    Törli a korábbi elemzési eredményt a Streamlit
+    munkamenet-állapotából.
+    """
+    session_keys_to_delete = [
+        "analysis_result",
+        "analysis_success",
+    ]
+
+    for key in session_keys_to_delete:
+        if key in st.session_state:
+            del st.session_state[key]
 
 def display_analysis_button() -> None:
     """
-    Megjeleníti az elemzés indítására szolgáló gombot,
-    és lefuttatja a teljes feldolgozási pipeline-t.
+    Megjeleníti az elemzés indítására és a korábbi
+    eredmények törlésére szolgáló gombokat.
     """
-    st.subheader("Elemzés indítása")
+    st.subheader("Elemzés vezérlése")
 
     input_files_available = (
         DEFAULT_VALIDATION_FILE.exists()
         and DEFAULT_POST_CONTEXT_FILE.exists()
     )
 
-    analysis_button_clicked = st.button(
-        "Elemzés indítása",
-        type="primary",
-        disabled=not input_files_available,
-    )
+    start_column, clear_column = st.columns(2)
+
+    with start_column:
+        analysis_button_clicked = st.button(
+            "Elemzés indítása",
+            type="primary",
+            disabled=not input_files_available,
+            use_container_width=True,
+        )
+
+    with clear_column:
+        clear_button_clicked = st.button(
+            "Korábbi eredmények törlése",
+            disabled=(
+                "analysis_result"
+                not in st.session_state
+            ),
+            use_container_width=True,
+        )
+
+    if st.session_state.get("analysis_success", False):
+        st.success(
+            "Az elemzés sikeresen befejeződött."
+        )
+
+        st.session_state["analysis_success"] = False
 
     if not input_files_available:
         st.warning(
             "Az elemzés indításához mindkét bemeneti "
             "CSV-fájlnak rendelkezésre kell állnia."
         )
+
+    if clear_button_clicked:
+        clear_previous_analysis()
+
+        st.session_state["clear_success"] = True
+
+        st.rerun()
+
+    if st.session_state.get("clear_success", False):
+        st.success(
+            "A korábbi elemzési eredmények törlésre kerültek."
+        )
+
+        st.session_state["clear_success"] = False
 
     if analysis_button_clicked:
         try:
@@ -188,10 +236,9 @@ def display_analysis_button() -> None:
                 )
 
                 st.session_state["analysis_result"] = result
+                st.session_state["analysis_success"] = True
 
-            st.success(
-                "Az elemzés sikeresen befejeződött."
-            )
+            st.rerun()
 
         except Exception as error:
             st.error(
