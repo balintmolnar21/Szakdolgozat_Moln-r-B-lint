@@ -8,4 +8,5 @@ torch
 requests
 emoji
 transformers
-torch
+torchvision
+streamlit
