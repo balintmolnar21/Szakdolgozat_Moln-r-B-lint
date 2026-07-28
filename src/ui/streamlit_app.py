@@ -72,9 +72,7 @@ def configure_page() -> None:
 
 
 def display_header() -> None:
-    """
-    Megjeleníti az alkalmazás címét és rövid leírását.
-    """
+    
     st.title("Social media hangulatelemző szoftver")
 
     st.write(
@@ -91,9 +89,7 @@ def display_header() -> None:
 
 
 def display_input_files() -> None:
-    """
-    Megjeleníti a CSV-alapú tesztmód bemeneti fájljait.
-    """
+    
     st.subheader("Bemeneti fájlok")
 
     validation_exists = DEFAULT_VALIDATION_FILE.exists()
@@ -121,9 +117,7 @@ def display_input_files() -> None:
 
 
 def display_output_information() -> None:
-    """
-    Megjeleníti a tervezett kimeneti fájlok helyét.
-    """
+    
     st.subheader("Kimenetek")
 
     st.write("A feldolgozás után létrejövő fő kimenetek:")
@@ -139,10 +133,7 @@ def display_output_information() -> None:
     )
 
 def clear_previous_analysis() -> None:
-    """
-    Törli a korábbi elemzési eredményt a Streamlit
-    munkamenet-állapotából.
-    """
+    
     session_keys_to_delete = [
         "analysis_result",
         "analysis_success",
@@ -154,13 +145,7 @@ def clear_previous_analysis() -> None:
 
 
 def display_analysis_error(error: Exception) -> None:
-    """
-    A futás közben keletkező gyakori hibákat felhasználóbarát
-    üzenetté alakítja.
-
-    A részletes technikai hiba külön lenyitható panelen
-    továbbra is megtekinthető.
-    """
+    
     if isinstance(error, FileNotFoundError):
         st.error(
             "A feldolgozáshoz szükséges egyik bemeneti fájl "
@@ -223,10 +208,7 @@ def display_analysis_error(error: Exception) -> None:
 
 
 def display_analysis_button() -> None:
-    """
-    Megjeleníti az elemzés indítására és a korábbi
-    eredmények törlésére szolgáló gombokat.
-    """
+    
     st.subheader("Elemzés vezérlése")
 
     input_files_available = (
@@ -312,9 +294,7 @@ def display_analysis_button() -> None:
             display_analysis_error(error)
 
 def translate_sentiment_label(value) -> str:
-    """
-    A belső angol sentiment címkéket magyar megnevezésre alakítja.
-    """
+    
     translations = {
         "positive": "Pozitív",
         "negative": "Negatív",
@@ -332,9 +312,7 @@ def translate_sentiment_label(value) -> str:
 
 
 def translate_context_alignment(value) -> str:
-    """
-    A belső kontextusilleszkedési kategóriákat magyarítja.
-    """
+    
     translations = {
         "aligned": "Azonos irányú",
         "opposite": "Ellentétes",
@@ -355,12 +333,7 @@ def create_display_dataframe(
     dataframe,
     column_translations: dict[str, str],
 ):
-    """
-    Megjelenítési célra másolatot készít a DataFrame-ről,
-    majd magyar oszlopnevekre nevezi át a mezőket.
-
-    Az eredeti DataFrame-et nem módosítja.
-    """
+    
     display_df = dataframe.copy()
 
     available_translations = {
@@ -377,10 +350,7 @@ def create_display_dataframe(
 def display_analysis_results(
     result: AnalysisPipelineResult,
 ) -> None:
-    """
-    Füles elrendezésben megjeleníti a teljes elemzési pipeline
-    legfontosabb eredményeit, grafikonjait és exportfájljait.
-    """
+    
     st.header("Elemzési eredmények")
 
     if result.overall_statistics_df.empty:

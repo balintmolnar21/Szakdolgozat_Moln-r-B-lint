@@ -815,3 +815,113 @@ outputs/charts/*.png
 outputs/reports/sentiment_summary.txt
 ```
 
+
+## 9. iteráció – Streamlit felület kialakítása CSV-alapú tesztmóddal
+
+### Cél
+
+A kilencedik fejlesztési iteráció célja egy egyszerű, grafikus Streamlit felület létrehozása volt, amely a meglévő CSV-alapú tesztadatokkal képes elindítani a teljes elemzési folyamatot és megjeleníteni az eredményeket.
+
+### Új fájlok
+
+```text
+src/ui/__init__.py
+src/ui/streamlit_app.py
+src/pipeline/__init__.py
+src/pipeline/analysis_pipeline.py
+````
+
+A `requirements.txt` fájl kiegészült a `streamlit` csomaggal.
+
+### Közös feldolgozási pipeline
+
+A teljes elemzési folyamat külön pipeline-modulba került:
+
+```text
+src/pipeline/analysis_pipeline.py
+```
+
+Ez a modul végzi:
+
+```text
+adatbeolvasás
+→ előfeldolgozás
+→ huBERT sentiment elemzés
+→ statisztikai összesítés
+→ kontextuselemzés
+→ Excel-export
+→ grafikonok készítése
+→ szöveges riport létrehozása
+```
+
+A közös pipeline használatával a parancssoros program és a Streamlit felület ugyanazt a feldolgozási logikát használja, így nem keletkezett kódduplikáció.
+
+### Streamlit felület
+
+A grafikus felület az alábbi fájlban készült el:
+
+```text
+src/ui/streamlit_app.py
+```
+
+A felület lehetővé teszi:
+
+```text
+a bemeneti fájlok ellenőrzését,
+az elemzés gombbal történő elindítását,
+a fő statisztikák megjelenítését,
+a posztonkénti eredmények megtekintését,
+a kontextuselemzés megjelenítését,
+a grafikonok megjelenítését,
+a szöveges riport megtekintését,
+az Excel- és TXT-fájl letöltését.
+```
+
+Az eredmények külön füleken jelennek meg.
+
+### Modell gyorsítótárazása
+
+A huBERT-modell betöltése Streamlit gyorsítótárazással történik:
+
+```python
+@st.cache_resource
+```
+
+Ez biztosítja, hogy a modell ugyanazon munkameneten belül ne töltődjön be minden elemzésnél újra.
+
+### Munkamenet-kezelés
+
+A pipeline eredményei a Streamlit munkamenet-állapotában kerülnek tárolásra:
+
+```python
+st.session_state["analysis_result"]
+```
+
+Külön gomb készült a korábbi eredmények törlésére és a felület alapállapotba történő visszaállítására.
+
+### Hibakezelés
+
+A felület külön kezeli többek között:
+
+```text
+a hiányzó vagy üres CSV-fájlokat,
+a hibás CSV-szerkezetet,
+a karakterkódolási problémákat,
+a megnyitott vagy nem írható kimeneti fájlokat,
+a hiányzó kötelező oszlopokat,
+a modellbetöltési és futtatási hibákat.
+```
+
+A technikai részletek külön lenyitható panelen jelennek meg.
+
+### Futtatás
+
+A Streamlit felület a projekt gyökérmappájából indítható:
+
+```powershell
+streamlit run src/ui/streamlit_app.py
+```
+
+### Eredmény
+
+A kilencedik iteráció eredményeként a rendszer már grafikus felületen is használható. A felhasználó egyetlen gombnyomással elindíthatja a teljes elemzést, majd áttekintheti és letöltheti a létrehozott eredményeket.
