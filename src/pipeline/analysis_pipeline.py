@@ -26,6 +26,10 @@ from evaluation.model_evaluator import (
     evaluate_sentiment_model,
 )
 
+from evaluation.evaluation_exporter import (
+    export_evaluation_results,
+)
+
 
 @dataclass
 class AnalysisPipelineResult:
@@ -38,6 +42,7 @@ class AnalysisPipelineResult:
     overall_statistics_df: pd.DataFrame
     context_analysis_df: pd.DataFrame
     evaluation_result: ModelEvaluationResult
+    evaluation_files: dict[str, Path]
     excel_output_file: Path
     chart_files: list[Path]
     report_file: Path
@@ -49,6 +54,7 @@ def run_analysis_pipeline(
     excel_output_file: str | Path,
     charts_output_directory: str | Path,
     reports_output_directory: str | Path,
+    evaluation_output_directory: Path,
     analyzer: HuBERTSentimentAnalyzer | None = None,
     limit: int | None = None,
 ) -> AnalysisPipelineResult:
@@ -115,9 +121,14 @@ def run_analysis_pipeline(
     #print(full_sentiment_df.columns.tolist())
 
     evaluation_result = evaluate_sentiment_model(
-                dataframe=full_sentiment_df,
-                manual_label_column="manual_label",
-                model_label_column="model_label",
+            dataframe=full_sentiment_df,
+            manual_label_column="manual_label",
+            model_label_column="model_label",
+    )
+
+    evaluation_files = export_evaluation_results(
+        evaluation_result=evaluation_result,
+        output_directory=evaluation_output_directory,
     )
 
     post_statistics_df = calculate_post_statistics(
@@ -162,6 +173,7 @@ def run_analysis_pipeline(
         overall_statistics_df=overall_statistics_df,
         context_analysis_df=context_analysis_df,
         evaluation_result=evaluation_result,
+        evaluation_files=evaluation_files,
         excel_output_file=created_excel_file,
         chart_files=created_chart_files,
         report_file=created_report_file,

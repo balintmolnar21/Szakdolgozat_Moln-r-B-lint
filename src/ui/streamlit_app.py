@@ -6,7 +6,7 @@ from pandas.errors import EmptyDataError, ParserError
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIRECTORY = PROJECT_ROOT / "src"
+SRC_DIRECTORY = PROJECT_ROOT / "src" 
 
 if str(SRC_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SRC_DIRECTORY))
@@ -52,6 +52,10 @@ REPORT_OUTPUT_FILE = (
     / "outputs"
     / "reports"
     / "sentiment_summary.txt"
+)
+
+EVALUATION_OUTPUT_DIRECTORY = (
+    PROJECT_ROOT / "outputs" / "evaluation"
 )
 
 @st.cache_resource(show_spinner=False)
@@ -280,6 +284,9 @@ def display_analysis_button() -> None:
                     ),
                     reports_output_directory=(
                         REPORT_OUTPUT_FILE.parent
+                    ),
+                    evaluation_output_directory=Path(
+                        "outputs/evaluation"
                     ),
                     analyzer=analyzer,
                     limit=None,
