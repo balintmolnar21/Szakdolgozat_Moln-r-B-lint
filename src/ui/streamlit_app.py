@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 import streamlit as st
+from pandas.errors import EmptyDataError, ParserError
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -154,6 +155,76 @@ def clear_previous_analysis() -> None:
         if key in st.session_state:
             del st.session_state[key]
 
+
+def display_analysis_error(error: Exception) -> None:
+    """
+    A futás közben keletkező gyakori hibákat felhasználóbarát
+    üzenetté alakítja.
+
+    A részletes technikai hiba külön lenyitható panelen
+    továbbra is megtekinthető.
+    """
+    if isinstance(error, FileNotFoundError):
+        st.error(
+            "A feldolgozáshoz szükséges egyik bemeneti fájl "
+            "nem található. Ellenőrizd a CSV-fájlok helyét."
+        )
+
+    elif isinstance(error, EmptyDataError):
+        st.error(
+            "Az egyik bemeneti CSV-fájl üres, ezért az elemzés "
+            "nem indítható el."
+        )
+
+    elif isinstance(error, ParserError):
+        st.error(
+            "A CSV-fájl szerkezete nem értelmezhető. "
+            "Ellenőrizd az elválasztó karaktereket, az oszlopokat "
+            "és az idézőjelek használatát."
+        )
+
+    elif isinstance(error, UnicodeDecodeError):
+        st.error(
+            "A bemeneti fájl karakterkódolása nem megfelelő. "
+            "A CSV-fájlt célszerű UTF-8 kódolással menteni."
+        )
+
+    elif isinstance(error, PermissionError):
+        st.error(
+            "A program nem tudta megnyitni vagy felülírni az egyik "
+            "kimeneti fájlt. Ellenőrizd, hogy az Excel-fájl vagy "
+            "más kimenet nincs-e megnyitva egy másik programban."
+        )
+
+    elif isinstance(error, ValueError):
+        st.error(
+            "A bemeneti adatok szerkezete vagy tartalma nem megfelelő. "
+            "Ellenőrizd a kötelező oszlopokat és azt, hogy az "
+            "adathalmaz tartalmaz-e feldolgozható rekordokat."
+        )
+
+    elif isinstance(error, RuntimeError):
+        st.error(
+            "A modell betöltése vagy futtatása közben technikai "
+            "hiba történt. Ellenőrizd a PyTorch-, Transformers- "
+            "és modellbeállításokat."
+        )
+
+    elif isinstance(error, OSError):
+        st.error(
+            "Fájl- vagy mappakezelési hiba történt. Ellenőrizd, "
+            "hogy a kimeneti könyvtárak elérhetők és írhatók-e."
+        )
+
+    else:
+        st.error(
+            "Az elemzés futtatása közben nem várt hiba történt."
+        )
+
+    with st.expander("Technikai részletek"):
+        st.exception(error)
+
+
 def display_analysis_button() -> None:
     """
     Megjeleníti az elemzés indítására és a korábbi
@@ -241,10 +312,7 @@ def display_analysis_button() -> None:
             st.rerun()
 
         except Exception as error:
-            st.error(
-                "Az elemzés futtatása közben hiba történt."
-            )
-            st.exception(error)
+            display_analysis_error(error)
 
 def translate_sentiment_label(value) -> str:
     """
