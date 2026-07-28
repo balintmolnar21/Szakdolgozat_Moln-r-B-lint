@@ -21,12 +21,15 @@ from visualization.sentiment_visualizer import (
 )
 from reporting.summary_report import create_summary_report
 
+from evaluation.model_evaluator import (
+    ModelEvaluationResult,
+    evaluate_sentiment_model,
+)
+
 
 @dataclass
 class AnalysisPipelineResult:
-    """
-    A teljes elemzési pipeline eredményeit tárolja.
-    """
+   
 
     comments_df: pd.DataFrame
     post_context_df: pd.DataFrame
@@ -34,6 +37,7 @@ class AnalysisPipelineResult:
     post_statistics_df: pd.DataFrame
     overall_statistics_df: pd.DataFrame
     context_analysis_df: pd.DataFrame
+    evaluation_result: ModelEvaluationResult
     excel_output_file: Path
     chart_files: list[Path]
     report_file: Path
@@ -48,12 +52,7 @@ def run_analysis_pipeline(
     analyzer: HuBERTSentimentAnalyzer | None = None,
     limit: int | None = None,
 ) -> AnalysisPipelineResult:
-    """
-    Lefuttatja a teljes sentimentfeldolgozási folyamatot.
-
-    A függvény használható a parancssoros programból és
-    a Streamlit felületről is.
-    """
+    
     comments_df = load_validation_dataset(
         validation_file
     )
@@ -105,12 +104,20 @@ def run_analysis_pipeline(
         },
     ]
 
-    full_sentiment_df = (
-        analyzer.analyze_multiple_dataframe_columns(
+    full_sentiment_df = analyzer.analyze_multiple_dataframe_columns(
             df=preprocessed_df,
             analysis_configs=sentiment_analysis_configs,
             limit=limit,
         )
+
+
+    #print("A full_sentiment_df oszlopai:")
+    #print(full_sentiment_df.columns.tolist())
+
+    evaluation_result = evaluate_sentiment_model(
+                dataframe=full_sentiment_df,
+                manual_label_column="manual_label",
+                model_label_column="model_label",
     )
 
     post_statistics_df = calculate_post_statistics(
@@ -154,6 +161,7 @@ def run_analysis_pipeline(
         post_statistics_df=post_statistics_df,
         overall_statistics_df=overall_statistics_df,
         context_analysis_df=context_analysis_df,
+        evaluation_result=evaluation_result,
         excel_output_file=created_excel_file,
         chart_files=created_chart_files,
         report_file=created_report_file,
