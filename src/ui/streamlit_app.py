@@ -56,10 +56,7 @@ REPORT_OUTPUT_FILE = (
 
 @st.cache_resource(show_spinner=False)
 def load_sentiment_analyzer() -> HuBERTSentimentAnalyzer:
-    """
-    Egyszer tölti be a huBERT modellt, majd a későbbi
-    Streamlit-futtatások során újra felhasználja.
-    """
+    print("HU­BERT MODELL TÉNYLEGES BETÖLTÉSE")
     return HuBERTSentimentAnalyzer()
 
 

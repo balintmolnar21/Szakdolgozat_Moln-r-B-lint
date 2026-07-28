@@ -1,210 +1,462 @@
+
 # „Social media” hangulatelemző szoftver
 
 ## Saját adatok
 
 - **Név:** Molnár Bálint Ottó
 - **Neptun-kód:** VP35W1
-- **Szak:** Mérnökinformatiksu Bsc
+- **Szak:** Mérnökinformatikus BSc
 - **Intézmény:** Széchenyi István Egyetem
-- **Készítés éve:** 2026.
-
-
----
-## Fejlesztési környezet beállítása
-
-A projekt Python alapú alkalmazás, ezért a futtatásához Python 3.11 verzió használata javasolt.  
-A függőségek elkülönített virtuális környezetben kerülnek telepítésre, így nem keverednek a rendszer globálisan telepített Python-csomagjaival.
-
-### 1. Projekt mappájának megnyitása
-
-A terminálban először a projekt gyökérmappájába kell lépni:
-
-```bash
-cd "C:\Users\USER\Desktop\projektek_fejlesztes\diplomamunka\Szakdolgozat_Moln-r-B-lint"
-```
-### 2. .venv létrehozása és aktiválása
- ```bash
-py -3.11 -m venv .venv
-```
-Majd:
- ```bash
-.venv\Scripts\activate
-```
-### 3. Bővítmények telepítése
-Végül pedig a requirements.txt telepítése
- ```bash
-py -m pip install --upgrade pip
-```
- ```bash
-py -m pip install -r requirements.txt
-```
+- **Készítés éve:** 2026
 
 ---
 
 ## Projektleírás
 
-Ez a repository egy Python alapú szoftverprototípust tartalmaz, amely Facebook-oldalak bejegyzéseinek és kommentjeinek automatikus hangulatelemzésére készült. A rendszer célja, hogy egy megadott bejegyzéshez kapcsolódó felhasználói visszajelzéseket összegyűjtse, feldolgozza, majd ezek alapján átfogó képet adjon a tartalom fogadtatásáról. A megoldás a Facebook Graph API használatára, szöveg-előfeldolgozásra és NLP-alapú sentiment elemzésre épül. :contentReference[oaicite:1]{index=1}
+Ez a repository egy Python-alapú szoftverprototípust tartalmaz, amely magyar nyelvű közösségimédia-kommentek automatikus hangulatelemzésére készült.
 
-A projekt központi feladata, hogy a közösségi médiában keletkező nagy mennyiségű kommentet és reakciót automatizált módon elemezze, és az eredményeket áttekinthető, összesített formában jelenítse meg.
+A rendszer jelenlegi változata CSV-alapú validációs adatokkal működik. A kommentek, a posztok szövege, a képi kontextus manuális szöveges leírása és a videós leirat előfeldolgozásra kerül, majd egy huBERT-alapú magyar sentimentmodell pozitív, negatív vagy semleges kategóriába sorolja azokat.
+
+A program az eredményeket statisztikailag összesíti, szabályalapú kontextuselemzést végez, grafikonokat és szöveges riportot készít, valamint Streamlit-alapú grafikus felületen jeleníti meg a főbb eredményeket.
+
+A Facebook Graph API integrációja egy későbbi fejlesztési iteráció része.
 
 ---
 
 ## A megoldandó probléma
 
-A közösségi médiafelületeken megjelenő posztokhoz gyakran nagyszámú reakció, hozzászólás és válaszkomment kapcsolódik. Ezek kézi feldolgozása időigényes, nehezen átlátható, és sok esetben szubjektív. A rendszer célja, hogy a bejegyzésekhez tartozó szöveges visszajelzéseket automatikusan feldolgozza, majd azok hangulati jellemzőit meghatározza, ezzel támogatva a tartalom fogadtatásának gyorsabb értelmezését. :contentReference[oaicite:2]{index=2}
+Egy Facebook-bejegyzéshez rövid idő alatt nagy mennyiségű hozzászólás érkezhet. Ezek kézi feldolgozása időigényes, nehezen ismételhető és sok esetben szubjektív.
+
+A rendszer célja, hogy a bejegyzésekhez tartozó szöveges visszajelzéseket automatikusan feldolgozza, meghatározza azok hangulati kategóriáját, majd összesített képet adjon a poszt fogadtatásáról.
+
+A rendszer különösen a magyar nyelvű, informális közösségimédia-szövegek sajátosságaira fókuszál, például:
+
+- rövid kommentek,
+- elírások,
+- szleng,
+- emojik,
+- irónia,
+- vegyes érzelmi tartalom,
+- kontextusfüggő megfogalmazások.
 
 ---
 
-## A rendszer célja
+## A rendszer jelenlegi célja
 
-A rendszer elsődleges célja egy olyan működő prototípus létrehozása, amely:
+A jelenlegi prototípus képes:
 
-- képes egy Facebook-bejegyzés azonosítására link vagy egyedi azonosító alapján,
-- lekéri a poszthoz tartozó releváns adatokat,
-- előfeldolgozza a bejegyzés és a kommentek szövegét,
-- automatikus hangulatelemzést végez,
-- összesített statisztikákat állít elő,
-- és az eredményeket könnyen értelmezhető formában jeleníti meg. :contentReference[oaicite:3]{index=3}
-
----
-
-## Fő funkciók
-
-A rendszer főbb funkciói:
-
-- Facebook-bejegyzés azonosítása link vagy posztazonosító alapján
-- Adatok lekérdezése a Facebook Graph API segítségével
-- Kommentek feldolgozható formában történő kezelése
-- Szöveg-előfeldolgozás
-- Kommentek automatikus hangulatelemzése
-- Összesített értékelés készítése a bejegyzés fogadtatásáról
-- Statisztikai eredmények előállítása
-- Eredmények megjelenítése
-- Hibakezelés
-- Bővíthető moduláris felépítés támogatása :contentReference[oaicite:4]{index=4}
+- CSV-formátumú kommentadatok beolvasására,
+- posztkontextus-adatok kezelésére,
+- kommentek és posztok összekapcsolására,
+- szöveg-előfeldolgozásra,
+- magyar nyelvű sentiment elemzésre,
+- statisztikai összesítésre,
+- szabályalapú kontextuselemzésre,
+- Excel-fájl exportálására,
+- grafikonok készítésére,
+- szöveges riport létrehozására,
+- Streamlit-alapú megjelenítésre,
+- az eredmények letöltésére.
 
 ---
 
-## A rendszer működésének áttekintése
+## Fejlesztési környezet beállítása
 
-A rendszer működése több egymásra épülő lépésből áll:
+A projekt futtatásához Python 3.11 használata javasolt.
 
-1. A felhasználó megadja a vizsgálni kívánt Facebook-bejegyzést.
-2. A rendszer lekéri a releváns adatokat a Facebook Graph API-n keresztül.
-3. A bejegyzés és a kommentek szövege előfeldolgozásra kerül.
-4. A hangulatelemző modul meghatározza az egyes kommentek érzelmi kategóriáját.
-5. A rendszer összesíti az eredményeket.
-6. A felhasználó statisztikai és szöveges összesítést kap a poszt általános fogadtatásáról. :contentReference[oaicite:5]{index=5}
+### 1. A projekt mappájának megnyitása
+
+```powershell
+cd "C:\Users\USER\Desktop\projektek_fejlesztes\diplomamunka\Szakdolgozat_Moln-r-B-lint"
+````
+
+### 2. Virtuális környezet létrehozása
+
+```powershell
+py -3.11 -m venv .venv
+```
+
+### 3. Virtuális környezet aktiválása
+
+PowerShell használata esetén:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Parancssor használata esetén:
+
+```cmd
+.venv\Scripts\activate
+```
+
+### 4. A pip frissítése
+
+```powershell
+python -m pip install --upgrade pip
+```
+
+### 5. Függőségek telepítése
+
+```powershell
+python -m pip install -r requirements.txt
+```
 
 ---
 
 ## Alkalmazott technológiák
 
-A specifikáció alapján a projekt fejlesztéséhez az alábbi technológiák és eszközök használata indokolt:
+A projekt főbb technológiái:
 
-- **Python**
-- **venv** virtuális környezet
-- **PyCharm**
-- **Git / GitHub**
-- **Facebook Graph API**
-- **pandas**
-- **Matplotlib**
-- **scikit-learn**
-- **Hugging Face Transformers**
-- **PyTorch**
-
-A specifikáció említi továbbá, hogy a rendszerhez magyar nyelvű előtanított modellek és referencia-adatkészletek is felhasználhatók, például magyar sentiment feladatokra alkalmas modellek és a HuSST adatkészlet. :contentReference[oaicite:6]{index=6}
-
----
-
-## Adatforrások és kezelt adatok
-
-A rendszer elsődleges adatforrása a Facebook Graph API. Az elemzéshez a következő adatok kerülhetnek felhasználásra:
-
-- a bejegyzés szövege,
-- a kommentek szövege,
-- a reakciók összesített adatai,
-- technikai azonosítók a lekérdezéshez és összekapcsoláshoz. :contentReference[oaicite:7]{index=7}
-
-Az alkalmazás csak olyan adatokkal dolgozik, amelyekhez szabályos hozzáférés áll rendelkezésre, és kizárólag a működéshez szükséges adatokat kezeli.
+* **Python 3.11**
+* **pandas**
+* **Matplotlib**
+* **openpyxl**
+* **Hugging Face Transformers**
+* **PyTorch**
+* **huBERT-alapú magyar sentimentmodell**
+* **Streamlit**
+* **Git és GitHub**
+* **python-dotenv**
+* **scikit-learn** – a későbbi validációs és modellkiértékelési szakaszhoz
 
 ---
 
-## Szöveg-előfeldolgozás
+## Projektstruktúra
 
-A közösségi médiás szövegek gyakran tartalmaznak rövidítéseket, ismétlődő karaktereket, felesleges írásjeleket, emojikat és más, a feldolgozást nehezítő elemeket. A rendszer előfeldolgozási lépéseinek célja, hogy a nyers szöveges adatokat alkalmassá tegye az automatikus elemzésre.
-
-Az előfeldolgozás során például az alábbi lépések történhetnek:
-
-- üres vagy hiányos szövegek kiszűrése,
-- zavaró karakterek kezelése,
-- szöveg egységesítése,
-- nem releváns elemek eltávolítása vagy figyelmen kívül hagyása. :contentReference[oaicite:8]{index=8}
-
----
-
-## Hangulatelemzés
-
-A rendszer a bejegyzések és kommentek automatikus értékelésére hangulatelemzési eljárást alkalmaz. Az elemzés célja annak meghatározása, hogy az adott szöveg pozitív, negatív vagy semleges érzelmi töltetű-e.
-
-Az alkalmazott módszer előtanított nyelvi modellre vagy más NLP-alapú szövegosztályozási megoldásra épülhet. A megközelítés célja, hogy a rövid, informális közösségi médiás szövegek esetén is használható eredményt adjon. :contentReference[oaicite:9]{index=9}
-
----
-
-## Eredmények és statisztikák
-
-A rendszer az elemzés alapján összesített eredményeket állít elő, például:
-
-- pozitív kommentek száma,
-- negatív kommentek száma,
-- semleges kommentek száma,
-- hangulati arányok,
-- a bejegyzés általános fogadtatásának összesített értékelése. :contentReference[oaicite:10]{index=10}
-
-Az eredmények megjelenhetnek:
-
-- szöveges összefoglalásként,
-- táblázatos formában,
-- egyszerű grafikus kimutatásként. :contentReference[oaicite:11]{index=11}
-
----
-
-## Nem funkcionális követelmények
-
-A rendszerrel szemben támasztott főbb nem funkcionális elvárások:
-
-- egyszerű használhatóság,
-- megbízható működés,
-- prototípus szinten elfogadható teljesítmény,
-- karbantartható moduláris felépítés,
-- biztonságos hitelesítési adatkezelés,
-- kompatibilitás Python-alapú környezettel,
-- lehető legjobb pontosság,
-- átlátható működés és eredményközlés. :contentReference[oaicite:12]{index=12}
+```text
+Szakdolgozat_Moln-r-B-lint/
+├── data/
+│   ├── processed/
+│   ├── raw/
+│   └── validation/
+│       ├── validacios_teszthalmaz.csv
+│       └── post_context.csv
+├── docs/
+│   └── development_log.md
+├── outputs/
+│   ├── charts/
+│   ├── exports/
+│   └── reports/
+├── src/
+│   ├── analytics/
+│   ├── context_analysis/
+│   ├── data_input/
+│   ├── data_model/
+│   ├── pipeline/
+│   ├── preprocessing/
+│   ├── reporting/
+│   ├── sentiment/
+│   ├── ui/
+│   ├── visualization/
+│   └── main.py
+├── tests/
+├── tools/
+├── .env.example
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
 
 ---
 
-## Fejlesztési megközelítés
+## Fő modulok
 
-A specifikáció szerint a projekt iteratív prototípusfejlesztési megközelítést követ. Ez azt jelenti, hogy a rendszer nem egyetlen lépésben készül el, hanem egymásra épülő fejlesztési szakaszok során válik egyre teljesebbé.
+### Adatbeolvasás
 
-A fejlesztés főbb iterációi:
+```text
+src/data_input/csv_loader.py
+```
 
-1. adatlekérési folyamat kialakítása,
-2. szövegek előfeldolgozása,
-3. hangulatelemzés integrálása,
-4. eredmények összesítése és megjelenítése,
-5. hibakezelés és finomhangolás. :contentReference[oaicite:13]{index=13}
+Feladata:
+
+* validációs kommentadatok beolvasása,
+* posztkontextus-adatok beolvasása,
+* kommentek és posztok összekapcsolása.
+
+### Szöveg-előfeldolgozás
+
+```text
+src/preprocessing/text_preprocessor.py
+```
+
+Feladata:
+
+* szövegek tisztítása,
+* URL-ek kezelése,
+* fölösleges szóközök és sortörések eltávolítása,
+* emojik szöveges tokenné alakítása,
+* kommentek, posztok, képleírások és videós leiratok előkészítése.
+
+### Sentiment elemzés
+
+```text
+src/sentiment/hubert_sentiment_analyzer.py
+```
+
+Feladata:
+
+* a huBERT-alapú modell betöltése,
+* pozitív, negatív és semleges címkék meghatározása,
+* konfidenciaértékek előállítása,
+* több szöveges mező együttes elemzése.
+
+### Statisztikai összesítés
+
+```text
+src/analytics/sentiment_statistics.py
+```
+
+Feladata:
+
+* kommentek darabszámának meghatározása,
+* pozitív, negatív és semleges arányok kiszámítása,
+* domináns sentiment meghatározása,
+* átlagos modellbizonyosság számítása,
+* több munkalapos Excel-fájl létrehozása.
+
+### Kontextuselemzés
+
+```text
+src/context_analysis/context_analyzer.py
+```
+
+Feladata:
+
+* a poszt sentimentjének és a kommentek domináns hangulatának összevetése,
+* reakciótípus meghatározása,
+* kontextusilleszkedés meghatározása,
+* rövid szöveges értelmezés készítése.
+
+A modul szabályalapú, nem végez teljes körű álláspont-felismerést.
+
+### Vizualizáció
+
+```text
+src/visualization/sentiment_visualizer.py
+```
+
+Feladata:
+
+* teljes sentimenteloszlás ábrázolása,
+* posztonkénti sentimentarányok megjelenítése,
+* átlagos modellbizonyosság ábrázolása,
+* kontextusilleszkedési eredmények megjelenítése.
+
+### Riportkészítés
+
+```text
+src/reporting/summary_report.py
+```
+
+Feladata:
+
+* összesített szöveges riport készítése,
+* legpozitívabb és legnegatívabb poszt meghatározása,
+* domináns sentiment és modellbizonyosság összegzése,
+* posztonkénti kontextuális értelmezések megjelenítése.
+
+### Közös feldolgozási pipeline
+
+```text
+src/pipeline/analysis_pipeline.py
+```
+
+Feladata a teljes feldolgozási folyamat közös kezelése.
+
+A modult használja:
+
+* a parancssoros `main.py`,
+* a Streamlit-alapú felület.
+
+Ez megakadályozza a feldolgozási logika duplikálását.
+
+### Streamlit felület
+
+```text
+src/ui/streamlit_app.py
+```
+
+Feladata:
+
+* az elemzés elindítása,
+* bemeneti fájlok ellenőrzése,
+* főbb statisztikák megjelenítése,
+* grafikonok és riport megjelenítése,
+* Excel- és TXT-fájl letöltése,
+* korábbi eredmények törlése,
+* felhasználóbarát hibakezelés.
 
 ---
 
-## Használat
+## A rendszer működési folyamata
 
-A rendszer használata egyszerű:
-
-1. Add meg a vizsgálni kívánt Facebook-bejegyzés linkjét vagy azonosítóját.
-2. A rendszer automatikusan lekéri az adatokat.
-3. Lefut a szöveg-előfeldolgozás és a hangulatelemzés.
-4. A rendszer megjeleníti az összesített eredményeket és statisztikákat. :contentReference[oaicite:14]{index=14}
+```text
+CSV-adatok beolvasása
+→ posztkontextusok beolvasása
+→ kommentek és posztok összekapcsolása
+→ szöveg-előfeldolgozás
+→ huBERT sentiment elemzés
+→ posztonkénti statisztikák
+→ teljes adathalmaz összesítése
+→ kontextuselemzés
+→ Excel-export
+→ grafikonok létrehozása
+→ szöveges riport készítése
+→ eredmények megjelenítése a Streamlit felületen
+```
 
 ---
+
+## Parancssoros futtatás
+
+A teljes feldolgozási folyamat a projekt gyökérmappájából indítható:
+
+```powershell
+python src/main.py
+```
+
+A parancssoros futtatás létrehozza:
+
+* az Excel-eredményfájlt,
+* a grafikonokat,
+* a szöveges riportot.
+
+---
+
+## Streamlit felület indítása
+
+A grafikus felület indítása:
+
+```powershell
+streamlit run src/ui/streamlit_app.py
+```
+
+A böngészőben várhatóan az alábbi cím nyílik meg:
+
+```text
+http://localhost:8501
+```
+
+A felületen az „Elemzés indítása” gomb elindítja a teljes feldolgozási pipeline-t.
+
+Az első futás hosszabb ideig tarthat, mert a huBERT-modell és a PyTorch környezet inicializálása is megtörténik. A modell a Streamlit `cache_resource` funkciójával gyorsítótárazásra kerül, de az egyes szövegek elemzése minden új futtatáskor ismét végrehajtódik.
+
+---
+
+## Streamlit felület funkciói
+
+A felület megjeleníti:
+
+* a feldolgozott posztok számát,
+* a feldolgozott kommentek számát,
+* a domináns sentimentet,
+* az átlagos modellbizonyosságot,
+* az összesített sentimentmegoszlást,
+* a posztonkénti statisztikákat,
+* a kontextuselemzési eredményeket,
+* a grafikonokat,
+* a szöveges riportot,
+* a részletes kommentenkénti eredményeket.
+
+Az eredmények külön füleken jelennek meg.
+
+A felület lehetőséget biztosít:
+
+* az Excel-fájl letöltésére,
+* a szöveges riport letöltésére,
+* a korábbi elemzési eredmény törlésére,
+* új elemzés indítására.
+
+---
+
+## Bemeneti fájlok
+
+### Validációs kommentadatok
+
+```text
+data/validation/validacios_teszthalmaz.csv
+```
+
+A fájl a kommentek szövegét, azonosítóit és kézi sentiment címkéit tartalmazza.
+
+### Posztkontextus-adatok
+
+```text
+data/validation/post_context.csv
+```
+
+A fájl tartalmazhatja:
+
+* a poszt szövegét,
+* a poszt típusát,
+* a kép manuális szöveges leírását,
+* a videós leiratot,
+* további megjegyzéseket.
+
+---
+
+## Kimeneti fájlok
+
+### Excel-eredményfájl
+
+```text
+data/processed/sentiment_analysis_results.xlsx
+```
+
+A munkafüzet fő lapjai:
+
+```text
+full_dataset
+post_statistics
+overall_statistics
+context_analysis
+```
+
+### Grafikonok
+
+```text
+outputs/charts/
+```
+
+Létrejövő főbb fájlok:
+
+```text
+overall_sentiment_distribution.png
+post_sentiment_distribution.png
+average_confidence_by_post.png
+context_alignment_distribution.png
+```
+
+### Szöveges riport
+
+```text
+outputs/reports/sentiment_summary.txt
+```
+
+A riport tartalmazza:
+
+* a feldolgozott adatok mennyiségét,
+* a sentimentmegoszlást,
+* a domináns sentimentet,
+* a legpozitívabb és legnegatívabb posztot,
+* az átlagos modellbizonyosságot,
+* a kontextuselemzés főbb eredményeit.
+
+---
+
+## Hibakezelés
+
+A Streamlit felület külön kezeli többek között:
+
+* hiányzó bemeneti fájlokat,
+* üres CSV-fájlokat,
+* hibás CSV-szerkezetet,
+* karakterkódolási problémákat,
+* megnyitott vagy nem írható Excel-fájlt,
+* hiányzó kötelező oszlopokat,
+* modellbetöltési és PyTorch-hibákat,
+* fájl- és mappakezelési problémákat.
+
+A részletes technikai hibaüzenetek külön lenyitható panelen jelennek meg.
+
