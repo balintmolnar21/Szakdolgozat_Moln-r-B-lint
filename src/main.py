@@ -22,6 +22,7 @@ from visualization.sentiment_visualizer import (
 from reporting.summary_report import create_summary_report
 
 
+
 def main():
     validation_file = "data/validation/validacios_teszthalmaz.csv"
     post_context_file = "data/validation/post_context.csv"

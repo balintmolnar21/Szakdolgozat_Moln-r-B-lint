@@ -6,7 +6,7 @@ from pandas.errors import EmptyDataError, ParserError
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIRECTORY = PROJECT_ROOT / "src"
+SRC_DIRECTORY = PROJECT_ROOT / "src" 
 
 if str(SRC_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SRC_DIRECTORY))
@@ -52,6 +52,10 @@ REPORT_OUTPUT_FILE = (
     / "outputs"
     / "reports"
     / "sentiment_summary.txt"
+)
+
+EVALUATION_OUTPUT_DIRECTORY = (
+    PROJECT_ROOT / "outputs" / "evaluation"
 )
 
 @st.cache_resource(show_spinner=False)
@@ -281,6 +285,9 @@ def display_analysis_button() -> None:
                     reports_output_directory=(
                         REPORT_OUTPUT_FILE.parent
                     ),
+                    evaluation_output_directory=Path(
+                        "outputs/evaluation"
+                    ),
                     analyzer=analyzer,
                     limit=None,
                 )
@@ -347,6 +354,236 @@ def create_display_dataframe(
         columns=available_translations
     )
 
+def display_metric_explanations() -> None:
+    """
+    Röviden ismerteti a modellkiértékelés fő mérőszámait.
+    """
+    st.markdown(
+        """
+        **Accuracy:** Megmutatja, hogy az összes kiértékelt komment
+        mekkora részét osztályozta helyesen a modell.
+
+        **Precision:** Azt fejezi ki, hogy egy adott kategóriába sorolt
+        kommentek közül ténylegesen hány tartozott oda.
+
+        **Recall:** Azt mutatja meg, hogy az adott kategóriába ténylegesen
+        tartozó kommentek mekkora részét találta meg a modell.
+
+        **F1-score:** A precision és a recall harmonikus átlaga, ezért
+        egyetlen értékben egyesíti a két mérőszámot.
+
+        **Konfidencia:** A modell becsült bizonyossága arra vonatkozóan,
+        hogy az adott kommenthez kiválasztott sentimentcímke helyes.
+        A magasabb érték nagyobb modellbizonyosságot jelez, de nem garantálja
+        a predikció tényleges helyességét.
+        """
+    )
+
+
+def display_chart_explanation(chart_file: Path) -> None:
+    """
+    Rövid magyarázatot jelenít meg az adott grafikonhoz.
+    """
+    chart_explanations = {
+        "overall_sentiment_distribution.png": (
+            "A diagram az összes vizsgált komment pozitív, negatív és "
+            "semleges megoszlását mutatja."
+        ),
+        "post_sentiment_distribution.png": (
+            "A diagram posztonként hasonlítja össze a pozitív, negatív "
+            "és semleges kommentek arányát."
+        ),
+        "average_confidence_by_post.png": (
+            "A diagram azt mutatja meg, hogy a modell átlagosan mennyire "
+            "volt biztos az egyes posztok kommentjeinek besorolásában."
+        ),
+        "context_alignment_distribution.png": (
+            "A diagram a poszt tartalma és a kommentek domináns hangulata "
+            "közötti illeszkedés megoszlását szemlélteti."
+        ),
+        "confusion_matrix.png": (
+            "A confusion matrix sorai a kézi címkéket, oszlopai a modell "
+            "predikcióit mutatják. A főátlóban találhatók a helyes találatok."
+        ),
+        "classification_metrics.png": (
+            "A diagram sentimentkategóriánként hasonlítja össze a "
+            "precision, recall és F1-score értékeket."
+        ),
+    }
+
+    explanation = chart_explanations.get(
+        chart_file.name,
+        "A grafikon az elemzés egyik összesített eredményét szemlélteti.",
+    )
+
+    st.caption(explanation)
+
+def display_model_evaluation(result) -> None:
+    """
+    Megjeleníti a modellkiértékelés fő eredményeit.
+    """
+    evaluation_result = result.evaluation_result
+
+    st.subheader("Modellkiértékelés")
+
+    evaluated_count = len(
+        evaluation_result.evaluated_data
+    )
+
+    misclassified_count = len(
+        evaluation_result.misclassified_comments
+    )
+
+    low_confidence_count = len(
+        evaluation_result.low_confidence_comments
+    )
+
+    metric_column_1, metric_column_2, metric_column_3 = st.columns(3)
+
+    with metric_column_1:
+        st.metric(
+            label="Accuracy",
+            value=f"{evaluation_result.accuracy:.2%}",
+        )
+
+    with metric_column_2:
+        st.metric(
+            label="Hibás predikciók",
+            value=misclassified_count,
+        )
+
+    with metric_column_3:
+        st.metric(
+            label="Alacsony konfidenciájú esetek",
+            value=low_confidence_count,
+        )
+
+    st.caption(
+        f"Összesen {evaluated_count} kézzel címkézett komment "
+        "került bevonásra a modell kiértékelésébe."
+    )
+
+    with st.expander("A mérőszámok rövid magyarázata"):
+        display_metric_explanations()
+
+    st.subheader("Osztályonkénti eredmények")
+
+    metrics_display_df = evaluation_result.metrics.copy()
+
+    metrics_display_df = metrics_display_df.rename(
+        columns={
+            "category": "Kategória",
+            "precision": "Precision",
+            "recall": "Recall",
+            "f1_score": "F1-score",
+            "support": "Esetszám",
+        }
+    )
+
+    category_translations = {
+        "negative": "Negatív",
+        "neutral": "Semleges",
+        "positive": "Pozitív",
+        "macro_avg": "Makróátlag",
+        "weighted_avg": "Súlyozott átlag",
+    }
+
+    metrics_display_df["Kategória"] = (
+        metrics_display_df["Kategória"].replace(
+            category_translations
+        )
+    )
+
+    st.dataframe(
+        metrics_display_df,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Precision": st.column_config.NumberColumn(
+                format="%.3f"
+            ),
+            "Recall": st.column_config.NumberColumn(
+                format="%.3f"
+            ),
+            "F1-score": st.column_config.NumberColumn(
+                format="%.3f"
+            ),
+        },
+    )
+
+    st.subheader("Confusion matrix")
+
+    st.caption(
+        "A sorok az ember által megadott címkéket, az oszlopok a modell "
+        "által előre jelzett kategóriákat jelentik."
+    )
+
+    st.dataframe(
+        evaluation_result.confusion_matrix,
+        use_container_width=True,
+    )
+
+    st.subheader("Hibás predikciók")
+
+    if evaluation_result.misclassified_comments.empty:
+        st.success(
+            "A kiértékelt adatok között nem található hibás predikció."
+        )
+    else:
+        misclassified_columns = [
+            column
+            for column in [
+                "comment_text",
+                "manual_label",
+                "model_label",
+                "confidence",
+            ]
+            if column
+            in evaluation_result.misclassified_comments.columns
+        ]
+
+        st.dataframe(
+            evaluation_result.misclassified_comments[
+                misclassified_columns
+            ],
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    st.subheader("Alacsony konfidenciájú predikciók")
+
+    st.caption(
+        "Ide azok a kommentek kerülnek, amelyeknél a modell "
+        "konfidenciaértéke 0,60 alatti. Ezek a predikciók "
+        "bizonytalanabbnak tekinthetők, ezért külön ellenőrzésük indokolt."
+    )
+
+    if evaluation_result.low_confidence_comments.empty:
+        st.info(
+            "Nem található 0,60 alatti konfidenciájú predikció."
+        )
+    else:
+        low_confidence_columns = [
+            column
+            for column in [
+                "comment_text",
+                "manual_label",
+                "model_label",
+                "confidence",
+            ]
+            if column
+            in evaluation_result.low_confidence_comments.columns
+        ]
+
+        st.dataframe(
+            evaluation_result.low_confidence_comments[
+                low_confidence_columns
+            ],
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
 def display_analysis_results(
     result: AnalysisPipelineResult,
 ) -> None:
@@ -406,12 +643,15 @@ def display_analysis_results(
             f"{average_confidence:.3f}",
         )
 
+    
+
     st.divider()
 
     (
         summary_tab,
         post_statistics_tab,
         context_tab,
+        evaluation_tab,
         charts_tab,
         report_tab,
         comments_tab,
@@ -420,9 +660,10 @@ def display_analysis_results(
             "Összegzés",
             "Posztonkénti statisztikák",
             "Kontextuselemzés",
+            "Modellkiértékelés",
             "Grafikonok",
             "Szöveges riport",
-            "Részletes kommenteredmények",
+            "Részletes kommentek",
         ]
     )
 
@@ -477,6 +718,8 @@ def display_analysis_results(
                 f"{neutral_count} db",
                 f"{neutral_ratio:.2f}%",
             )
+
+    
 
         st.subheader("Kimeneti fájlok")
 
@@ -634,12 +877,19 @@ def display_analysis_results(
                 "Nem találhatók megjeleníthető grafikonok."
             )
         else:
-            for chart_file in existing_chart_files:
+            for chart_file in result.chart_files:
+                st.markdown(
+                    f"#### {chart_file.stem.replace('_', ' ').title()}"
+                )
+
+                display_chart_explanation(chart_file)
+
                 st.image(
                     str(chart_file),
-                    caption=chart_file.stem,
                     use_container_width=True,
                 )
+
+                st.divider()
 
     with report_tab:
         st.subheader("Automatikusan létrehozott riport")
@@ -730,6 +980,9 @@ def display_analysis_results(
             hide_index=True,
             height=550,
         )
+
+    with evaluation_tab:
+            display_model_evaluation(result)
 
 
 def main() -> None:

@@ -21,12 +21,28 @@ from visualization.sentiment_visualizer import (
 )
 from reporting.summary_report import create_summary_report
 
+from evaluation.model_evaluator import (
+    ModelEvaluationResult,
+    evaluate_sentiment_model,
+)
+
+from evaluation.evaluation_exporter import (
+    export_evaluation_results,
+)
+
+from evaluation.evaluation_visualizer import (
+    create_confusion_matrix_chart,
+)
+
+from evaluation.evaluation_visualizer import (
+    create_classification_metrics_chart,
+    create_confusion_matrix_chart,
+)
+
 
 @dataclass
 class AnalysisPipelineResult:
-    """
-    A teljes elemzési pipeline eredményeit tárolja.
-    """
+   
 
     comments_df: pd.DataFrame
     post_context_df: pd.DataFrame
@@ -34,6 +50,8 @@ class AnalysisPipelineResult:
     post_statistics_df: pd.DataFrame
     overall_statistics_df: pd.DataFrame
     context_analysis_df: pd.DataFrame
+    evaluation_result: ModelEvaluationResult
+    evaluation_files: dict[str, Path]
     excel_output_file: Path
     chart_files: list[Path]
     report_file: Path
@@ -45,15 +63,11 @@ def run_analysis_pipeline(
     excel_output_file: str | Path,
     charts_output_directory: str | Path,
     reports_output_directory: str | Path,
+    evaluation_output_directory: Path,
     analyzer: HuBERTSentimentAnalyzer | None = None,
     limit: int | None = None,
 ) -> AnalysisPipelineResult:
-    """
-    Lefuttatja a teljes sentimentfeldolgozási folyamatot.
-
-    A függvény használható a parancssoros programból és
-    a Streamlit felületről is.
-    """
+    
     comments_df = load_validation_dataset(
         validation_file
     )
@@ -105,12 +119,27 @@ def run_analysis_pipeline(
         },
     ]
 
-    full_sentiment_df = (
-        analyzer.analyze_multiple_dataframe_columns(
+    full_sentiment_df = analyzer.analyze_multiple_dataframe_columns(
             df=preprocessed_df,
             analysis_configs=sentiment_analysis_configs,
             limit=limit,
         )
+
+
+    #print("A full_sentiment_df oszlopai:")
+    #print(full_sentiment_df.columns.tolist())
+
+    evaluation_result = evaluate_sentiment_model(
+        dataframe=full_sentiment_df,
+        manual_label_column="manual_label",
+        model_label_column="model_label",
+        confidence_column="confidence",
+        confidence_threshold=0.60,
+    )
+
+    evaluation_files = export_evaluation_results(
+        evaluation_result=evaluation_result,
+        output_directory=evaluation_output_directory,
     )
 
     post_statistics_df = calculate_post_statistics(
@@ -140,6 +169,32 @@ def run_analysis_pipeline(
         output_directory=charts_output_directory,
     )
 
+    confusion_matrix_chart_file = create_confusion_matrix_chart(
+        confusion_matrix_df=evaluation_result.confusion_matrix,
+        output_file=(
+            charts_output_directory
+            / "confusion_matrix.png"
+        ),
+    )
+
+    created_chart_files.append(
+        confusion_matrix_chart_file
+    )
+
+    classification_metrics_chart_file = (
+        create_classification_metrics_chart(
+            metrics_df=evaluation_result.metrics,
+            output_file=(
+                charts_output_directory
+                / "classification_metrics.png"
+            ),
+        )
+    )
+
+    created_chart_files.append(
+        classification_metrics_chart_file
+    )
+
     created_report_file = create_summary_report(
         post_statistics_df=post_statistics_df,
         overall_statistics_df=overall_statistics_df,
@@ -154,6 +209,8 @@ def run_analysis_pipeline(
         post_statistics_df=post_statistics_df,
         overall_statistics_df=overall_statistics_df,
         context_analysis_df=context_analysis_df,
+        evaluation_result=evaluation_result,
+        evaluation_files=evaluation_files,
         excel_output_file=created_excel_file,
         chart_files=created_chart_files,
         report_file=created_report_file,

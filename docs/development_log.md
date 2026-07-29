@@ -925,3 +925,111 @@ streamlit run src/ui/streamlit_app.py
 ### Eredmény
 
 A kilencedik iteráció eredményeként a rendszer már grafikus felületen is használható. A felhasználó egyetlen gombnyomással elindíthatja a teljes elemzést, majd áttekintheti és letöltheti a létrehozott eredményeket.
+
+
+
+
+## 10. iteráció – Modellvalidáció és teljesítménykiértékelés
+
+### Cél
+
+A tizedik fejlesztési iteráció célja a huBERT-alapú sentimentmodell teljesítményének objektív kiértékelése volt. A modell által előállított címkék összehasonlításra kerültek az ember által megadott kézi címkékkel.
+
+### Új modulok
+
+A modellkiértékeléshez az alábbi fájlok készültek:
+
+```text
+src/evaluation/__init__.py
+src/evaluation/model_evaluator.py
+src/evaluation/evaluation_exporter.py
+src/evaluation/evaluation_visualizer.py
+````
+
+A kiértékelési eredmények számára külön kimeneti mappa került kialakításra:
+
+```text
+outputs/evaluation/
+```
+
+### Kiértékelési folyamat
+
+A kiértékelés során a rendszer a következő oszlopokat hasonlítja össze:
+
+```text
+manual_label
+model_label
+```
+
+A kézi és modellcímkék egységesítés után pozitív, negatív és semleges kategóriákba kerülnek.
+
+A rendszer kiszámítja:
+
+```text
+accuracy
+precision
+recall
+F1-score
+support
+```
+
+Az eredmények osztályonként, valamint makró- és súlyozott átlagként is előállnak.
+
+### Confusion matrix
+
+A fejlesztés részeként confusion matrix is készül. A mátrix sorai az ember által megadott címkéket, az oszlopai pedig a modell predikcióit jelentik.
+
+A főátlóban találhatók a helyes predikciók, míg a főátlón kívüli értékek a téves osztályozásokat mutatják.
+
+A confusion matrix táblázatos és grafikus formában is elkészül.
+
+### Hibás és alacsony konfidenciájú predikciók
+
+A rendszer külön kigyűjti azokat a kommenteket, amelyeknél a modell címkéje eltér a kézi címkétől.
+
+Külön fájlba kerülnek azok a predikciók is, amelyeknél a modell konfidenciaértéke 0,60 alatti. Ezek az esetek bizonytalanabbnak tekinthetők, ezért részletesebb vizsgálatuk indokolt.
+
+### Létrehozott kimenetek
+
+A kiértékelés során az alábbi fájlok készülnek:
+
+```text
+outputs/evaluation/model_metrics.csv
+outputs/evaluation/confusion_matrix.csv
+outputs/evaluation/misclassified_comments.csv
+outputs/evaluation/low_confidence_comments.csv
+outputs/evaluation/evaluation_summary.txt
+```
+
+A grafikus eredmények:
+
+```text
+outputs/charts/confusion_matrix.png
+outputs/charts/classification_metrics.png
+```
+
+### Pipeline-integráció
+
+A modellkiértékelés bekerült a közös elemzési pipeline-ba. A kiértékelés a sentiment elemzés után automatikusan lefut, majd létrehozza a metrikákat, exportfájlokat és grafikonokat.
+
+A pipeline eredményobjektuma kiegészült a kiértékelési eredményekkel és a létrehozott fájlok elérési útjaival.
+
+### Streamlit megjelenítés
+
+A Streamlit felület új „Modellkiértékelés” füllel egészült ki.
+
+A felület megjeleníti:
+
+```text
+az accuracy értékét,
+a hibás predikciók számát,
+az alacsony konfidenciájú esetek számát,
+az osztályonkénti precision, recall és F1-score értékeket,
+a confusion matrixot,
+a hibás predikciókat,
+az alacsony konfidenciájú kommenteket.
+```
+
+A főbb mérőszámokhoz és grafikonokhoz rövid magyarázatok is készültek.
+
+

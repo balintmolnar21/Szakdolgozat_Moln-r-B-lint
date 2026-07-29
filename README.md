@@ -1,4 +1,3 @@
-
 # „Social media” hangulatelemző szoftver
 
 ## Saját adatok
@@ -18,6 +17,8 @@ Ez a repository egy Python-alapú szoftverprototípust tartalmaz, amely magyar n
 A rendszer jelenlegi változata CSV-alapú validációs adatokkal működik. A kommentek, a posztok szövege, a képi kontextus manuális szöveges leírása és a videós leirat előfeldolgozásra kerül, majd egy huBERT-alapú magyar sentimentmodell pozitív, negatív vagy semleges kategóriába sorolja azokat.
 
 A program az eredményeket statisztikailag összesíti, szabályalapú kontextuselemzést végez, grafikonokat és szöveges riportot készít, valamint Streamlit-alapú grafikus felületen jeleníti meg a főbb eredményeket.
+
+A rendszer az ember által megadott és a modell által előállított sentimentcímkék összehasonlításával modellkiértékelést is végez. A kiértékelés során accuracy, precision, recall és F1-score mérőszámokat, valamint confusion matrixot készít.
 
 A Facebook Graph API integrációja egy későbbi fejlesztési iteráció része.
 
@@ -52,6 +53,8 @@ A jelenlegi prototípus képes:
 - magyar nyelvű sentiment elemzésre,
 - statisztikai összesítésre,
 - szabályalapú kontextuselemzésre,
+- a modell teljesítményének kiértékelésére,
+- hibás és alacsony konfidenciájú predikciók kigyűjtésére,
 - Excel-fájl exportálására,
 - grafikonok készítésére,
 - szöveges riport létrehozására,
@@ -68,7 +71,7 @@ A projekt futtatásához Python 3.11 használata javasolt.
 
 ```powershell
 cd "C:\Users\USER\Desktop\projektek_fejlesztes\diplomamunka\Szakdolgozat_Moln-r-B-lint"
-````
+```
 
 ### 2. Virtuális környezet létrehozása
 
@@ -108,17 +111,19 @@ python -m pip install -r requirements.txt
 
 A projekt főbb technológiái:
 
-* **Python 3.11**
-* **pandas**
-* **Matplotlib**
-* **openpyxl**
-* **Hugging Face Transformers**
-* **PyTorch**
-* **huBERT-alapú magyar sentimentmodell**
-* **Streamlit**
-* **Git és GitHub**
-* **python-dotenv**
-* **scikit-learn** – a későbbi validációs és modellkiértékelési szakaszhoz
+- **Python 3.11**
+- **pandas**
+- **Matplotlib**
+- **openpyxl**
+- **Hugging Face Transformers**
+- **PyTorch**
+- **huBERT-alapú magyar sentimentmodell**
+- **Streamlit**
+- **scikit-learn**
+- **Git és GitHub**
+- **python-dotenv**
+
+A `scikit-learn` biztosítja a modellkiértékelés során használt accuracy, precision, recall, F1-score és confusion matrix számítását.
 
 ---
 
@@ -136,6 +141,7 @@ Szakdolgozat_Moln-r-B-lint/
 │   └── development_log.md
 ├── outputs/
 │   ├── charts/
+│   ├── evaluation/
 │   ├── exports/
 │   └── reports/
 ├── src/
@@ -143,6 +149,11 @@ Szakdolgozat_Moln-r-B-lint/
 │   ├── context_analysis/
 │   ├── data_input/
 │   ├── data_model/
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   ├── evaluation_exporter.py
+│   │   ├── evaluation_visualizer.py
+│   │   └── model_evaluator.py
 │   ├── pipeline/
 │   ├── preprocessing/
 │   ├── reporting/
@@ -170,9 +181,9 @@ src/data_input/csv_loader.py
 
 Feladata:
 
-* validációs kommentadatok beolvasása,
-* posztkontextus-adatok beolvasása,
-* kommentek és posztok összekapcsolása.
+- validációs kommentadatok beolvasása,
+- posztkontextus-adatok beolvasása,
+- kommentek és posztok összekapcsolása.
 
 ### Szöveg-előfeldolgozás
 
@@ -182,11 +193,11 @@ src/preprocessing/text_preprocessor.py
 
 Feladata:
 
-* szövegek tisztítása,
-* URL-ek kezelése,
-* fölösleges szóközök és sortörések eltávolítása,
-* emojik szöveges tokenné alakítása,
-* kommentek, posztok, képleírások és videós leiratok előkészítése.
+- szövegek tisztítása,
+- URL-ek kezelése,
+- fölösleges szóközök és sortörések eltávolítása,
+- emojik szöveges tokenné alakítása,
+- kommentek, posztok, képleírások és videós leiratok előkészítése.
 
 ### Sentiment elemzés
 
@@ -196,10 +207,10 @@ src/sentiment/hubert_sentiment_analyzer.py
 
 Feladata:
 
-* a huBERT-alapú modell betöltése,
-* pozitív, negatív és semleges címkék meghatározása,
-* konfidenciaértékek előállítása,
-* több szöveges mező együttes elemzése.
+- a huBERT-alapú modell betöltése,
+- pozitív, negatív és semleges címkék meghatározása,
+- konfidenciaértékek előállítása,
+- több szöveges mező együttes elemzése.
 
 ### Statisztikai összesítés
 
@@ -209,11 +220,11 @@ src/analytics/sentiment_statistics.py
 
 Feladata:
 
-* kommentek darabszámának meghatározása,
-* pozitív, negatív és semleges arányok kiszámítása,
-* domináns sentiment meghatározása,
-* átlagos modellbizonyosság számítása,
-* több munkalapos Excel-fájl létrehozása.
+- kommentek darabszámának meghatározása,
+- pozitív, negatív és semleges arányok kiszámítása,
+- domináns sentiment meghatározása,
+- átlagos modellbizonyosság számítása,
+- több munkalapos Excel-fájl létrehozása.
 
 ### Kontextuselemzés
 
@@ -223,12 +234,29 @@ src/context_analysis/context_analyzer.py
 
 Feladata:
 
-* a poszt sentimentjének és a kommentek domináns hangulatának összevetése,
-* reakciótípus meghatározása,
-* kontextusilleszkedés meghatározása,
-* rövid szöveges értelmezés készítése.
+- a poszt sentimentjének és a kommentek domináns hangulatának összevetése,
+- reakciótípus meghatározása,
+- kontextusilleszkedés meghatározása,
+- rövid szöveges értelmezés készítése.
 
 A modul szabályalapú, nem végez teljes körű álláspont-felismerést.
+
+### Modellkiértékelés
+
+```text
+src/evaluation/
+```
+
+A modul feladata:
+
+- a kézi és a modell által előállított címkék összehasonlítása,
+- accuracy, precision, recall és F1-score számítása,
+- confusion matrix létrehozása,
+- hibás predikciók kigyűjtése,
+- alacsony konfidenciájú eredmények azonosítása,
+- a kiértékelési eredmények fájlba mentése és vizualizálása.
+
+A konfidenciaérték a modell becsült bizonyosságát jelzi, de a magas konfidencia önmagában nem garantálja a predikció helyességét.
 
 ### Vizualizáció
 
@@ -238,10 +266,16 @@ src/visualization/sentiment_visualizer.py
 
 Feladata:
 
-* teljes sentimenteloszlás ábrázolása,
-* posztonkénti sentimentarányok megjelenítése,
-* átlagos modellbizonyosság ábrázolása,
-* kontextusilleszkedési eredmények megjelenítése.
+- teljes sentimenteloszlás ábrázolása,
+- posztonkénti sentimentarányok megjelenítése,
+- átlagos modellbizonyosság ábrázolása,
+- kontextusilleszkedési eredmények megjelenítése.
+
+A modellkiértékeléshez tartozó grafikonokat a következő modul készíti:
+
+```text
+src/evaluation/evaluation_visualizer.py
+```
 
 ### Riportkészítés
 
@@ -251,10 +285,10 @@ src/reporting/summary_report.py
 
 Feladata:
 
-* összesített szöveges riport készítése,
-* legpozitívabb és legnegatívabb poszt meghatározása,
-* domináns sentiment és modellbizonyosság összegzése,
-* posztonkénti kontextuális értelmezések megjelenítése.
+- összesített szöveges riport készítése,
+- legpozitívabb és legnegatívabb poszt meghatározása,
+- domináns sentiment és modellbizonyosság összegzése,
+- posztonkénti kontextuális értelmezések megjelenítése.
 
 ### Közös feldolgozási pipeline
 
@@ -266,8 +300,8 @@ Feladata a teljes feldolgozási folyamat közös kezelése.
 
 A modult használja:
 
-* a parancssoros `main.py`,
-* a Streamlit-alapú felület.
+- a parancssoros `main.py`,
+- a Streamlit-alapú felület.
 
 Ez megakadályozza a feldolgozási logika duplikálását.
 
@@ -279,13 +313,14 @@ src/ui/streamlit_app.py
 
 Feladata:
 
-* az elemzés elindítása,
-* bemeneti fájlok ellenőrzése,
-* főbb statisztikák megjelenítése,
-* grafikonok és riport megjelenítése,
-* Excel- és TXT-fájl letöltése,
-* korábbi eredmények törlése,
-* felhasználóbarát hibakezelés.
+- az elemzés elindítása,
+- bemeneti fájlok ellenőrzése,
+- főbb statisztikák megjelenítése,
+- modellkiértékelési eredmények megjelenítése,
+- grafikonok és riport megjelenítése,
+- Excel- és TXT-fájl letöltése,
+- korábbi eredmények törlése,
+- felhasználóbarát hibakezelés.
 
 ---
 
@@ -297,10 +332,13 @@ CSV-adatok beolvasása
 → kommentek és posztok összekapcsolása
 → szöveg-előfeldolgozás
 → huBERT sentiment elemzés
+→ modellkiértékelés
+→ hibás és alacsony konfidenciájú predikciók kigyűjtése
 → posztonkénti statisztikák
 → teljes adathalmaz összesítése
 → kontextuselemzés
 → Excel-export
+→ kiértékelési fájlok exportálása
 → grafikonok létrehozása
 → szöveges riport készítése
 → eredmények megjelenítése a Streamlit felületen
@@ -318,9 +356,10 @@ python src/main.py
 
 A parancssoros futtatás létrehozza:
 
-* az Excel-eredményfájlt,
-* a grafikonokat,
-* a szöveges riportot.
+- az Excel-eredményfájlt,
+- a kiértékelési eredményeket,
+- a grafikonokat,
+- a szöveges riportot.
 
 ---
 
@@ -348,25 +387,29 @@ Az első futás hosszabb ideig tarthat, mert a huBERT-modell és a PyTorch körn
 
 A felület megjeleníti:
 
-* a feldolgozott posztok számát,
-* a feldolgozott kommentek számát,
-* a domináns sentimentet,
-* az átlagos modellbizonyosságot,
-* az összesített sentimentmegoszlást,
-* a posztonkénti statisztikákat,
-* a kontextuselemzési eredményeket,
-* a grafikonokat,
-* a szöveges riportot,
-* a részletes kommentenkénti eredményeket.
+- a feldolgozott posztok számát,
+- a feldolgozott kommentek számát,
+- a domináns sentimentet,
+- az átlagos modellbizonyosságot,
+- az összesített sentimentmegoszlást,
+- a posztonkénti statisztikákat,
+- a kontextuselemzési eredményeket,
+- a modellkiértékelési eredményeket,
+- az accuracy, precision, recall és F1-score értékeket,
+- a confusion matrixot,
+- a hibás és alacsony konfidenciájú predikciókat,
+- a grafikonokat,
+- a szöveges riportot,
+- a részletes kommentenkénti eredményeket.
 
-Az eredmények külön füleken jelennek meg.
+Az eredmények külön füleken jelennek meg. A mérőszámokhoz és a grafikonokhoz rövid értelmező magyarázat is tartozik.
 
 A felület lehetőséget biztosít:
 
-* az Excel-fájl letöltésére,
-* a szöveges riport letöltésére,
-* a korábbi elemzési eredmény törlésére,
-* új elemzés indítására.
+- az Excel-fájl letöltésére,
+- a szöveges riport letöltésére,
+- a korábbi elemzési eredmény törlésére,
+- új elemzés indítására.
 
 ---
 
@@ -378,7 +421,7 @@ A felület lehetőséget biztosít:
 data/validation/validacios_teszthalmaz.csv
 ```
 
-A fájl a kommentek szövegét, azonosítóit és kézi sentiment címkéit tartalmazza.
+A fájl a kommentek szövegét, azonosítóit és kézi sentimentcímkéit tartalmazza. A `manual_label` oszlop szolgál referenciaértékként a modellkiértékelés során.
 
 ### Posztkontextus-adatok
 
@@ -388,11 +431,11 @@ data/validation/post_context.csv
 
 A fájl tartalmazhatja:
 
-* a poszt szövegét,
-* a poszt típusát,
-* a kép manuális szöveges leírását,
-* a videós leiratot,
-* további megjegyzéseket.
+- a poszt szövegét,
+- a poszt típusát,
+- a kép manuális szöveges leírását,
+- a videós leiratot,
+- további megjegyzéseket.
 
 ---
 
@@ -426,7 +469,29 @@ overall_sentiment_distribution.png
 post_sentiment_distribution.png
 average_confidence_by_post.png
 context_alignment_distribution.png
+confusion_matrix.png
+classification_metrics.png
 ```
+
+A `confusion_matrix.png` a kézi és automatikus címkék közötti eltéréseket mutatja. A `classification_metrics.png` sentimentkategóriánként szemlélteti a precision, recall és F1-score értékeket.
+
+### Modellkiértékelési eredmények
+
+```text
+outputs/evaluation/
+```
+
+Létrejövő fájlok:
+
+```text
+model_metrics.csv
+confusion_matrix.csv
+misclassified_comments.csv
+low_confidence_comments.csv
+evaluation_summary.txt
+```
+
+A `misclassified_comments.csv` a kézi címkétől eltérő modellpredikciókat tartalmazza. A `low_confidence_comments.csv` az alapértelmezett 0,60-as küszöbértéknél alacsonyabb konfidenciájú eseteket gyűjti össze.
 
 ### Szöveges riport
 
@@ -436,12 +501,26 @@ outputs/reports/sentiment_summary.txt
 
 A riport tartalmazza:
 
-* a feldolgozott adatok mennyiségét,
-* a sentimentmegoszlást,
-* a domináns sentimentet,
-* a legpozitívabb és legnegatívabb posztot,
-* az átlagos modellbizonyosságot,
-* a kontextuselemzés főbb eredményeit.
+- a feldolgozott adatok mennyiségét,
+- a sentimentmegoszlást,
+- a domináns sentimentet,
+- a legpozitívabb és legnegatívabb posztot,
+- az átlagos modellbizonyosságot,
+- a kontextuselemzés főbb eredményeit.
+
+---
+
+## Modellkiértékelési mérőszámok
+
+A kiértékelés során használt főbb mutatók:
+
+- **Accuracy:** az összes komment közül a helyesen osztályozott esetek aránya.
+- **Precision:** az adott kategóriába sorolt kommentek közül a ténylegesen oda tartozók aránya.
+- **Recall:** az adott kategóriába ténylegesen tartozó kommentek közül a modell által helyesen megtalált esetek aránya.
+- **F1-score:** a precision és recall harmonikus átlaga.
+- **Support:** az adott kategóriába tartozó kézzel címkézett kommentek száma.
+
+A confusion matrix sorai a kézi címkéket, oszlopai pedig a modell predikcióit jelentik. A főátlóban szereplő értékek a helyes osztályozásokat mutatják.
 
 ---
 
@@ -449,14 +528,13 @@ A riport tartalmazza:
 
 A Streamlit felület külön kezeli többek között:
 
-* hiányzó bemeneti fájlokat,
-* üres CSV-fájlokat,
-* hibás CSV-szerkezetet,
-* karakterkódolási problémákat,
-* megnyitott vagy nem írható Excel-fájlt,
-* hiányzó kötelező oszlopokat,
-* modellbetöltési és PyTorch-hibákat,
-* fájl- és mappakezelési problémákat.
+- hiányzó bemeneti fájlokat,
+- üres CSV-fájlokat,
+- hibás CSV-szerkezetet,
+- karakterkódolási problémákat,
+- megnyitott vagy nem írható Excel-fájlt,
+- hiányzó kötelező oszlopokat,
+- modellbetöltési és PyTorch-hibákat,
+- fájl- és mappakezelési problémákat.
 
 A részletes technikai hibaüzenetek külön lenyitható panelen jelennek meg.
-
