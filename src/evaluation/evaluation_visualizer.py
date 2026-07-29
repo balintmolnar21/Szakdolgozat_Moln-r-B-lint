@@ -139,6 +139,139 @@ def create_confusion_matrix_chart(
     return output_file
 
 
+def create_classification_metrics_chart(
+    metrics_df: pd.DataFrame,
+    output_file: Path,
+) -> Path:
+    """
+    Osztályonként ábrázolja a precision, recall és
+    F1-score értékeket.
+
+    Args:
+        metrics_df:
+            A modellkiértékelés metrikáit tartalmazó DataFrame.
+        output_file:
+            A létrehozandó PNG-fájl elérési útja.
+
+    Returns:
+        A létrehozott grafikon elérési útja.
+    """
+    if metrics_df.empty:
+        raise ValueError(
+            "A metrikákat tartalmazó DataFrame üres, "
+            "ezért a grafikon nem készíthető el."
+        )
+
+    required_columns = {
+        "category",
+        "precision",
+        "recall",
+        "f1_score",
+    }
+
+    missing_columns = required_columns.difference(
+        metrics_df.columns
+    )
+
+    if missing_columns:
+        raise ValueError(
+            "A metrikadiagramhoz szükséges oszlopok "
+            f"közül hiányzik: {', '.join(sorted(missing_columns))}."
+        )
+
+    class_metrics_df = metrics_df[
+        metrics_df["category"].isin(
+            ["negative", "neutral", "positive"]
+        )
+    ].copy()
+
+    if class_metrics_df.empty:
+        raise ValueError(
+            "Nem találhatók osztályonkénti metrikák."
+        )
+
+    category_translations = {
+        "negative": "Negatív",
+        "neutral": "Semleges",
+        "positive": "Pozitív",
+    }
+
+    class_metrics_df["category_hu"] = (
+        class_metrics_df["category"].map(
+            category_translations
+        )
+    )
+
+    output_file.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    chart_data = class_metrics_df.set_index(
+        "category_hu"
+    )[
+        [
+            "precision",
+            "recall",
+            "f1_score",
+        ]
+    ]
+
+    axis = chart_data.plot(
+        kind="bar",
+        figsize=(9, 6),
+    )
+
+    axis.set_title(
+        "A sentimentmodell osztályonkénti teljesítménye"
+    )
+
+    axis.set_xlabel(
+        "Sentimentkategória"
+    )
+
+    axis.set_ylabel(
+        "Metrika értéke"
+    )
+
+    axis.set_ylim(
+        0,
+        1,
+    )
+
+    axis.legend(
+        [
+            "Precision",
+            "Recall",
+            "F1-score",
+        ]
+    )
+
+    axis.tick_params(
+        axis="x",
+        rotation=0,
+    )
+
+    axis.grid(
+        axis="y",
+        alpha=0.3,
+    )
+
+    figure = axis.get_figure()
+
+    figure.tight_layout()
+
+    figure.savefig(
+        output_file,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.close(figure)
+
+    return output_file
+
+
 def translate_matrix_label(label: object) -> str:
     """
     A confusion matrix technikai címkéit magyar

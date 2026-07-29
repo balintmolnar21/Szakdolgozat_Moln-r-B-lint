@@ -34,6 +34,10 @@ from evaluation.evaluation_visualizer import (
     create_confusion_matrix_chart,
 )
 
+from evaluation.evaluation_visualizer import (
+    create_classification_metrics_chart,
+    create_confusion_matrix_chart,
+)
 
 
 @dataclass
@@ -173,6 +177,20 @@ def run_analysis_pipeline(
 
     created_chart_files.append(
         confusion_matrix_chart_file
+    )
+
+    classification_metrics_chart_file = (
+        create_classification_metrics_chart(
+            metrics_df=evaluation_result.metrics,
+            output_file=(
+                charts_output_directory
+                / "classification_metrics.png"
+            ),
+        )
+    )
+
+    created_chart_files.append(
+        classification_metrics_chart_file
     )
 
     created_report_file = create_summary_report(
