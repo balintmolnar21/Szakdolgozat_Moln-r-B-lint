@@ -30,6 +30,11 @@ from evaluation.evaluation_exporter import (
     export_evaluation_results,
 )
 
+from evaluation.evaluation_visualizer import (
+    create_confusion_matrix_chart,
+)
+
+
 
 @dataclass
 class AnalysisPipelineResult:
@@ -156,6 +161,18 @@ def run_analysis_pipeline(
         overall_statistics_df=overall_statistics_df,
         context_analysis_df=context_analysis_df,
         output_directory=charts_output_directory,
+    )
+
+    confusion_matrix_chart_file = create_confusion_matrix_chart(
+        confusion_matrix_df=evaluation_result.confusion_matrix,
+        output_file=(
+            charts_output_directory
+            / "confusion_matrix.png"
+        ),
+    )
+
+    created_chart_files.append(
+        confusion_matrix_chart_file
     )
 
     created_report_file = create_summary_report(
