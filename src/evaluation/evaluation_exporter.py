@@ -37,6 +37,10 @@ def export_evaluation_results(
         output_directory / "evaluation_summary.txt"
     )
 
+    low_confidence_file = (
+        output_directory / "low_confidence_comments.csv"
+    )
+
     evaluation_result.metrics.to_csv(
         metrics_file,
         index=False,
@@ -55,15 +59,22 @@ def export_evaluation_results(
         encoding="utf-8-sig",
     )
 
+    evaluation_result.low_confidence_comments.to_csv(
+        low_confidence_file,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
     create_evaluation_summary(
         evaluation_result=evaluation_result,
         output_file=summary_file,
     )
 
-    return {
+    return{
         "metrics": metrics_file,
         "confusion_matrix": confusion_matrix_file,
         "misclassified_comments": misclassified_file,
+        "low_confidence_comments": low_confidence_file,
         "summary": summary_file,
     }
 
@@ -87,6 +98,8 @@ def create_evaluation_summary(
     correct_count = (
         evaluated_count - misclassified_count
     )
+
+    
 
     summary_lines = [
         "SENTIMENT MODELL KIÉRTÉKELÉSI ÖSSZEFOGLALÓ",
@@ -119,3 +132,5 @@ def create_evaluation_summary(
         "\n".join(summary_lines),
         encoding="utf-8",
     )
+
+    

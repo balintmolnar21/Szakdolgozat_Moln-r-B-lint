@@ -39,6 +39,7 @@ class ModelEvaluationResult:
     metrics: pd.DataFrame
     confusion_matrix: pd.DataFrame
     misclassified_comments: pd.DataFrame
+    low_confidence_comments: pd.DataFrame
     accuracy: float
 
 
@@ -250,6 +251,8 @@ def evaluate_sentiment_model(
     dataframe: pd.DataFrame,
     manual_label_column: str,
     model_label_column: str,
+    confidence_column: str = "confidence",
+    confidence_threshold: float = 0.60,
 ) -> ModelEvaluationResult:
     """
     Végrehajtja a sentimentmodell teljes alapkiértékelését.
@@ -298,10 +301,30 @@ def evaluate_sentiment_model(
         ~evaluation_data["is_correct_prediction"]
     ].copy()
 
+    if confidence_column not in evaluation_data.columns:
+        raise ValueError(
+            "A konfidenciaelemzéshez szükséges oszlop hiányzik: "
+            f"{confidence_column}."
+        )
+
+    evaluation_data[confidence_column] = pd.to_numeric(
+        evaluation_data[confidence_column],
+        errors="coerce",
+    )
+
+    low_confidence_comments = evaluation_data.loc[
+        evaluation_data[confidence_column].notna()
+        & (
+            evaluation_data[confidence_column]
+            < confidence_threshold
+        )
+    ].copy()
+
     return ModelEvaluationResult(
         evaluated_data=evaluation_data,
         metrics=metrics,
         confusion_matrix=confusion_matrix_dataframe,
         misclassified_comments=misclassified_comments,
+        low_confidence_comments=low_confidence_comments,
         accuracy=float(accuracy),
     )

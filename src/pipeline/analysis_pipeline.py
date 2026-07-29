@@ -130,9 +130,11 @@ def run_analysis_pipeline(
     #print(full_sentiment_df.columns.tolist())
 
     evaluation_result = evaluate_sentiment_model(
-            dataframe=full_sentiment_df,
-            manual_label_column="manual_label",
-            model_label_column="model_label",
+        dataframe=full_sentiment_df,
+        manual_label_column="manual_label",
+        model_label_column="model_label",
+        confidence_column="confidence",
+        confidence_threshold=0.60,
     )
 
     evaluation_files = export_evaluation_results(
