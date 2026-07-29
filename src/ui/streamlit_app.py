@@ -355,9 +355,7 @@ def create_display_dataframe(
     )
 
 def display_metric_explanations() -> None:
-    """
-    Röviden ismerteti a modellkiértékelés fő mérőszámait.
-    """
+    
     st.markdown(
         """
         **Accuracy:** Megmutatja, hogy az összes kiértékelt komment
@@ -381,9 +379,7 @@ def display_metric_explanations() -> None:
 
 
 def display_chart_explanation(chart_file: Path) -> None:
-    """
-    Rövid magyarázatot jelenít meg az adott grafikonhoz.
-    """
+   
     chart_explanations = {
         "overall_sentiment_distribution.png": (
             "A diagram az összes vizsgált komment pozitív, negatív és "
@@ -419,9 +415,7 @@ def display_chart_explanation(chart_file: Path) -> None:
     st.caption(explanation)
 
 def display_model_evaluation(result) -> None:
-    """
-    Megjeleníti a modellkiértékelés fő eredményeit.
-    """
+    
     evaluation_result = result.evaluation_result
 
     st.subheader("Modellkiértékelés")

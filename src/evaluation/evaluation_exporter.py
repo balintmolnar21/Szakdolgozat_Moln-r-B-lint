@@ -9,18 +9,7 @@ def export_evaluation_results(
     evaluation_result: ModelEvaluationResult,
     output_directory: Path,
 ) -> dict[str, Path]:
-    """
-    A modellkiértékelés eredményeit külön fájlokba menti.
-
-    Args:
-        evaluation_result:
-            A modellkiértékelés eredményobjektuma.
-        output_directory:
-            A kimeneti mappa elérési útja.
-
-    Returns:
-        A létrehozott fájlok elérési útjai.
-    """
+    
     output_directory.mkdir(
         parents=True,
         exist_ok=True,

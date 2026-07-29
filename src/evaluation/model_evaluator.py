@@ -31,9 +31,7 @@ LABEL_MAPPING = {
 
 @dataclass
 class ModelEvaluationResult:
-    """
-    A sentimentmodell kiértékelésének eredményeit tárolja.
-    """
+    
 
     evaluated_data: pd.DataFrame
     metrics: pd.DataFrame
@@ -44,23 +42,7 @@ class ModelEvaluationResult:
 
 
 def normalize_sentiment_label(value: object) -> str | None:
-    """
-    Egy sentimentcímkét egységes angol formátumra alakít.
-
-    Támogatott végleges címkék:
-    - positive
-    - negative
-    - neutral
-
-    Args:
-        value: A normalizálandó címke.
-
-    Returns:
-        Az egységesített címke, vagy None hiányzó érték esetén.
-
-    Raises:
-        ValueError: Ha a címke nem támogatott.
-    """
+    
     if pd.isna(value):
         return None
 
@@ -84,17 +66,7 @@ def validate_evaluation_columns(
     manual_label_column: str,
     model_label_column: str,
 ) -> None:
-    """
-    Ellenőrzi a kiértékeléshez szükséges oszlopokat.
-
-    Args:
-        dataframe: A kiértékelendő adathalmaz.
-        manual_label_column: A kézi címkéket tartalmazó oszlop.
-        model_label_column: A modell címkéit tartalmazó oszlop.
-
-    Raises:
-        ValueError: Üres adathalmaz vagy hiányzó oszlop esetén.
-    """
+    
     if dataframe.empty:
         raise ValueError(
             "A modellkiértékeléshez kapott adathalmaz üres."
@@ -125,12 +97,7 @@ def prepare_evaluation_data(
     manual_label_column: str,
     model_label_column: str,
 ) -> pd.DataFrame:
-    """
-    Előkészíti és egységesíti a kézi, valamint a modellcímkéket.
-
-    A hiányzó kézi vagy modellcímkével rendelkező sorok nem
-    kerülnek bele a kiértékelésbe.
-    """
+    
     validate_evaluation_columns(
         dataframe=dataframe,
         manual_label_column=manual_label_column,
@@ -176,9 +143,7 @@ def create_metrics_dataframe(
     manual_labels: pd.Series,
     model_labels: pd.Series,
 ) -> pd.DataFrame:
-    """
-    Osztályonkénti és összesített kiértékelési mutatókat készít.
-    """
+    
     report = classification_report(
         manual_labels,
         model_labels,
@@ -222,12 +187,7 @@ def create_confusion_matrix_dataframe(
     manual_labels: pd.Series,
     model_labels: pd.Series,
 ) -> pd.DataFrame:
-    """
-    Elkészíti a confusion matrix táblázatos változatát.
-
-    A sorok a kézi címkéket, az oszlopok a modell
-    predikcióit jelentik.
-    """
+    
     matrix = confusion_matrix(
         manual_labels,
         model_labels,
@@ -254,18 +214,7 @@ def evaluate_sentiment_model(
     confidence_column: str = "confidence",
     confidence_threshold: float = 0.60,
 ) -> ModelEvaluationResult:
-    """
-    Végrehajtja a sentimentmodell teljes alapkiértékelését.
-
-    Args:
-        dataframe: A kézi és modellcímkéket tartalmazó adathalmaz.
-        manual_label_column: A kézi címke oszlopának neve.
-        model_label_column: A modellcímke oszlopának neve.
-
-    Returns:
-        A mérőszámokat, confusion matrixot és hibás
-        predikciókat tartalmazó eredményobjektum.
-    """
+    
     evaluation_data = prepare_evaluation_data(
         dataframe=dataframe,
         manual_label_column=manual_label_column,
