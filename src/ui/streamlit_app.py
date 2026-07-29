@@ -554,7 +554,8 @@ def display_model_evaluation(result) -> None:
 
     st.caption(
         "Ide azok a kommentek kerülnek, amelyeknél a modell "
-        "konfidenciaértéke 0,60 alatti."
+        "konfidenciaértéke 0,60 alatti. Ezek a predikciók "
+        "bizonytalanabbnak tekinthetők, ezért külön ellenőrzésük indokolt."
     )
 
     if evaluation_result.low_confidence_comments.empty:
