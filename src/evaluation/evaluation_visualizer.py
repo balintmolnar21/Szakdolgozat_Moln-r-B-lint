@@ -15,25 +15,7 @@ def create_confusion_matrix_chart(
     confusion_matrix_df: pd.DataFrame,
     output_file: Path,
 ) -> Path:
-    """
-    Grafikus confusion matrixot készít és PNG-fájlba menti.
-
-    A sorok az ember által megadott címkéket, az oszlopok
-    pedig a modell által előre jelzett címkéket jelentik.
-
-    Args:
-        confusion_matrix_df:
-            A confusion matrix DataFrame formátumban.
-        output_file:
-            A létrehozandó PNG-fájl elérési útja.
-
-    Returns:
-        A létrehozott grafikon elérési útja.
-
-    Raises:
-        ValueError:
-            Ha a confusion matrix üres.
-    """
+    
     if confusion_matrix_df.empty:
         raise ValueError(
             "A confusion matrix üres, ezért a grafikon "
@@ -143,19 +125,7 @@ def create_classification_metrics_chart(
     metrics_df: pd.DataFrame,
     output_file: Path,
 ) -> Path:
-    """
-    Osztályonként ábrázolja a precision, recall és
-    F1-score értékeket.
-
-    Args:
-        metrics_df:
-            A modellkiértékelés metrikáit tartalmazó DataFrame.
-        output_file:
-            A létrehozandó PNG-fájl elérési útja.
-
-    Returns:
-        A létrehozott grafikon elérési útja.
-    """
+    
     if metrics_df.empty:
         raise ValueError(
             "A metrikákat tartalmazó DataFrame üres, "
@@ -273,10 +243,7 @@ def create_classification_metrics_chart(
 
 
 def translate_matrix_label(label: object) -> str:
-    """
-    A confusion matrix technikai címkéit magyar
-    megjelenítési formára alakítja.
-    """
+    
     normalized_label = (
         str(label)
         .replace("actual_", "")
