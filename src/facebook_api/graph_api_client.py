@@ -115,3 +115,18 @@ class FacebookGraphAPIClient:
             )
 
         return response_data
+
+    def test_connection(self) -> dict[str, Any]:
+        """
+        Egyszerű Graph API kéréssel ellenőrzi,
+        hogy az access token használható-e.
+
+        Returns:
+            Az API által visszaadott alapvető azonosító adatok.
+        """
+        return self.get(
+            endpoint="me",
+            params={
+                "fields": "id,name",
+            },
+    )
