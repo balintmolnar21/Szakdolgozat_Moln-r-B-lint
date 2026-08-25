@@ -1033,3 +1033,111 @@ az alacsony konfidenciájú kommenteket.
 A főbb mérőszámokhoz és grafikonokhoz rövid magyarázatok is készültek.
 
 
+## 11. iteráció – Facebook Graph API adatlekérési réteg kialakítása
+
+### Cél
+
+A tizenegyedik fejlesztési iteráció célja a Facebook Graph API-alapú adatlekérési réteg kialakítása volt. A fejlesztés során a rendszer képessé vált arra, hogy egy adminisztrált Facebook-oldalhoz kapcsolódó adatokat közvetlenül a Graph API-n keresztül érjen el.
+
+### Konfiguráció és hitelesítés
+
+A Facebook API-hozzáféréshez szükséges adatok környezeti változókból kerülnek betöltésre. A `.env` fájl tartalmazza:
+
+```text
+FACEBOOK_ACCESS_TOKEN
+FACEBOOK_PAGE_ID
+FACEBOOK_GRAPH_API_VERSION
+```
+
+A token és az oldalazonosító nem kerül verziókezelés alá.
+
+### Új modulok
+
+A Facebook API kezeléséhez az alábbi modulok készültek:
+
+```text
+src/facebook_api/
+├── __init__.py
+├── config.py
+├── graph_api_client.py
+├── post_fetcher.py
+├── comment_fetcher.py
+└── facebook_data_mapper.py
+```
+
+### Graph API kliens
+
+A `graph_api_client.py` felelős az API-kérések végrehajtásáért. A kliens kezeli:
+
+```text
+GET kérések küldését
+access token használatát
+API-verzió kezelését
+hálózati hibákat
+Meta API hibaválaszokat
+lapozott lekérések támogatását
+```
+
+### Posztok lekérése
+
+A rendszer képes egy konkrét Facebook-poszt alapadatainak lekérésére.
+
+A lekért adatok többek között:
+
+```text
+post_id
+post_text
+post_link
+created_time
+```
+
+Ezen kívül külön teszt készült az oldal legutóbbi bejegyzéseinek lekérésére is.
+
+### Kommentek lekérése
+
+A `comment_fetcher.py` segítségével a rendszer egy adott poszthoz tartozó kommenteket is le tudja kérni.
+
+A kommentlekérés támogatja a Graph API lapozását, így több oldalnyi komment automatikusan összegyűjthető.
+
+A normalizált kommentadatok többek között:
+
+```text
+post_id
+comment_id
+comment_text
+created_time
+```
+
+### Adatok átalakítása
+
+A `facebook_data_mapper.py` a Graph API-ból érkező adatokat pandas DataFrame formára alakítja.
+
+A létrehozott struktúra illeszkedik a projekt meglévő feldolgozási logikájához, így később közvetlenül beköthető a sentiment elemzési pipeline-ba.
+
+A valódi Facebook-adatok esetén a `manual_label` mező üres marad, mivel ezekhez nem tartozik előzetesen kézzel megadott referencia-címke.
+
+### Tesztelés
+
+A fejlesztési iteráció során külön tesztek készültek az alábbi funkciók ellenőrzésére:
+
+```text
+API-kapcsolat ellenőrzése
+Facebook-oldal elérése
+posztok lekérése
+konkrét poszt lekérése
+kommentek lekérése
+pagination kezelése
+DataFrame átalakítás
+```
+
+A tesztek valódi Facebook-oldallal és érvényes Page Access Tokennel sikeresen lefutottak.
+
+### Eredmény
+
+A tizenegyedik iteráció eredményeként elkészült az önálló Facebook Graph API adatlekérési réteg. A rendszer már képes valódi Facebook-posztok és kommentek lekérésére, valamint ezek belső adatstruktúrára történő átalakítására.
+
+A következő fejlesztési iteráció feladata az API-adatforrás bekötése lesz a közös feldolgozási pipeline-ba és a Streamlit felületbe.
+
+
+
+

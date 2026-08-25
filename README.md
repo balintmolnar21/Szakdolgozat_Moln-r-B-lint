@@ -20,7 +20,7 @@ A program az eredményeket statisztikailag összesíti, szabályalapú kontextus
 
 A rendszer az ember által megadott és a modell által előállított sentimentcímkék összehasonlításával modellkiértékelést is végez. A kiértékelés során accuracy, precision, recall és F1-score mérőszámokat, valamint confusion matrixot készít.
 
-A Facebook Graph API integrációja egy későbbi fejlesztési iteráció része.
+A Facebook Graph API adatlekérési rétege elkészült, így a rendszer képes adminisztrált Facebook-oldalak posztjainak és kommentjeinek lekérésére. A következő fejlesztési lépés ennek a funkciónak a közös feldolgozási pipeline-ba és a Streamlit felületbe történő integrációja.
 
 ---
 
@@ -55,6 +55,10 @@ A jelenlegi prototípus képes:
 - szabályalapú kontextuselemzésre,
 - a modell teljesítményének kiértékelésére,
 - hibás és alacsony konfidenciájú predikciók kigyűjtésére,
+- Facebook Graph API-alapú posztlekérésre,
+- Facebook-kommentek lekérésére,
+- lapozott API-válaszok kezelésére,
+- Facebook-adatok pandas DataFrame formára alakítására,
 - Excel-fájl exportálására,
 - grafikonok készítésére,
 - szöveges riport létrehozására,
@@ -122,6 +126,8 @@ A projekt főbb technológiái:
 - **scikit-learn**
 - **Git és GitHub**
 - **python-dotenv**
+- **Facebook Graph API**
+- **requests**
 
 A `scikit-learn` biztosítja a modellkiértékelés során használt accuracy, precision, recall, F1-score és confusion matrix számítását.
 
@@ -132,6 +138,7 @@ A `scikit-learn` biztosítja a modellkiértékelés során használt accuracy, p
 ```text
 Szakdolgozat_Moln-r-B-lint/
 ├── data/
+│   ├── mock/
 │   ├── processed/
 │   ├── raw/
 │   └── validation/
@@ -154,6 +161,13 @@ Szakdolgozat_Moln-r-B-lint/
 │   │   ├── evaluation_exporter.py
 │   │   ├── evaluation_visualizer.py
 │   │   └── model_evaluator.py
+│   ├── facebook_api/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── graph_api_client.py
+│   │   ├── post_fetcher.py
+│   │   ├── comment_fetcher.py
+│   │   └── facebook_data_mapper.py
 │   ├── pipeline/
 │   ├── preprocessing/
 │   ├── reporting/
@@ -258,6 +272,24 @@ A modul feladata:
 
 A konfidenciaérték a modell becsült bizonyosságát jelzi, de a magas konfidencia önmagában nem garantálja a predikció helyességét.
 
+### Facebook Graph API
+
+```text
+src/facebook_api/
+```
+
+A modul feladata:
+
+- a Facebook Graph API-kapcsolat kezelése,
+- access token és Page ID betöltése környezeti változókból,
+- Facebook-posztok lekérése,
+- kommentek lekérése,
+- API pagination kezelése,
+- API-hibák feldolgozása,
+- a lekért adatok pandas DataFrame formára alakítása.
+
+A valódi Facebook-adatokhoz nem tartozik kézi `manual_label` érték, ezért a modellkiértékelés ezeknél az adatoknál nem alkalmazható automatikusan.
+
 ### Vizualizáció
 
 ```text
@@ -326,6 +358,8 @@ Feladata:
 
 ## A rendszer működési folyamata
 
+A jelenlegi CSV-alapú feldolgozási folyamat:
+
 ```text
 CSV-adatok beolvasása
 → posztkontextusok beolvasása
@@ -343,6 +377,20 @@ CSV-adatok beolvasása
 → szöveges riport készítése
 → eredmények megjelenítése a Streamlit felületen
 ```
+
+A Facebook Graph API adatlekérési réteg jelenlegi működése:
+
+```text
+Facebook Graph API
+→ oldal és posztok elérése
+→ konkrét poszt lekérése
+→ kommentek lekérése
+→ pagination kezelése
+→ adatok normalizálása
+→ pandas DataFrame létrehozása
+```
+
+A következő fejlesztési iteráció feladata ennek a két folyamatnak az összekapcsolása.
 
 ---
 
@@ -410,6 +458,20 @@ A felület lehetőséget biztosít:
 - a szöveges riport letöltésére,
 - a korábbi elemzési eredmény törlésére,
 - új elemzés indítására.
+
+---
+
+## Facebook Graph API konfiguráció
+
+A Graph API használatához szükséges érzékeny adatok a `.env` fájlban kerülnek tárolásra:
+
+```env
+FACEBOOK_ACCESS_TOKEN=your_access_token_here
+FACEBOOK_PAGE_ID=your_page_id_here
+FACEBOOK_GRAPH_API_VERSION=v25.0
+```
+
+A valódi `.env` fájl nem kerül verziókezelés alá. A repository kizárólag a `.env.example` mintafájlt tartalmazza.
 
 ---
 
@@ -538,3 +600,5 @@ A Streamlit felület külön kezeli többek között:
 - fájl- és mappakezelési problémákat.
 
 A részletes technikai hibaüzenetek külön lenyitható panelen jelennek meg.
+
+A Facebook Graph API modul külön kezeli az API-kapcsolati hibákat, az érvénytelen vagy lejárt access tokent, a jogosultsági problémákat, valamint a hálózati és lapozási hibákat.
