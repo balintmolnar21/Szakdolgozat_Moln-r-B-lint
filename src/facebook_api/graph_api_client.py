@@ -116,6 +116,49 @@ class FacebookGraphAPIClient:
 
         return response_data
 
+
+    def get_from_url(
+            self,
+            url: str,
+        ) -> dict[str, Any]:
+            """
+            Teljes Graph API URL alapján hajt végre GET kérést.
+
+            Elsősorban pagination kezelésére használható.
+            """
+            try:
+                response = requests.get(
+                    url,
+                    timeout=self.timeout,
+                )
+
+            except requests.RequestException as error:
+                raise RuntimeError(
+                    "A Facebook Graph API következő oldalának "
+                    "lekérése sikertelen volt."
+                ) from error
+
+            try:
+                response_data = response.json()
+
+            except ValueError as error:
+                raise RuntimeError(
+                    "A Facebook Graph API nem JSON választ adott."
+                ) from error
+
+            if not response.ok:
+                error_data = response_data.get(
+                    "error",
+                    {},
+                )
+
+                raise RuntimeError(
+                    "Facebook Graph API hiba: "
+                    f"{error_data.get('message', 'Ismeretlen hiba.')}"
+                )
+
+            return response_data
+
     def test_connection(self) -> dict[str, Any]:
         """
         Egyszerű Graph API kéréssel ellenőrzi,
