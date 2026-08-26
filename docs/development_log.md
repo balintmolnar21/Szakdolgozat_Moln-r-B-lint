@@ -1139,5 +1139,12 @@ A tizenegyedik iteráció eredményeként elkészült az önálló Facebook Grap
 A következő fejlesztési iteráció feladata az API-adatforrás bekötése lesz a közös feldolgozási pipeline-ba és a Streamlit felületbe.
 
 
+## 12. iteráció – Validációs teszthalmaz bővítése
+
+A tizenkettedik fejlesztési iteráció célja a validációs adathalmaz méretének növelése és domain-specifikusabbá tétele volt. A korábbi teszthalmaz kiegészítésre került további Facebook-posztokkal és az azokhoz tartozó kommentekkel annak érdekében, hogy a későbbi modellfinomítás és kiértékelés megbízhatóbb alapokon történjen.
+
+Az új kommentek nyers formában kerültek eltárolásra, az eredeti Unicode emojik megtartásával. Ez azért fontos, mert a későbbi kísérletek során külön vizsgálható lesz a nyers emoji, a szöveges emoji-leírás és a korábban alkalmazott tokenizált forma hatása a modell teljesítményére.
+
+A kibővített adathalmaz minden kommentje kézi sentimentcímkét kap pozitív, negatív vagy semleges kategóriában. Az így létrejött nagyobb, egységesen címkézett adathalmaz szolgál majd alapul a tanító-, validációs- és teszthalmaz kialakításához, valamint a huBERT modell későbbi domain-specifikus finomhangolásához.
 
 
