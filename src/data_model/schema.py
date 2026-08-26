@@ -1,7 +1,6 @@
 COMMENT_COLUMNS = [
     "post_id",
     "post_type",
-    "post_link",
     "comment_id",
     "comment_text",
     "manual_label",
@@ -35,7 +34,6 @@ SENTIMENT_CONTEXT_COLUMNS = [
 INTERNAL_DATA_COLUMNS = [
     "post_id",
     "post_type",
-    "post_link",
 
     "post_text",
     "image_context_text",
