@@ -11,7 +11,6 @@ from data_model.schema import (
 VALIDATION_COLUMN_MAPPING = {
     "Poszt ID": "post_id",
     "Poszt típusa": "post_type",
-    "Poszt link": "post_link",
     "Komment ID": "comment_id",
     "Komment tartalma": "comment_text",
     "Kézi címke": "manual_label",
