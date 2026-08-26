@@ -1,22 +1,22 @@
-﻿"post_id","post_type","post_text","image_context_text","video_context_text","note"
-"P1","image","Ma az utolsó plakátok is gazdára találtak.😀
+﻿post_id,post_type,post_text,image_context_text,video_context_text,note
+P1,image,"Ma az utolsó plakátok is gazdára találtak.😀
 
-Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
-"P2","image","Köszönöm!💙
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.
+P2,image,"Köszönöm!💙
 
 A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
 Pedig a valódi köszönet nekik jár.
 Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
 Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
 
-Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
-"P3","image","Választás előtti utolsó piac!🍎💙","A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
-"P4","video","Így szegényítette el a Fidesz a nyugdíjasokat.👇","","Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.
+P3,image,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.
+P4,video,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
 
 Csak jobb lenne nem?
 
-Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.","Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra."
-"P5","image","A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.
+P5,image,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
 
 Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
 
@@ -29,4 +29,54 @@ Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy 
 Csak erős baloldal tudja képviselni a magyar vidéket.
 
 Erős baloldal!
-Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.","","Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra."
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.
+P6,image,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.
+P7,text,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.
+P8,image,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.
+P9,video,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.
+P10,image,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.
+P11,text,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.
+P12,video,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.
+P13,image,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.
+P14,image,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.
+P15,video,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.
