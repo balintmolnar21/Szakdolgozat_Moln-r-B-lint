@@ -1,4 +1,4 @@
 ﻿,predicted_negative,predicted_neutral,predicted_positive
-actual_negative,35,6,1
-actual_neutral,14,13,8
-actual_positive,4,12,37
+actual_negative,55,15,2
+actual_neutral,22,41,12
+actual_positive,7,21,55

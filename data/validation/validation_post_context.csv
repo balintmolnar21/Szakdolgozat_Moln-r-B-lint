@@ -1,0 +1,51 @@
+﻿post_id,post_type,post_text,image_context_text,video_context_text,note
+P1,image,"Egyetlen gyerek se kezdje éhesen a tanítási napot. 🍎🥪
+
+Azt javaslom, hogy minden általános iskolás számára legyen ingyenes reggeli az iskolában, családi jövedelemtől függetlenül.
+
+A cél egyszerű: minden gyerek kapjon egy biztos, normális étkezést a tanítás előtt.","Iskolai étkezőben gyerekek reggeliznek. Az asztalokon szendvicsek, gyümölcs és ital látható. A kép az iskolai étkeztetést és az egyenlő hozzáférést hangsúlyozza.",,
+P2,video,"Biztonságosabb és összefüggőbb kerékpáros hálózatot szeretnék a városban. 🚲
+
+A következő években jelentősen bővíteném az elkülönített kerékpársávokat, még akkor is, ha ehhez néhány helyen autósávot vagy parkolóhelyet kell átalakítani.
+
+Ha valódi alternatívát akarunk az autó mellett, ahhoz használható infrastruktúra kell.",,"A videó forgalmas városi utcákat mutat, majd látványterven elkülönített kerékpársávok, biztonságos kereszteződések és bicikliző családok jelennek meg. A narráció a kerékpáros hálózat bővítése mellett érvel.",
+P3,text,"A vagyonnyilatkozat csak akkor ér valamit, ha valóban könnyen ellenőrizhető. 🔍
+
+Az önkormányzati képviselők vagyonnyilatkozatait kereshető, egységes online adatbázisban tenném közzé, több évre visszamenőleg.
+
+A közbizalomhoz átlátható és ellenőrizhető szabályok kellenek.",,,
+P4,image,"Kevesebb egyszer használatos műanyagot a rendezvényeinken. ♻️
+
+Az önkormányzati és támogatott helyi rendezvényeken betiltanám az egyszer használatos műanyag evőeszközök használatát, és többször használható vagy visszaváltható megoldásokat vezetnék be.
+
+A nagy rendezvényeken keletkező hulladékon igenis lehet csökkenteni.","Szabadtéri rendezvény után szelektíven gyűjtött hulladék, újrahasználható poharak és evőeszközök láthatók. A kép a rendezvényi hulladékcsökkentés témáját jeleníti meg.",,
+P5,video,"A helyi döntések legyenek valóban nyilvánosak. 🎥
+
+Minden települési képviselő-testületi ülés nyilvános részét élőben közvetíteném az interneten, a teljes felvételt pedig később visszanézhetővé tenném.
+
+Aki nem tud személyesen ott lenni, az is követhesse, miről és hogyan döntenek.",,"A videó egy képviselő-testületi ülést mutat több kameranézettel, majd egy online közvetítési felület jelenik meg visszanézhető napirendi pontokkal. A narráció a helyi döntéshozatal átláthatóságát hangsúlyozza.",
+P6,image,"A digitális ügyintézés ne hagyja magára az idősebbeket. 👵💻
+
+Ingyenes önkormányzati segítséget indítanék azoknak az időseknek, akiknek gondot okoz az online időpontfoglalás, elektronikus űrlapok kitöltése vagy más digitális ügyintézés.
+
+A személyes ügyintézés megmaradna, de aki szeretné, segítséget kapna a digitális megoldások használatához.","Közösségi térben egy idősebb ember laptop előtt ül, mellette segítő mutatja az online ügyintézési felület használatát. A kép barátságos, oktatási helyzetet ábrázol.",,
+P7,text,"Több milliárdos sportberuházás előtt kérdezzük meg a helyieket is. 🗳️🏟️
+
+Egy meghatározott értékhatár felett kötelező helyi népszavazást írnék elő új sportlétesítmény építése előtt.
+
+A beruházás költségeit és hosszú távú fenntartását is a település viseli, ezért egy ilyen döntéshez széles társadalmi támogatás kell.",,,
+P8,video,"Egy kis faluban a bolt nem csak üzlet, hanem alapvető szolgáltatás is. 🏪
+
+Célzott állami támogatással segíteném azoknak a vidéki kisboltoknak a nyitvatartását, amelyek olyan településeken működnek, ahol nincs más könnyen elérhető élelmiszerbolt.
+
+Az idősek és autó nélkül élők alapellátását nem hagyhatjuk kizárólag piaci logikára.",,"A videó egy kis vidéki élelmiszerboltot mutat, ahová főként idősebb helyiek érkeznek. Vágóképeken ritka buszjárat és távolabbi nagyobb üzlet látszik. A narráció a falusi alapellátás fenntartása mellett érvel.",
+P9,image,"A buszmegálló és a játszótér ne legyen dohányzóhely. 🚭
+
+Tovább szigorítanám a közterületi dohányzás szabályait: a buszmegállók és játszóterek meghatározott környezetében tilos lenne rágyújtani.
+
+A gyerekeknek és várakozó utasoknak ne kelljen más füstjét belélegezniük.",Buszmegálló és közeli játszótér látható jól felismerhető dohányozni tilos jelzéssel. A kép a passzív dohányzás és a közterületi szabályozás témáját emeli ki.,,
+P10,image,"Ha egy településen hiányzik a szakember, segítsünk helyben kinevelni. 🎓
+
+Önkormányzati ösztöndíjat adnék azoknak a helyi fiataloknak, akik hiányszakmát tanulnak, és vállalják, hogy végzés után meghatározott ideig a térségben dolgoznak.
+
+A támogatást évente felülvizsgált hiányszakma-listához kötnénk.",Fiatal hallgatók és szakmát tanuló diákok láthatók tanműhelyi és egyetemi környezetben. A képen ösztöndíjat és helyi munkavállalást jelképező grafikai elemek is megjelennek.,,

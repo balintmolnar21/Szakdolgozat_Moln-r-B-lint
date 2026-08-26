@@ -1,40 +1,40 @@
 SENTIMENT MODELL KIÉRTÉKELÉSI ÖSSZEFOGLALÓ
 ================================================
 
-Kiértékelt kommentek száma: 130
-Helyes predikciók száma: 85
-Hibás predikciók száma: 45
-Accuracy: 0.6538
-Accuracy százalékosan: 65.38%
+Kiértékelt kommentek száma: 230
+Helyes predikciók száma: 151
+Hibás predikciók száma: 79
+Accuracy: 0.6565
+Accuracy százalékosan: 65.65%
 
 OSZTÁLYONKÉNTI MUTATÓK
 ------------------------------------------------
 Kategória: negative
-  Precision: 0.6604
-  Recall: 0.8333
-  F1-score: 0.7368
-  Esetszám: 42
+  Precision: 0.6548
+  Recall: 0.7639
+  F1-score: 0.7051
+  Esetszám: 72
 
 Kategória: neutral
-  Precision: 0.4194
-  Recall: 0.3714
-  F1-score: 0.3939
-  Esetszám: 35
+  Precision: 0.5325
+  Recall: 0.5467
+  F1-score: 0.5395
+  Esetszám: 75
 
 Kategória: positive
-  Precision: 0.8043
-  Recall: 0.6981
-  F1-score: 0.7475
-  Esetszám: 53
+  Precision: 0.7971
+  Recall: 0.6627
+  F1-score: 0.7237
+  Esetszám: 83
 
 Kategória: macro_avg
-  Precision: 0.6280
-  Recall: 0.6343
-  F1-score: 0.6261
-  Esetszám: 130
+  Precision: 0.6614
+  Recall: 0.6577
+  F1-score: 0.6561
+  Esetszám: 230
 
 Kategória: weighted_avg
-  Precision: 0.6542
-  Recall: 0.6538
-  F1-score: 0.6489
-  Esetszám: 130
+  Precision: 0.6662
+  Recall: 0.6565
+  F1-score: 0.6578
+  Esetszám: 230
