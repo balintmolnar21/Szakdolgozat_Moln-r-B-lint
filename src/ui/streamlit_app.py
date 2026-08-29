@@ -20,20 +20,19 @@ from pipeline.analysis_pipeline import (
     run_analysis_pipeline,
 )
 
-DEFAULT_VALIDATION_FILE = (
+DEFAULT_TEST_COMMENTS_FILE = (
     PROJECT_ROOT
     / "data"
     / "validation"
-    / "validacios_teszthalmaz.csv"
+    / "test_comments.csv"
 )
 
-DEFAULT_POST_CONTEXT_FILE = (
+DEFAULT_TEST_POST_CONTEXT_FILE = (
     PROJECT_ROOT
     / "data"
     / "validation"
-    / "post_context.csv"
+    / "test_post_context.csv"
 )
-
 EXCEL_OUTPUT_FILE = (
     PROJECT_ROOT
     / "data"
@@ -86,9 +85,9 @@ def display_header() -> None:
     )
 
     st.info(
-        "A jelenlegi tesztmód a projektben található validációs "
-        "CSV-fájlokat használja. A Facebook Graph API-integráció "
-        "egy későbbi fejlesztési iterációban készül el."
+        "A jelenlegi tesztmód a független test adathalmazt használja. "
+        "A train és validation halmazok a modell finomhangolásához "
+        "és annak ellenőrzéséhez szolgálnak."
     )
 
 
@@ -96,28 +95,28 @@ def display_input_files() -> None:
     
     st.subheader("Bemeneti fájlok")
 
-    validation_exists = DEFAULT_VALIDATION_FILE.exists()
-    context_exists = DEFAULT_POST_CONTEXT_FILE.exists()
+    test_comments_exists = DEFAULT_TEST_COMMENTS_FILE.exists()
+    test_context_exists = DEFAULT_TEST_POST_CONTEXT_FILE.exists()
 
     first_column, second_column = st.columns(2)
 
     with first_column:
-        st.write("Validációs kommentadatok")
-        st.code(str(DEFAULT_VALIDATION_FILE))
+        st.write("Teszt kommentadatok")
+        st.code(str(DEFAULT_TEST_COMMENTS_FILE))
 
-        if validation_exists:
-            st.success("A validációs fájl elérhető.")
+        if test_comments_exists:
+            st.success("A teszt kommentfájl elérhető.")
         else:
-            st.error("A validációs fájl nem található.")
+            st.error("A teszt kommentfájl nem található.")
 
     with second_column:
-        st.write("Posztkontextus-adatok")
-        st.code(str(DEFAULT_POST_CONTEXT_FILE))
+        st.write("Teszt posztkontextus-adatok")
+        st.code(str(DEFAULT_TEST_POST_CONTEXT_FILE))
 
-        if context_exists:
-            st.success("A posztkontextus-fájl elérhető.")
+        if test_context_exists:
+            st.success("A teszt posztkontextus-fájl elérhető.")
         else:
-            st.error("A posztkontextus-fájl nem található.")
+            st.error("A teszt posztkontextus-fájl nem található.")
 
 
 def display_output_information() -> None:
@@ -216,8 +215,8 @@ def display_analysis_button() -> None:
     st.subheader("Elemzés vezérlése")
 
     input_files_available = (
-        DEFAULT_VALIDATION_FILE.exists()
-        and DEFAULT_POST_CONTEXT_FILE.exists()
+        DEFAULT_TEST_COMMENTS_FILE.exists()
+        and DEFAULT_TEST_POST_CONTEXT_FILE.exists()
     )
 
     start_column, clear_column = st.columns(2)
@@ -276,8 +275,8 @@ def display_analysis_button() -> None:
                 analyzer = load_sentiment_analyzer()
 
                 result = run_analysis_pipeline(
-                    validation_file=DEFAULT_VALIDATION_FILE,
-                    post_context_file=DEFAULT_POST_CONTEXT_FILE,
+                    validation_file=DEFAULT_TEST_COMMENTS_FILE,
+                    post_context_file=DEFAULT_TEST_POST_CONTEXT_FILE,
                     excel_output_file=EXCEL_OUTPUT_FILE,
                     charts_output_directory=(
                         CHARTS_OUTPUT_DIRECTORY

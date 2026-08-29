@@ -10,3 +10,5 @@ emoji
 transformers
 torchvision
 streamlit
+datasets
+accelerate

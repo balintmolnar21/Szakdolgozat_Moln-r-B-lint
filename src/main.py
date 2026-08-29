@@ -24,18 +24,18 @@ from reporting.summary_report import create_summary_report
 
 
 def main():
-    validation_file = "data/validation/validacios_teszthalmaz.csv"
-    post_context_file = "data/validation/post_context.csv"
+    test_comments_file = "data/validation/test_comments.csv"
+    test_post_context_file = "data/validation/test_post_context.csv"
 
     output_file = "data/processed/sentiment_analysis_results.xlsx"
     charts_output_directory = "outputs/charts"
     reports_output_directory = "outputs/reports"
 
-    print("Validációs kommentadatok beolvasása...")
-    comments_df = load_validation_dataset(validation_file)
+    print("Teszt kommentadatok beolvasása...")
+    comments_df = load_validation_dataset(test_comments_file)
 
-    print("Posztkontextus-adatok beolvasása...")
-    post_context_df = load_post_context_csv(post_context_file)
+    print("Teszt posztkontextus-adatok beolvasása...")
+    post_context_df = load_post_context_csv(test_post_context_file)
 
     print("Kommentek és posztkontextus összekapcsolása...")
     merged_df = merge_comments_with_post_context(
