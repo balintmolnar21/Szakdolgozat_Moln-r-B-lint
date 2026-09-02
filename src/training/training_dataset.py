@@ -5,16 +5,13 @@ import pandas as pd
 
 from data_input.csv_loader import (
     load_labeled_comments_dataset,
+    load_post_context_csv,
+    merge_comments_with_post_context,
 )
-from preprocessing.text_preprocessor import (
-    clean_text,
-)
-from preprocessing.emoji_lib import (
-    validate_emoji_mode,
-)
+from preprocessing.text_preprocessor import clean_text
+from preprocessing.emoji_lib import validate_emoji_mode
 
 
-# A saját háromosztályos fine-tuning modell címkézése.
 LABEL_TO_ID = {
     "negative": 0,
     "neutral": 1,
@@ -22,16 +19,17 @@ LABEL_TO_ID = {
 }
 
 ID_TO_LABEL = {
-    label_id: label
-    for label, label_id in LABEL_TO_ID.items()
+    0: "negative",
+    1: "neutral",
+    2: "positive",
 }
 
 
 @dataclass
 class TrainingDatasetBundle:
     """
-    A fine-tuninghoz használt train és validation
-    adathalmazokat összefogó adatstruktúra.
+    A context-aware fine-tuninghoz használt
+    train és validation adathalmazokat tartalmazza.
     """
 
     train_dataframe: pd.DataFrame
@@ -43,8 +41,8 @@ def add_numeric_labels(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    A szöveges sentimentcímkéket numerikus
-    osztályazonosítóra alakítja.
+    A kézi sentimentcímkéket numerikus
+    osztályazonosítókká alakítja.
 
     negative -> 0
     neutral  -> 1
@@ -55,47 +53,93 @@ def add_numeric_labels(
 
     if "manual_label" not in dataframe.columns:
         raise ValueError(
-            "A numerikus címkézéshez hiányzik "
+            "A tanító adathalmazból hiányzik "
             "a manual_label oszlop."
         )
 
-    dataframe["label"] = (
-        dataframe["manual_label"]
-        .map(LABEL_TO_ID)
+    dataframe["label"] = dataframe[
+        "manual_label"
+    ].map(
+        LABEL_TO_ID
     )
 
     if dataframe["label"].isna().any():
-        invalid_rows = dataframe.loc[
-            dataframe["label"].isna(),
-            "manual_label",
-        ].unique()
+        invalid_labels = (
+            dataframe.loc[
+                dataframe["label"].isna(),
+                "manual_label",
+            ]
+            .dropna()
+            .unique()
+        )
 
         raise ValueError(
-            "Nem támogatott sentimentcímke található "
-            "az adathalmazban: "
+            "Nem támogatott sentimentcímke található: "
             + ", ".join(
-                str(value)
-                for value in invalid_rows
+                str(label)
+                for label in invalid_labels
             )
         )
 
-    dataframe["label"] = (
-        dataframe["label"]
-        .astype(int)
-    )
+    dataframe["label"] = dataframe[
+        "label"
+    ].astype(int)
 
     return dataframe
 
 
-def add_processed_text(
+def validate_post_context(
+    dataframe: pd.DataFrame,
+) -> None:
+    """
+    Ellenőrzi, hogy minden kommenthez
+    rendelkezésre áll-e posztszöveg.
+    """
+
+    if "post_text" not in dataframe.columns:
+        raise ValueError(
+            "A context-aware tanításhoz hiányzik "
+            "a post_text oszlop."
+        )
+
+    missing_context_mask = (
+        dataframe["post_text"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .eq("")
+    )
+
+    if missing_context_mask.any():
+        missing_post_ids = (
+            dataframe.loc[
+                missing_context_mask,
+                "post_id",
+            ]
+            .dropna()
+            .astype(str)
+            .unique()
+            .tolist()
+        )
+
+        raise ValueError(
+            "A context-aware tanításhoz egy vagy több "
+            "kommenthez nem található használható posztszöveg. "
+            "Érintett post_id értékek: "
+            + ", ".join(missing_post_ids)
+        )
+
+
+def add_processed_context_fields(
     dataframe: pd.DataFrame,
     emoji_mode: str,
 ) -> pd.DataFrame:
     """
-    A nyers comment_text oszlopból létrehozza
-    a fine-tuninghoz használt processed_text mezőt.
+    Külön előfeldolgozza a poszt és a komment
+    szövegét.
 
-    Az eredeti comment_text változatlan marad.
+    Az eredeti post_text és comment_text mezők
+    változatlanul megmaradnak.
     """
 
     dataframe = dataframe.copy()
@@ -104,15 +148,18 @@ def add_processed_text(
         emoji_mode
     )
 
+    validate_post_context(
+        dataframe
+    )
+
     if "comment_text" not in dataframe.columns:
         raise ValueError(
-            "Az előfeldolgozáshoz hiányzik "
+            "A tanító adathalmazból hiányzik "
             "a comment_text oszlop."
         )
 
-    dataframe["processed_text"] = (
-        dataframe["comment_text"]
-        .apply(
+    dataframe["processed_post_text"] = (
+        dataframe["post_text"].apply(
             lambda text: clean_text(
                 text,
                 emoji_mode=emoji_mode,
@@ -120,84 +167,120 @@ def add_processed_text(
         )
     )
 
-    empty_text_mask = (
-        dataframe["processed_text"]
+    dataframe["processed_comment_text"] = (
+        dataframe["comment_text"].apply(
+            lambda text: clean_text(
+                text,
+                emoji_mode=emoji_mode,
+            )
+        )
+    )
+
+    empty_comment_mask = (
+        dataframe["processed_comment_text"]
         .fillna("")
         .astype(str)
         .str.strip()
         .eq("")
     )
 
-    if empty_text_mask.any():
+    if empty_comment_mask.any():
         empty_count = int(
-            empty_text_mask.sum()
+            empty_comment_mask.sum()
         )
 
         raise ValueError(
             "Az előfeldolgozás után "
-            f"{empty_count} rekord szövege üres."
+            f"{empty_count} komment szövege üres."
         )
 
     return dataframe
 
 
-def prepare_training_dataframe(
-    file_path: str | Path,
+def prepare_context_training_dataframe(
+    comments_file: str | Path,
+    post_context_file: str | Path,
     emoji_mode: str = "raw",
 ) -> pd.DataFrame:
     """
-    Egy kézzel címkézett kommentfájlt előkészít
-    a fine-tuninghoz.
+    Egy context-aware adathalmaz teljes
+    előkészítését végzi el.
 
-    A függvény:
-    1. betölti a CSV-t,
-    2. ellenőrzi a kézi címkéket,
-    3. létrehozza a processed_text mezőt,
-    4. numerikus label értéket rendel a címkéhez.
-    """
-
-    validate_emoji_mode(
-        emoji_mode
-    )
-
-    dataframe = load_labeled_comments_dataset(
-        file_path
-    )
-
-    dataframe = add_processed_text(
-        dataframe=dataframe,
-        emoji_mode=emoji_mode,
-    )
-
-    dataframe = add_numeric_labels(
-        dataframe
-    )
-
-    return dataframe
-
-
-def create_training_dataset_bundle(
-    train_file: str | Path,
-    validation_file: str | Path,
-    emoji_mode: str = "raw",
-) -> TrainingDatasetBundle:
-    """
-    Betölti és előkészíti a train és validation
-    adathalmazokat ugyanazzal az emoji-stratégiával.
+    Folyamat:
+    1. kommentek betöltése,
+    2. posztkontextus betöltése,
+    3. összekapcsolás post_id alapján,
+    4. poszt és komment előfeldolgozása,
+    5. numerikus label létrehozása.
     """
 
     normalized_emoji_mode = validate_emoji_mode(
         emoji_mode
     )
 
-    train_dataframe = prepare_training_dataframe(
-        file_path=train_file,
-        emoji_mode=normalized_emoji_mode,
+    comments_dataframe = (
+        load_labeled_comments_dataset(
+            comments_file
+        )
     )
 
-    validation_dataframe = prepare_training_dataframe(
-        file_path=validation_file,
-        emoji_mode=normalized_emoji_mode,
+    post_context_dataframe = (
+        load_post_context_csv(
+            post_context_file
+        )
+    )
+
+    merged_dataframe = (
+        merge_comments_with_post_context(
+            comments_dataframe,
+            post_context_dataframe,
+        )
+    )
+
+    merged_dataframe = (
+        add_processed_context_fields(
+            dataframe=merged_dataframe,
+            emoji_mode=normalized_emoji_mode,
+        )
+    )
+
+    merged_dataframe = add_numeric_labels(
+        merged_dataframe
+    )
+
+    return merged_dataframe
+
+
+def create_training_dataset_bundle(
+    train_comments_file: str | Path,
+    train_post_context_file: str | Path,
+    validation_comments_file: str | Path,
+    validation_post_context_file: str | Path,
+    emoji_mode: str = "raw",
+) -> TrainingDatasetBundle:
+    """
+    A train és validation halmazt azonos
+    preprocessing-beállítással készíti elő.
+    """
+
+    normalized_emoji_mode = validate_emoji_mode(
+        emoji_mode
+    )
+
+    train_dataframe = (
+        prepare_context_training_dataframe(
+            comments_file=train_comments_file,
+            post_context_file=train_post_context_file,
+            emoji_mode=normalized_emoji_mode,
+        )
+    )
+
+    validation_dataframe = (
+        prepare_context_training_dataframe(
+            comments_file=validation_comments_file,
+            post_context_file=validation_post_context_file,
+            emoji_mode=normalized_emoji_mode,
+        )
     )
 
     return TrainingDatasetBundle(
@@ -211,33 +294,15 @@ def calculate_label_distribution(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Elkészíti az adathalmaz sentimentosztályainak
-    darabszám- és százalékos megoszlását.
+    Sentimentosztályonként kiszámítja
+    a darabszámot és az arányt.
     """
-
-    required_columns = {
-        "manual_label",
-        "label",
-    }
-
-    missing_columns = required_columns.difference(
-        dataframe.columns
-    )
-
-    if missing_columns:
-        raise ValueError(
-            "Az osztályeloszlás számításához "
-            "szükséges oszlopok közül hiányzik: "
-            + ", ".join(
-                sorted(missing_columns)
-            )
-        )
 
     total_count = len(
         dataframe
     )
 
-    distribution_records = []
+    records = []
 
     for label_name, label_id in LABEL_TO_ID.items():
         count = int(
@@ -253,7 +318,7 @@ def calculate_label_distribution(
             else 0.0
         )
 
-        distribution_records.append(
+        records.append(
             {
                 "label": label_name,
                 "label_id": label_id,
@@ -266,7 +331,7 @@ def calculate_label_distribution(
         )
 
     return pd.DataFrame(
-        distribution_records
+        records
     )
 
 
@@ -275,8 +340,8 @@ def print_dataset_summary(
     dataset_name: str,
 ) -> None:
     """
-    Rövid konzolos összefoglalót ír ki
-    az előkészített adathalmazról.
+    Konzolos összefoglalót készít
+    az előkészített halmazról.
     """
 
     print(
@@ -284,11 +349,16 @@ def print_dataset_summary(
     )
 
     print(
-        "-" * 50
+        "-" * 60
     )
 
     print(
         f"Rekordok száma: {len(dataframe)}"
+    )
+
+    print(
+        f"Posztok száma: "
+        f"{dataframe['post_id'].nunique()}"
     )
 
     print(
