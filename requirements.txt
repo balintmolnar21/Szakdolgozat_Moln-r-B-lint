@@ -5,10 +5,8 @@ scikit-learn
 python-dotenv
 transformers
 torch
+torchvision
 requests
 emoji
-transformers
-torchvision
 streamlit
-datasets
 accelerate
