@@ -17,8 +17,8 @@ class ContextAwareTrainingConfig:
     emoji_mode: str = "text"
 
     # Fine-tuning paraméterek
-    learning_rate: float = 2e-5
-    num_train_epochs: int = 4
+    learning_rate: float = 2.5e-5
+    num_train_epochs: int = 1
 
     per_device_train_batch_size: int = 8
     per_device_eval_batch_size: int = 8
