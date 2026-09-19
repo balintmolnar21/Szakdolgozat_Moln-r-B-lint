@@ -6,6 +6,7 @@ from transformers import (
     DataCollatorWithPadding,
     Trainer,
     TrainingArguments,
+    set_seed,
 )
 
 from training.context_aware_dataset import (
@@ -127,6 +128,10 @@ def create_context_aware_trainer(
     Létrehozza a context-aware fine-tuninghoz
     szükséges modellt, dataseteket és Trainert.
     """
+
+    # A reprodukálhatóság érdekében a seedet
+    # még a modell inicializálása előtt beállítjuk.
+    set_seed(config.seed)
 
     tokenizer = (
         load_context_aware_tokenizer(

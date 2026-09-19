@@ -1,0 +1,30 @@
+﻿post_id,post_type,comment_id,comment_text,manual_label,model_label,note,post_text,image_context_text,video_context_text,post_context_note,confidence,original_model_label,post_sentiment_label,post_sentiment_confidence,post_original_model_label,image_context_sentiment_label,image_context_sentiment_confidence,image_context_original_model_label,video_context_sentiment_label,video_context_sentiment_confidence,video_context_original_model_label,baseline_label,baseline_confidence,finetuned_label,finetuned_confidence,finetuned_threshold_label,baseline_correct,finetuned_correct,finetuned_threshold_correct,finetuned_improved,finetuned_worsened,threshold_improved_vs_baseline,threshold_worsened_vs_baseline,threshold_improved_vs_finetuned,threshold_worsened_vs_finetuned
+P1,Fényképes/szöveges poszt,P1K10,"Bálint! Ők lesznek az ifjú demokraták? 😭💙💙💙 Az után pótlás? Jó példát látnak. Beszélgessen velük sokat, kell, hogy lássák, hogy fontosak az elvek, a tisztesség, az igazságosság. 💙",positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5245361924171448,positive,0.48948752880096436,neutral,True,True,False,False,False,False,True,False,True
+P3,Fényképes/szöveges poszt,P3K17,💙💙💙,positive,,"csak emoji, szövegesítve",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.7737125754356384,positive,0.4307520389556885,neutral,False,True,False,True,False,False,False,False,True
+P3,Fényképes/szöveges poszt,P3K18,💙💙,positive,,"csak emoji, szövegesítve",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.763708233833313,positive,0.4331309497356415,neutral,False,True,False,True,False,False,False,False,True
+P4,Videós poszt,P4K38,Hajrá DK.,positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.5535942316055298,positive,0.5327873826026917,neutral,True,True,False,False,False,False,True,False,True
+P5,Fényképes poszt,P5K1,"2026-ban csak erős baloldal tudja képviselni a magyar nyugdíjasokat! 👍 Oszd meg, ha te is így gondolod! 💙",positive,,szerzői/posztoló kommentnek tűnik; emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5030151605606079,positive,0.37924519181251526,neutral,True,True,False,False,False,False,True,False,True
+P11,Szöveges poszt,P11K4,Négynapos hét ugyanannyi pénzért? A versenyszférában ezt meséljék el. 🤡,negative,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,neutral,0.6931739449501038,negative,0.5476511120796204,neutral,False,True,False,True,False,False,False,False,True

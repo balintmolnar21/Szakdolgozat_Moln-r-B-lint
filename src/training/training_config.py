@@ -13,12 +13,13 @@ class ContextAwareTrainingConfig:
     num_labels: int = 3
 
     # A tokenizálási diagnosztika alapján
-    # az első fine-tuning kísérlet ezt használja.
+    # az emojik szöveges reprezentációját használjuk.
     emoji_mode: str = "text"
 
-    # Fine-tuning paraméterek
-    learning_rate: float = 2.5e-5
-    num_train_epochs: int = 1
+    # A validációs kísérletek alapján kiválasztott
+    # végleges fine-tuning paraméterek.
+    learning_rate: float = 2e-5
+    num_train_epochs: int = 4
 
     per_device_train_batch_size: int = 8
     per_device_eval_batch_size: int = 8
