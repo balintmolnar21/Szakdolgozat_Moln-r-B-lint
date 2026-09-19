@@ -1,0 +1,55 @@
+﻿post_id,post_type,comment_id,comment_text,manual_label,model_label,note,post_text,image_context_text,video_context_text,post_context_note,confidence,original_model_label,post_sentiment_label,post_sentiment_confidence,post_original_model_label,image_context_sentiment_label,image_context_sentiment_confidence,image_context_original_model_label,video_context_sentiment_label,video_context_sentiment_confidence,video_context_original_model_label,baseline_label,baseline_confidence,finetuned_label,finetuned_confidence,finetuned_threshold_label,baseline_correct,finetuned_correct,finetuned_threshold_correct,finetuned_improved,finetuned_worsened,threshold_improved_vs_baseline,threshold_worsened_vs_baseline,threshold_improved_vs_finetuned,threshold_worsened_vs_finetuned
+P1,Fényképes/szöveges poszt,P1K5,Kálmán Németh miért kellene lemondania? Mert az országban inkább a lebutított szavazók miatt lett ez az eredmény.,neutral,,a képen le volt vágva; érdemes kézzel ellenőrizni,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.6696265935897827,negative,0.5413808226585388,neutral,False,False,True,False,False,True,False,True,False
+P2,Fényképes/szöveges poszt,P2K8,"Ehhez a mondathoz csak annyit teszek hozzá, hogy a mondat végi írásjelet kivéve nincs benne helyesírási hiba. Gratulálok.",neutral,,válaszkomment,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.502984881401062,positive,0.5518248081207275,neutral,False,False,True,False,False,True,False,True,False
+P2,Fényképes/szöveges poszt,P2K10,"Drága, abból a fajtából is van többféle. Legalább ezt illene tudni, ha humorálni akar. 🥰",neutral,,válaszkomment; emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.4497115910053253,positive,0.5252054929733276,neutral,False,False,True,False,False,True,False,True,False
+P4,Videós poszt,P4K1,Igen.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.6538609266281128,positive,0.5942175388336182,neutral,True,False,True,False,True,False,False,True,False
+P4,Videós poszt,P4K2,"Igen, ezzel egyetértünk! De azt tudni kellene, hogy ha a DK-ra szavazunk, akkor nagyon megoszlik a szavazat és nem lesz kormányváltás! Ezért a DK-nak és az összes kis pártnak be kell állni a Tisza párt mögé! Csak így lehet rendszert váltani!!! Bálint, remélem ezzel tisztában vagy te is! Nem vagyok tiszás, de ennek a korrupt Fidesznek mennie kell!!!",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5816292762756348,negative,0.4738195240497589,neutral,False,False,True,False,False,True,False,True,False
+P4,Videós poszt,P4K68,Hajrá Tisza.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6580519676208496,positive,0.5186731219291687,neutral,False,False,True,False,False,True,False,True,False
+P7,Szöveges poszt,P7K8,"Én is túléltem suli alatt telefon nélkül, de azért a világ nem állt meg 2005-ben. 🤷‍♂️",neutral,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.5904058814048767,positive,0.48669591546058655,neutral,True,False,True,False,True,False,False,True,False
+P8,Fényképes poszt,P8K8,"Jól hangzik, de attól még nem lesz átláthatóbb, ha 200 oldalas szerződéseket feltöltenek. 🤔",neutral,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.48999449610710144,negative,0.4971059262752533,neutral,False,False,True,False,False,True,False,True,False
+P9,Videós poszt,P9K8,"Nekem tetszik a sétálós rész, de az esős novemberben már kevésbé látom magam előtt. 🤷",neutral,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.6617621779441833,negative,0.4928848147392273,neutral,True,False,True,False,True,False,False,True,False
+P14,Fényképes poszt,P14K8,"Hasznos lehet, bár attól még rossz érzés lesz azt látni, hogy 74 nap. 😕",neutral,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.48523277044296265,negative,0.5437684655189514,neutral,False,False,True,False,False,True,False,True,False

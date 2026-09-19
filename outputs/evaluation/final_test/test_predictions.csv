@@ -1,0 +1,1227 @@
+﻿post_id,post_type,comment_id,comment_text,manual_label,model_label,note,post_text,image_context_text,video_context_text,post_context_note,confidence,original_model_label,post_sentiment_label,post_sentiment_confidence,post_original_model_label,image_context_sentiment_label,image_context_sentiment_confidence,image_context_original_model_label,video_context_sentiment_label,video_context_sentiment_confidence,video_context_original_model_label,baseline_label,baseline_confidence,finetuned_label,finetuned_confidence,finetuned_threshold_label,baseline_correct,finetuned_correct,finetuned_threshold_correct,finetuned_improved,finetuned_worsened,threshold_improved_vs_baseline,threshold_worsened_vs_baseline,threshold_improved_vs_finetuned,threshold_worsened_vs_finetuned
+P1,Fényképes/szöveges poszt,P1K1,Molnár Bálint 👍👍👍,positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.7652406096458435,positive,0.7554069757461548,positive,False,True,True,True,False,True,False,False,False
+P1,Fényképes/szöveges poszt,P1K2,Hajrá fiatalok! Kellenek az ifjú demokraták! Új arc új lendület megújuló Ó ellenzék! 💙☘️💙,positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5635505318641663,positive,0.81410151720047,positive,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K3,"Nem lenne elegánsabb, ha MB lemondana a pápai DK vezetői posztjáról (1,2%)!!",negative,,,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.674133837223053,negative,0.881092369556427,negative,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K4,"Molnár Bálint Bocsánat, akkor mondjon le, távozzon az aki a vezető (GA?)",negative,,válaszkomment,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.7534154057502747,negative,0.818683922290802,negative,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K5,Kálmán Németh miért kellene lemondania? Mert az országban inkább a lebutított szavazók miatt lett ez az eredmény.,neutral,,a képen le volt vágva; érdemes kézzel ellenőrizni,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.6696265935897827,negative,0.5413808226585388,neutral,False,False,True,False,False,True,False,True,False
+P1,Fényképes/szöveges poszt,P1K6,"Kálmán Németh Miért kellene valamiről is lemondani? Mindent megtett, sajnos voltak akik az áradást választották. Akik ezt tették szégyelljék magukat.",neutral,,válaszkomment,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.7166358232498169,negative,0.9254475235939026,negative,False,False,False,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K7,Kálmán Németh Kidobott pénz volt az egész kampány 😅😅 Igaz az Elsibolt pénzből futotta [undor emoji],negative,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.5769217014312744,negative,0.9742364287376404,negative,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K8,Hajrá Bálint! Megyünk tovább! Csak a DK! 💙🇭🇺💙,positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5391601920127869,positive,0.7255155444145203,positive,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K9,"Ez így van Bálint, szervezd a fiatalokat a „klubba”……! [szeretetteljes/mosolygó emoji]",positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.8388256430625916,positive,0.771730363368988,positive,True,True,True,False,False,False,False,False,False
+P1,Fényképes/szöveges poszt,P1K10,"Bálint! Ők lesznek az ifjú demokraták? 😭💙💙💙 Az után pótlás? Jó példát látnak. Beszélgessen velük sokat, kell, hogy lássák, hogy fontosak az elvek, a tisztesség, az igazságosság. 💙",positive,,emoji szövegesítve,"Ma az utolsó plakátok is gazdára találtak.😀
+
+Köszönöm!💙","A képen négy személy látható kültéri környezetben, akik választási kampányplakátokat tartanak. A szereplők mosolyognak, a kép pozitív, kampányzáró hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5245361924171448,positive,0.48948752880096436,neutral,True,True,False,False,False,False,True,False,True
+P2,Fényképes/szöveges poszt,P2K1,Szuper csapat! 👍😭💙,positive,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7638580799102783,positive,0.8297802805900574,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K2,"Sajnáljuk, hogy nem tudtunk ott lenni. Nagyon jó volt így együtt látni ezt a remek csapatot. Reméljük, hogy még sokszor fogunk találkozni, együtt dolgozni! Üdv. Mindenkinek.",positive,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7100487947463989,positive,0.8081902861595154,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K3,"Köszönjük az együttlétet, és a fotót",positive,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7261887788772583,positive,0.8475729823112488,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K4,"Nagyon gyengén, rosszul teljesített a pápai DK a múlt vasárnapi választáson. Ezek után kérdezem, mikor mond le MB a párt vezetéséről??",negative,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.7639116048812866,negative,0.8895982503890991,negative,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K5,Ebben a kampányban minden DK erőn felül teljesített. A vezetőség lemondott. Mi itt a vidéki végeken tovább visszük az emberek hangját és képviseljük őket. Miért nem a fideszes vezetőket tetszik kérni lemondásra? 🥰,positive,,válaszkomment; emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.4088619351387024,negative,0.9289197325706482,negative,True,False,False,False,True,False,True,False,False
+P2,Fényképes/szöveges poszt,P2K6,Gratulálok Bálint! 🙏🙏🙏,positive,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6638200879096985,positive,0.8193482756614685,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K7,"A citromos Gösser erősebb, mint a DK 😅🤘",negative,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.4763338565826416,positive,0.864153265953064,positive,False,False,False,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K8,"Ehhez a mondathoz csak annyit teszek hozzá, hogy a mondat végi írásjelet kivéve nincs benne helyesírási hiba. Gratulálok.",neutral,,válaszkomment,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.502984881401062,positive,0.5518248081207275,neutral,False,False,True,False,False,True,False,True,False
+P2,Fényképes/szöveges poszt,P2K9,"„Gábor butákat beszél, ne légy olyan mint Gábor”? No!?",neutral,,válaszkomment,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.7637633085250854,negative,0.9694225192070007,negative,False,False,False,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K10,"Drága, abból a fajtából is van többféle. Legalább ezt illene tudni, ha humorálni akar. 🥰",neutral,,válaszkomment; emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.4497115910053253,positive,0.5252054929733276,neutral,False,False,True,False,False,True,False,True,False
+P2,Fényképes/szöveges poszt,P2K11,Sikerült megfogni a lényeget 😀👏,neutral,,válaszkomment; emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7898261547088623,positive,0.8562541604042053,positive,False,False,False,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K12,Sörről sose viccelünk 😁,neutral,,válaszkomment; emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.5654758214950562,negative,0.7540050745010376,negative,True,False,False,False,True,False,True,False,False
+P2,Fényképes/szöveges poszt,P2K13,"Én azt gondolom, hogy van helyed a politikai pályán, most ez így alakult, kívánom, hogy megtaláld a megfelelő utat 😊",positive,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6424018144607544,positive,0.682993471622467,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K14,"Köszönöm szépen a meghívást, ilyen jó csapat még nem volt, mint a miénk. Egyben köszönöm a Gyöngyinek és az Iminek a hihetetlen vendégszeretetüket és kedvességüket!",positive,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5240049958229065,positive,0.7797676920890808,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K15,Köszönöm a meghívást és a remek hangulatot. 👍😊,positive,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7457433938980103,positive,0.816165030002594,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K16,"Jó csapat, köszönjük szépen a meghívást!",positive,,"a képen egy nem szöveges/sticker jellegű elem is látszott, azt kihagytam","Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6517004370689392,positive,0.8775692582130432,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K17,Köszönet és elismerés! 😊 Bálintnak és az egész csapatnak jó egészséget kívánok! 😊😊,positive,,emoji szövegesítve,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7546020746231079,positive,0.8493617177009583,positive,True,True,True,False,False,False,False,False,False
+P2,Fényképes/szöveges poszt,P2K18,"Értem én persze. De mégis mi a terved, hogyan tovább, hogy szolgálod a demokráciát?",neutral,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.4641197919845581,neutral,0.8502212166786194,neutral,False,True,True,True,False,True,False,False,False
+P2,Fényképes/szöveges poszt,P2K19,💙❤️,positive,,"csak emoji, szövegesítve","Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.736522912979126,positive,0.7707639336585999,positive,False,True,True,True,False,True,False,False,False
+P2,Fényképes/szöveges poszt,P2K20,"Köszönjük, Bálint és csapata!",positive,,,"Köszönöm!💙
+
+A mai napon a csapatom egy “köszönöm” bulit szervezett nekem.
+Pedig a valódi köszönet nekik jár.
+Nekik, aki a leghidegebb reggeleken álltak mellettem a piacon, a legmelegebb nyári napokon szórólapoztak és kopogtattak velem.
+Egy biztos: én abszolút győztes vagyok, mert a legnehezebb pillanatokban is egy nagyszerű csapat volt mellettem.
+
+Köszönöm nektek!💙","A képen egy nagyobb csoport látható egy családi ház udvarán vagy teraszán. A szereplők közösen állnak a kamera előtt, többen mosolyognak. A kép közösségi, csapatépítő és köszönetnyilvánító hangulatot sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.4696250557899475,positive,0.8776440620422363,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K1,Hajrá DK!! 👍,positive,,"emoji szövegesítve; alatta nem szöveges lóhere kép/sticker látható, azt kihagytam",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5568863749504089,positive,0.7511366009712219,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K2,"1.3%-on állsz. Kérd meg a szavazóidat, hogy szavazzanak a Tiszára és Újvári Szilviára. Így tudod levenni a válladról ezt a mérhetetlen kudarcot és hős lehetsz a rendszerváltásban!",neutral,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.36562857031822205,negative,0.6026507616043091,negative,True,False,False,False,True,False,True,False,False
+P3,Fényképes/szöveges poszt,P3K3,Hajrá Bálint! 💙💙💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6017027497291565,positive,0.6559239625930786,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K4,"Szorgalmatok hozza meg gyümölcsét, a győzelmet! 😁😁😁",positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7213646173477173,positive,0.7521365880966187,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K5,Csak a DK! 💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.47128716111183167,negative,0.5011484622955322,neutral,True,False,False,False,True,False,True,False,False
+P3,Fényképes/szöveges poszt,P3K6,Bravo! Hajrá DK!,positive,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6941133141517639,positive,0.8513386249542236,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K7,Jó csapat! 💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.8231895565986633,positive,0.8474597930908203,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K8,Csak a Fidesz,negative,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.47207140922546387,negative,0.8033165335655212,negative,False,True,True,True,False,True,False,False,False
+P3,Fényképes/szöveges poszt,P3K9,"Hajrá Bálint, sok sikert!",positive,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.733550488948822,positive,0.8652445077896118,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K10,Hajrá Bálint!,positive,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7183636426925659,positive,0.8261784911155701,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K11,Hajrá Dk! 💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7593939900398254,positive,0.7354849576950073,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K12,Hajrá! 💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7144445180892944,positive,0.7660118341445923,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K13,Sok sikert kívánok Molnár Bálint 👍💙,positive,,emoji szövegesítve,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5418357849121094,positive,0.7335728406906128,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K14,"Ön mint a Demokratikus Koalíció elnöke ilyenné vált. Sajnálom, nem önt, hanem a Demokratikus Koalíció politikusait, és a Demokratikus Koalíció tagjait és választóit, mert a Demokratikus Koalícióban sok nagyon jó politikus van, illetve április 13-án már csak volt. Gyurcsány Ferenc 15 év alatt felépítette a Demokratikus Koalíció pártot és azt ön fél év alatt tönkre tette. Nem tudom, hogy miért. Lehet, hogy a Fidesz megvette önt?",neutral,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.6177018284797668,negative,0.9478681087493896,negative,False,False,False,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K15,"Sok sikert, Bálint!",positive,,"alatta nem szöveges zöld szív kép/sticker látható, azt kihagytam",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7098511457443237,positive,0.8406565189361572,positive,True,True,True,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K16,A vigyorgóknak... Fogtok még sírni. Akkor még én vigyorgok.,neutral,,,Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.37199127674102783,negative,0.9438674449920654,negative,False,False,False,False,False,False,False,False,False
+P3,Fényképes/szöveges poszt,P3K17,💙💙💙,positive,,"csak emoji, szövegesítve",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.7737125754356384,positive,0.4307520389556885,neutral,False,True,False,True,False,False,False,False,True
+P3,Fényképes/szöveges poszt,P3K18,💙💙,positive,,"csak emoji, szövegesítve",Választás előtti utolsó piac!🍎💙,"A képen három személy látható a pápai vásárcsarnok bejárata előtt egy kampánypultnál. A pulton szórólapok vannak, az egyik szereplő Molnár Bálint nevét tartalmazó kampánytáblát tart. A kép választás előtti utcai kampányhelyzetet és személyes jelenlétet mutat.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.763708233833313,positive,0.4331309497356415,neutral,False,True,False,True,False,False,False,False,True
+P4,Videós poszt,P4K1,Igen.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.6538609266281128,positive,0.5942175388336182,neutral,True,False,True,False,True,False,False,True,False
+P4,Videós poszt,P4K2,"Igen, ezzel egyetértünk! De azt tudni kellene, hogy ha a DK-ra szavazunk, akkor nagyon megoszlik a szavazat és nem lesz kormányváltás! Ezért a DK-nak és az összes kis pártnak be kell állni a Tisza párt mögé! Csak így lehet rendszert váltani!!! Bálint, remélem ezzel tisztában vagy te is! Nem vagyok tiszás, de ennek a korrupt Fidesznek mennie kell!!!",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5816292762756348,negative,0.4738195240497589,neutral,False,False,True,False,False,True,False,True,False
+P4,Videós poszt,P4K3,"Nehogy már te mondd meg, hogy egy igaz baloldali szavazó kire és kikre szavazzon? Soha sem szavazok egy szélső jobboldali szekta vezetőjére és a FityeSS-ből leamortizált, leselejtezett figurákra! M. Júdás Petyátok mit ígér a nyugdíjasoknak? Ami a csődörnek a két lába között lóg! 🍊🤢 Szemetet összehordta a szél! 🍊🤢",negative,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6235806941986084,negative,0.9590754508972168,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K4,"60-ról 62-re a Horn–Kuncze kormány emelte a nyugdíjkorhatárt, 62-ről 65-re a Bajnai–Gyurcsány kormány emelte a nyugdíjkorhatárt. 5 évnyi nyugdíjat loptatok el.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.519294798374176,negative,0.9151977896690369,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K5,Nagyon rosszul emlékszel. 2010-ben döntöttek a nyugdíjkorhatár-emelésről. Ki volt akkor kormányon? A Fidesz! Ugyanekkor vezették ki a svájci indexálást.,negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.45809319615364075,negative,0.6657357811927795,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K6,Bajnai megszorító csomagjának a 4. pontja. Szívesen.,negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.79998779296875,positive,0.5408386588096619,neutral,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K7,Hülye vagy! Ne fényezd magad! 2009-től folyamatosan és sávosan!!,negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5288339853286743,negative,0.9514084458351135,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K8,"2010-től fokozatosan emelték fel 65 évre a Fidesz alatt, szívesen!!!!",neutral,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5301852226257324,negative,0.9097089171409607,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K9,"Mert a tetvek csúsztatva vezették be. Nők 40-re a Fidesz csökkentette, szívesen.",negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6464045643806458,negative,0.9521751403808594,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K10,"Pontosan jól mondja, a Fidesz tetvek vezették be, és foggal-körömmel harcoltak, hogy a férfiak ne mehessenek 40 év munka után nyugdíjba. Az való igaz, a nőknek a Fidesz vezette be a 40 évet.",positive,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.45519575476646423,negative,0.7646017670631409,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K11,Ébredj.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.3908165991306305,negative,0.7609260082244873,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K12,"Antall-kormánnyal hogy is volt? Kivette alólunk a munkahelyeket! Lett minimálbérünk, még sok szar az életünkbe!",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.618809700012207,negative,0.9715462327003479,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K13,"Pontosan! Itt az ideje, hogy visszavezessék a svájci indexálást!",positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5520131587982178,positive,0.7148244380950928,positive,False,True,True,True,False,True,False,False,False
+P4,Videós poszt,P4K14,"Nagyon fontos, az kell nekünk! 👍 Hajrá Bálint!! 👍",positive,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6896091103553772,positive,0.7917878031730652,positive,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K15,"Egy lófaszt a DK-ra, elég volt Feriből!!!",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.4663594663143158,negative,0.9416447281837463,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K16,Hol van már Feri?,negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6627172231674194,negative,0.9229289293289185,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K17,Az még most is kavarja. A válás csak stratégiai húzás volt!,negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.669479250907898,negative,0.938648521900177,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K18,Kihúzhatnád már a fejed Gyurcsány Ferenc s...éből! Ott van Orbán Viktor miniszterelnököd és csicskái valaga! 🍊🤣,negative,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5685004591941833,negative,0.948124885559082,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K19,"Tisztelt Uram, a szövegértése „0”, a hozzászólása primitív, de ez az Ön keresztje, viselje!!",negative,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6858469843864441,negative,0.7138581871986389,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K20,Lófaszt aki írta! Hajrá DK!,positive,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6173499822616577,negative,0.8421704173088074,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K21,Hajrá! 💙,positive,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.7144445180892944,negative,0.5118206143379211,neutral,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K22,"Én inkább a Tiszára szavazok, mert nem akarom, hogy elveszítse a rendszerváltás lehetőségét.",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.45935359597206116,negative,0.8535117506980896,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K23,"Akkor mit keresel itt? Rendszerváltás akkor lesz, ha a Fideszt nem cseréled le egy másikra 😉",negative,,válaszkomment; emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6842861771583557,negative,0.9018705487251282,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K24,"Mondd már meg, mikor volt Magyarországon rendszerváltás!? 🤔 Szerintem csak nevet váltottak, az MSZMP kommunisták genny halmaza ott van a hatalom élvezői között a mai napig! És most ugyanaz a felállás, csak most a FityeSS kommunista párt leszármazottai jönnek! 🍊🤢",negative,,válaszkomment; emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5904576778411865,negative,0.8771520853042603,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K25,Tolvaj Fidesz!,negative,,"alatta képes/mémes tartalom látható, azt külön nem vettem fel",Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.483046293258667,negative,0.8194581866264343,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K26,"Ez igaz, de van esélyetek, hogy ti legyetek a kormány. Nektek is a Tiszát támogatjátok, mert így csak duma egy DK-s.",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6682488918304443,negative,0.9112560749053955,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K27,"No arra a 2%-ra minek, hogy segítsetek a Fideszt?",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6782265305519104,negative,0.8779643774032593,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K28,Nem szavazok.,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5833016633987427,negative,0.8481715321540833,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K29,"Miért foglalkozik mindenki a nyugdíjasokkal? Nem kell őket szédíteni, arra szavaz, akire akar és ......",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6623148918151855,negative,0.9323670268058777,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K30,A 13-ik havi nyugdíjat meg a szocialisták szüntették meg.,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6541030406951904,negative,0.883158266544342,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K31,"A svájci nyugdíjrendszer egy összetett, soktényezős rendszer. Most ti, sok kis fax, Dobrevvel az élen ebből a rendszerből kiemeltek egy elemet, mely úgy érzitek, az elméletetekhez igazolást nyújt. De, mint tudjuk, egy rendszerből kiemelni egy alkotóelemet az mindig torzulást okoz. Ezen kívül nem az a lényeg, hogy hogyan számolom ki, hanem az, mennyit lehet kiosztani. Akárhány szeletre vágom a tortát, az attól nem lesz nagyobb! Bunkócskáim.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5536314249038696,negative,0.9686232805252075,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K32,"Árad a Tisza! Ha rendszerváltást akarsz, szavazz a Tiszára. A DK-ra szavazók Pedofideszt támogatják!",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5011969804763794,negative,0.8953210115432739,negative,False,True,True,True,False,True,False,False,False
+P4,Videós poszt,P4K33,"Neked nyugdíjad se lesz. Klárika meg megígérte az EU-s nyugdíjat? Hol is van? Klárika ott az EU-ban kő pénzér mit tett a nyugdíjaké? Semmit? Pedig ezzel kampányolt, te kis seggnyaló.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5627236366271973,negative,0.969813346862793,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K34,"Nagyon megért rá, hogy visszakapjuk a svájci indexálást. A Tisza visszaadja ❤️❤️❤️",neutral,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.8092174530029297,positive,0.8492816686630249,positive,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K35,Hajrá TISZA. Narancssárga seggnyalókra nem szabad szavazni.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5694429874420166,negative,0.8485005497932434,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K36,Ennyi.,positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.4787684381008148,negative,0.9031226634979248,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K37,"Ha a DK-ra szavazok, nem lesz kormányváltás. De ezt te is tudod... Mégis itt téped a szád....",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6659446358680725,negative,0.9642269015312195,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K38,Hajrá DK.,positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.5535942316055298,positive,0.5327873826026917,neutral,True,True,False,False,False,False,True,False,True
+P4,Videós poszt,P4K39,Eddig nem tűnt fel???,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5333288908004761,neutral,0.5151199102401733,neutral,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K40,"Ki van hatalmon, az baszta el, a mocskos Fidesz.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6111396551132202,negative,0.9571008682250977,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K41,"Te már csak tudod, hogy én hogy értelmezem az ostoba kommented 🍊🤢",neutral,,válaszkomment; emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.616256594657898,negative,0.8663668036460876,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K42,"Hát tisztelt Uram, maradjunk is ennyiben! Szép napot!",neutral,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.49394646286964417,negative,0.8121562004089355,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K43,"Milyen igazad van, az ostobaságot nehéz megmagyarázni! 🍊🤢",neutral,,válaszkomment; emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.5255827307701111,negative,0.8535556793212891,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K44,"A DK meg a 13 havi szünteti meg, heló.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.7141745090484619,negative,0.9580870866775513,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K45,Ki mondta?,neutral,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5531801581382751,neutral,0.6383829116821289,neutral,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K46,"1. nem igaz. 2. 12 hónap van, arra kell nyugdíjat adni. Visszaadni az embereknek, amit 16 év alatt elloptak.",neutral,,válaszkomment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.546314537525177,negative,0.8550820350646973,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K47,Nagyon karcsúak vagytok 😮,negative,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6520689129829407,negative,0.913179874420166,negative,False,True,True,True,False,True,False,False,False
+P4,Videós poszt,P4K48,Te mennyi nyugdíjat fizetél be?,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.7846214175224304,neutral,0.9631022214889526,neutral,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K49,Az utolsó mondat agyonvágta a lényeget! A fenébe!,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5605728030204773,negative,0.9587863683700562,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K50,"Nem baj, nyugdíjas vagyok, van pénzem.",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.4324796497821808,negative,0.950366735458374,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K51,A Tiszára!,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5979114174842834,negative,0.8873124122619629,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K52,Szégyen.,positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6988164782524109,negative,0.7803038358688354,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K53,Hülye vagy!,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5834348201751709,negative,0.9333990812301636,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K54,"Igen, tudjuk, a sok hülye nyugdíjas mégis rá szavaz, úgy kell nekik.",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.3211057484149933,negative,0.8831868767738342,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K55,A DK meg asszisztált hozzá. Most meg ezzel kampányoltok? Viszlát DK.,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.6610627770423889,negative,0.9613865613937378,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K56,De miért? Hogy aztán megegye őket?,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.4923608601093292,negative,0.7460298538208008,negative,False,True,True,True,False,True,False,False,False
+P4,Videós poszt,P4K57,"NEM. A TISZA a bejövő, rá kell szavazni. Igazat beszélsz, de a te pártod semmit nem tett 2009 óta azért, hogy ismét úgy legyen. Csak a TISZA!",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.48601752519607544,negative,0.7954861521720886,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K58,"Ha a DK-ra szavazunk, akkor bevezetik a svájci indexálást? Ez biztos?",neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.64197838306427,neutral,0.97383052110672,neutral,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K59,❤️❤️❤️❤️❤️,positive,,"csak emoji, szövegesítve",Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.7675005793571472,negative,0.8762333989143372,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K60,Tisza 🇭🇺🇪🇺❗,neutral,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.8017590045928955,negative,0.781728208065033,negative,True,False,False,False,True,False,True,False,False
+P4,Videós poszt,P4K61,Igaz.,positive,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.5942009687423706,positive,0.7733942866325378,positive,False,True,True,True,False,True,False,False,False
+P4,Videós poszt,P4K62,"Áradjon a Tisza, hajrá Magyar Péter ❤️🤍💚 ❤️🤍💚",neutral,,emoji szövegesítve,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6967982649803162,negative,0.912955641746521,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K63,"Elhagytad a golyóidat, kappanka? Mit tapsikolsz? A parlamentbe sem fogtok bejutni.",negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5595690011978149,negative,0.9719870686531067,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K64,"A svájci frank alapú hiteleknek sok köze nincs ehhez a dumához. A dolog arról szólt, hogy megkötöd a szerződést, a frank 150 Ft volt, időn belül a frank 300 Ft lett, itt van a lehúzás. Nem mindegy, hogy a megkötés 150 Ft vagy 300 Ft után fizeted a kamatos kamatot. Csak egy példa, sajnos közeli rokon: vett valamit 6 millióért, kifizetett 7 milliót, és még a fennálló tartozás 11 millió.",neutral,,hosszú komment,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5838273763656616,negative,0.9287983775138855,negative,False,False,False,False,False,False,False,False,False
+P4,Videós poszt,P4K65,"Szerencsétlen, félrevezetett. A 2009. évi XL törvény szüntette meg a svájci indexálást, és 2009-ben a Fidesz ellenzékben volt. Azért olvasd el a mellékletet, hogy ne halj meg hülyén. A Fidesz ezt csak eloda, hogy nem csak 9 havi nyugdíjra volt pénz a nyugdíjkasszában. Elszegényíteni meg a baloldalnak sikerült. A 2010-es nyugdíjjal rendelkező ma veletek 5,15 havi nyugdíjba fog kerülni, és élhet a 6,85 haviból. Köszönjük, mi értelmesebb nyugdíjasok nem kérünk belőletek.",negative,,hosszú komment; a screenshot alapján érdemes kézzel ellenőrizni,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.5776722431182861,negative,0.9299735426902771,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K66,Jó.,positive,,"alatta BRAVO feliratú kép/sticker látható, azt külön nem vettem fel",Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.7530612349510193,positive,0.8663128018379211,positive,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K67,A nemzet megvetettje! Szüksége van rá?,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.48361438512802124,negative,0.8417367339134216,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K68,Hajrá Tisza.,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,positive,0.6580519676208496,positive,0.5186731219291687,neutral,False,False,True,False,False,True,False,True,False
+P4,Videós poszt,P4K69,Blabla.,negative,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,negative,0.31455197930336,negative,0.8639838695526123,negative,True,True,True,False,False,False,False,False,False
+P4,Videós poszt,P4K70,TISZA!,neutral,,,Így szegényítette el a Fidesz a nyugdíjasokat.👇,,"Anno a Fidesz vezette ki a nyugdíjak svájci indexálását. Ezzel gyakorlatilag elintézte a magyar nyugdíjasok elszegényedését. A svájci indexálás lényege, hogy a nyugdíjak nemcsak az infláció mértékével növekednek, hanem a béreket is követik.
+
+Csak jobb lenne nem?
+
+Ha igen akkor április 12-én szavazz a Demokratikus Koalícióra.",Videós poszt; a videó tartalma manuális szöveges leiratként kerül tárolásra.,,,,,,,,,,,,neutral,0.6960113048553467,negative,0.8564499020576477,negative,True,False,False,False,True,False,True,False,False
+P5,Fényképes poszt,P5K1,"2026-ban csak erős baloldal tudja képviselni a magyar nyugdíjasokat! 👍 Oszd meg, ha te is így gondolod! 💙",positive,,szerzői/posztoló kommentnek tűnik; emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5030151605606079,positive,0.37924519181251526,neutral,True,True,False,False,False,False,True,False,True
+P5,Fényképes poszt,P5K2,"Ráadásul a nyugdíj csak adható, nem szerzett jog! Klára asszony, veled vagyunk, sikerül megváltoztatni ezt az ellenünk hozott törvényt! 🇭🇺💙",positive,,emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.5209093689918518,negative,0.9130235314369202,negative,True,False,False,False,True,False,True,False,False
+P5,Fényképes poszt,P5K3,"Ez megfelel a tényeknek! És az alkotmányból kivették, hogy jár! Most már csak adható!",positive,,,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.4972718358039856,positive,0.9080500602722168,positive,False,True,True,True,False,True,False,False,False
+P5,Fényképes poszt,P5K4,Csak erős baloldal tudja képviselni a vidéket! 💙,positive,,emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.4666496515274048,positive,0.8155351877212524,positive,False,True,True,True,False,True,False,False,False
+P5,Fényképes poszt,P5K5,"A rokkantakkal se nagyon törődnek, nagyon sokan kapnak 100 ezer forintot, sőt kevesebbet, és még dolgozni se tudnak mellette. SZÉGYEN!!!!!!!!!!",positive,,,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.521942675113678,negative,0.9584482312202454,negative,False,False,False,False,False,False,False,False,False
+P5,Fényképes poszt,P5K6,A Fidesz tönkretette a vidéket!,positive,,,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.43740347027778625,negative,0.8975797295570374,negative,False,False,False,False,False,False,False,False,False
+P5,Fényképes poszt,P5K7,Gyerünk Bálint! 💙,positive,,emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.7681072950363159,negative,0.6852686405181885,negative,True,False,False,False,True,False,True,False,False
+P5,Fényképes poszt,P5K8,Hajrá DK!!!,positive,,,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.6421727538108826,positive,0.9060387015342712,positive,True,True,True,False,False,False,False,False,False
+P5,Fényképes poszt,P5K9,Hajrá Bálint! 💙,positive,,emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,positive,0.732361376285553,positive,0.8392953276634216,positive,True,True,True,False,False,False,False,False,False
+P5,Fényképes poszt,P5K10,"Igen, így gondolom!! 👍👍",positive,,emoji szövegesítve,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.5850110650062561,positive,0.9442450404167175,positive,False,True,True,True,False,True,False,False,False
+P5,Fényképes poszt,P5K11,💙💙,positive,,"csak emoji, szövegesítve","A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,neutral,0.763708233833313,neutral,0.3716162443161011,neutral,False,False,False,False,False,False,False,False,False
+P5,Fényképes poszt,P5K12,Na meg ha fizették volna rendesen a járulékot.,negative,,,"A Fidesz-kormány 16 év alatt 5 millió forintot vett el a nyugdíjasoktól.👇
+
+Amikor kivezették a svájci indexálást, azzal évről évre kevesebb lett az idősek járandósága. Ha megmaradt volna az igazságos emelési rendszer, ma magasabb nyugdíjakból élhetnének százezrek.
+
+Közben nehezebb lett az élet a vidéken a nyugdíjasok számára. Dráguló élelmiszer, növekvő rezsi, megszűnő szolgáltatások – sok faluban már az alapvető ügyintézés is komoly kihívás.
+
+Ez nem természeti törvény, hanem politikai döntések következménye.
+
+Mi baloldaliak hisszük, hogy tisztességes megélhetés jár azoknak, akik egy életen át dolgoztak. A nyugdíjak értékét vissza kell adni, a vidéket pedig meg kell erősíteni.
+
+Csak erős baloldal tudja képviselni a magyar vidéket.
+
+Erős baloldal!
+Erős magyar vidék! 💙","A képen kültéri, téli környezetben két férfi beszélget egy idősebb nővel. Az egyik férfi szórólapot tart a kezében. A jelenet személyes választói találkozást, vidéki kampányhelyzetet és nyugdíjasokat érintő társadalmi témát sugall.",,Képes poszt; a kép tartalma manuális szöveges leírásként kerül tárolásra.,,,,,,,,,,,,negative,0.47475767135620117,positive,0.7613343000411987,positive,True,False,False,False,True,False,True,False,False
+P6,Fényképes/szöveges poszt,P6K1,"Végre valami, ami tényleg segít a családoknak! 👏🚌",positive,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,positive,0.8295842409133911,positive,0.9089744687080383,positive,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K2,"Pont így kellene: kevesebb autó, több busz. 👍",positive,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,neutral,0.6086745858192444,positive,0.6125003099441528,positive,False,True,True,True,False,True,False,False,False
+P6,Fényképes/szöveges poszt,P6K3,"Ha ettől több gyerek jár tömegközlekedéssel, már megérte. 💚",positive,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,positive,0.7302773594856262,positive,0.9143469929695129,positive,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K4,"Ingyen semmi nincs, csak majd az autósokkal fizettetik meg. 👎",negative,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,negative,0.5571823120117188,negative,0.976045548915863,negative,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K5,A parkolást megint drágítanák? Na persze… mindig ugyanazokat húzzák le.,negative,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,negative,0.6973511576652527,negative,0.9779900312423706,negative,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K6,"Ez megint egy jól hangzó kampányötlet, amit aztán mindenki más finanszíroz. 🤦",negative,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,neutral,0.5100635886192322,negative,0.9784598350524902,negative,False,True,True,True,False,True,False,False,False
+P6,Fényképes/szöveges poszt,P6K7,18 év alatt pontosan mit jelent: a 18. születésnapig vagy a tanév végéig?,neutral,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,neutral,0.8592007160186768,neutral,0.9878486394882202,neutral,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K8,"Papíron jól hangzik, de előbb látnám a számokat. 🤔",neutral,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,neutral,0.6855437159538269,neutral,0.9636881947517395,neutral,True,True,True,False,False,False,False,False,False
+P6,Fényképes/szöveges poszt,P6K9,"Ingyen busz + drágább parkolás… egyik zseb, másik zseb 😅",neutral,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,neutral,0.5404011011123657,negative,0.9640671014785767,negative,True,False,False,False,True,False,True,False,False
+P6,Fényképes/szöveges poszt,P6K10,"😂 Ezt a családi ebédnél bedobom, kíváncsi leszek, ki melyik oldalra ül.",neutral,,szintetikus komment,"A fiatalok közlekedése ne a család pénztárcáján múljon. 🚌
+
+Azt javaslom, hogy 18 éves kor alatt legyen ingyenes a helyi buszközlekedés. A kieső bevétel egy részét a belvárosi parkolási díjak emeléséből lehetne fedezni.
+
+Kevesebb autó, több lehetőség a fiataloknak. Szerintem ez egy igazságos csere. 👍","A képen egy helyi autóbusz látható egy városi megállóban, mellette több fiatal várakozik hátizsákkal. A kép a közösségi közlekedést, a diákok mindennapi utazását és a városi mobilitást hangsúlyozza.",,Képes/szöveges poszt; az ingyenes helyi közlekedés támogatásáról szóló álláspont.,,,,,,,,,,,,positive,0.464250385761261,negative,0.9588842391967773,negative,False,False,False,False,False,False,False,False,False
+P7,Szöveges poszt,P7K1,"Nagyon kell már ez. Órán tanuljanak, ne TikTokozzanak. ✅",positive,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,negative,0.5948591232299805,negative,0.8607481718063354,negative,False,False,False,False,False,False,False,False,False
+P7,Szöveges poszt,P7K2,Végre a tanárnak nem egy kijelzővel kell versenyeznie. 👏,positive,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,positive,0.6417571306228638,negative,0.9431477785110474,negative,True,False,False,False,True,False,True,False,False
+P7,Szöveges poszt,P7K3,"Teljesen támogatom, 45 percet mindenki kibír telefon nélkül.",positive,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,positive,0.7972679734230042,positive,0.9607169032096863,positive,True,True,True,False,False,False,False,False,False
+P7,Szöveges poszt,P7K4,"2026-ban a telefont elzárni nem nevelés, hanem időutazás. 🙄",negative,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,negative,0.4591943323612213,negative,0.975129246711731,negative,True,True,True,False,False,False,False,False,False
+P7,Szöveges poszt,P7K5,"A tanár tanítson érdekesen, ne a telefont hibáztassa mindenért.",negative,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.4439009130001068,positive,0.5659483671188354,neutral,False,False,False,False,False,False,False,False,False
+P7,Szöveges poszt,P7K6,Tiltással még soha nem tanítottak meg senkit felelősen használni valamit. 👎,negative,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,negative,0.4868133068084717,negative,0.8968566656112671,negative,True,True,True,False,False,False,False,False,False
+P7,Szöveges poszt,P7K7,"Szünetben is bent maradna a szekrényben, vagy csak órán?",neutral,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.7400106191635132,neutral,0.9864901304244995,neutral,True,True,True,False,False,False,False,False,False
+P7,Szöveges poszt,P7K8,"Én is túléltem suli alatt telefon nélkül, de azért a világ nem állt meg 2005-ben. 🤷‍♂️",neutral,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.5904058814048767,positive,0.48669591546058655,neutral,True,False,True,False,True,False,False,True,False
+P7,Szöveges poszt,P7K9,"Legyen szabály, csak vészhelyzetben azért lehessen gyorsan elérni a gyereket.",neutral,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.6295063495635986,neutral,0.9147391319274902,neutral,True,True,True,False,False,False,False,False,False
+P7,Szöveges poszt,P7K10,"Na, ebből lesz még szülői értekezletes vita rendesen 😅",neutral,,szintetikus komment,"Tanítási időben a telefon helye ne a padon legyen. 📵
+
+Támogatom, hogy az iskolákban a diákok a tanítás kezdetén zárt szekrényben helyezzék el a mobiltelefonjukat, és csak indokolt esetben használhassák azt.
+
+A figyelem az órán legyen, ne a kijelzőn.",,,Szöveges poszt; az iskolai mobiltelefon-használat korlátozását támogatja.,,,,,,,,,,,,neutral,0.36902695894241333,negative,0.9764716029167175,negative,True,False,False,False,True,False,True,False,False
+P8,Fényképes poszt,P8K1,Ez lenne a minimum. Közpénz = közadat. 👏,positive,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.4521620571613312,positive,0.8006350994110107,positive,False,True,True,True,False,True,False,False,False
+P8,Fényképes poszt,P8K2,Végre nem PDF-eket kellene vadászni három menüpont mélyén. 👍,positive,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.4435463845729828,positive,0.6193898916244507,positive,False,True,True,True,False,True,False,False,False
+P8,Fényképes poszt,P8K3,"Aki tisztán dolgozik, annak nincs mitől félnie. Nyilvánosságot! 🔍",positive,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,positive,0.4775316119194031,positive,0.9229729175567627,positive,True,True,True,False,False,False,False,False,False
+P8,Fényképes poszt,P8K4,"Megint egy új rendszer, amit milliókért fejlesztenek, aztán senki nem használja.",negative,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.5578943490982056,negative,0.9774445295333862,negative,True,True,True,False,False,False,False,False,False
+P8,Fényképes poszt,P8K5,"Minden szerződést kiteregetni szerintem túlzás, üzleti titok is létezik.",negative,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.4987652003765106,neutral,0.8658954501152039,neutral,False,False,False,False,False,False,False,False,False
+P8,Fényképes poszt,P8K6,"Előbb dolgozzanak, utána gyártsanak még egy adminisztrációs felületet. 🙄",negative,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.7043048739433289,negative,0.9739856123924255,negative,True,True,True,False,False,False,False,False,False
+P8,Fényképes poszt,P8K7,Az 5 milliós határ nettó vagy bruttó összeg lenne?,neutral,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.8440489768981934,neutral,0.9879879951477051,neutral,True,True,True,False,False,False,False,False,False
+P8,Fényképes poszt,P8K8,"Jól hangzik, de attól még nem lesz átláthatóbb, ha 200 oldalas szerződéseket feltöltenek. 🤔",neutral,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.48999449610710144,negative,0.4971059262752533,neutral,False,False,True,False,False,True,False,True,False
+P8,Fényképes poszt,P8K9,"Ha kereshető és normálisan használható, akkor van értelme. Ha csak egy újabb dokumentumtár, akkor kevésbé.",neutral,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.6626233458518982,neutral,0.9138408899307251,neutral,True,True,True,False,False,False,False,False,False
+P8,Fényképes poszt,P8K10,"Transzparencia jó szó, csak kíváncsi vagyok, hányan keresnének rá ténylegesen 😄",neutral,,szintetikus komment,"A közpénz útja legyen mindenki számára követhető. 🔎
+
+Minden 5 millió forint feletti önkormányzati szerződést egy kereshető, könnyen használható online adatbázisban kellene közzétenni.
+
+Aki közpénzt költ, annak nincs mit titkolnia.","A képen egy laptop kijelzőjén táblázatos, kereshető adatbázis látható szerződéses összegekkel és dátumokkal. A háttérben önkormányzati épület vagy hivatalos környezet jelenik meg. A kép az átláthatóság és a közpénzek nyilvánosságának témáját erősíti.",,Képes poszt; az önkormányzati szerződések nagyobb nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.7111831903457642,neutral,0.9798427224159241,neutral,True,True,True,False,False,False,False,False,False
+P9,Videós poszt,P9K1,"Igen! A főtér embereké legyen, ne parkoló autóké. 🌳❤️",positive,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.6490703821182251,positive,0.8373600244522095,positive,False,True,True,True,False,True,False,False,False
+P9,Videós poszt,P9K2,"Sokkal élhetőbb lenne, végre lehetne normálisan sétálni a gyerekekkel. 👏",positive,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,positive,0.41679418087005615,positive,0.8605750203132629,positive,True,True,True,False,False,False,False,False,False
+P9,Videós poszt,P9K3,300 méter séta senkit nem fog tönkretenni. Támogatom. 🙂,positive,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,positive,0.6661925911903381,positive,0.8055667281150818,positive,True,True,True,False,False,False,False,False,False
+P9,Videós poszt,P9K4,A belvárosi üzleteket ezzel lehet végleg kinyírni. Gratulálok. 👎,negative,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,negative,0.5489780306816101,negative,0.8343940377235413,negative,True,True,True,False,False,False,False,False,False
+P9,Videós poszt,P9K5,"Idősek, mozgáskorlátozottak majd teleportálnak? 🤦‍♀️",negative,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.572448194026947,negative,0.9050922989845276,negative,False,True,True,True,False,True,False,False,False
+P9,Videós poszt,P9K6,"Még több terasz, még kevesebb parkoló… pont erre volt szükségünk, persze. 🙃",negative,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.4081209599971771,negative,0.7130776047706604,negative,False,True,True,True,False,True,False,False,False
+P9,Videós poszt,P9K7,A rakodás hogy lenne megoldva szombat délelőtt?,neutral,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,negative,0.5543963313102722,neutral,0.9646041989326477,neutral,False,True,True,True,False,True,False,False,False
+P9,Videós poszt,P9K8,"Nekem tetszik a sétálós rész, de az esős novemberben már kevésbé látom magam előtt. 🤷",neutral,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.6617621779441833,negative,0.4928848147392273,neutral,True,False,True,False,True,False,False,True,False
+P9,Videós poszt,P9K9,"300 méter nem sok, kivéve amikor két kisgyerekkel és három szatyorral mész 😅",neutral,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,neutral,0.605889081954956,negative,0.7870979905128479,negative,True,False,False,False,True,False,True,False,False
+P9,Videós poszt,P9K10,"Autómentes hétvége… egyszer kipróbálnám, aztán meglátjuk.",neutral,,szintetikus komment,"Hétvégén adjuk vissza a főteret az embereknek. 🌳🚶
+
+A belvárosi főtér szombaton és vasárnap legyen részben autómentes: több terasz, több zöldfelület, több hely a gyalogosoknak és a családoknak.
+
+Nem az autósok ellen, hanem egy élhetőbb városért.",,"A videó egy forgalmas belvárosi főteret mutat, majd vizualizációval vagy vágóképekkel azt, hogyan nézne ki ugyanaz a tér kevesebb autóval, több fával, padokkal, teraszokkal és gyalogosokkal. A narráció a hétvégi részleges autómentesítés mellett érvel.",Videós poszt; a hétvégi részleges autómentes főtér ötletét támogatja.,,,,,,,,,,,,positive,0.5702812075614929,positive,0.7936918139457703,positive,False,False,False,False,False,False,False,False,False
+P10,Fényképes/szöveges poszt,P10K1,Teljesen jogos. Lakás ne befektetési üres doboz legyen. 🏠,positive,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.7640362977981567,positive,0.9393382668495178,positive,False,True,True,True,False,True,False,False,False
+P10,Fényképes/szöveges poszt,P10K2,"Ha valakinek öt lakása áll üresen, nyugodtan járuljon hozzá a bérlakásokhoz. 👍",positive,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.7169859409332275,positive,0.719059407711029,positive,False,True,True,True,False,True,False,False,False
+P10,Fényképes/szöveges poszt,P10K3,"Végre egy ötlet, ami talán a fiatalok lakhatásán is segít. 👏",positive,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,positive,0.7522915005683899,positive,0.9578698873519897,positive,True,True,True,False,False,False,False,False,False
+P10,Fényképes/szöveges poszt,P10K4,"A saját tulajdonom után még külön büntetőadót is? Kösz, nem.",negative,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,negative,0.5800133347511292,neutral,0.8005162477493286,neutral,True,False,False,False,True,False,True,False,False
+P10,Fényképes/szöveges poszt,P10K5,"Ma a második lakás, holnap már azt is megszabják, mekkora lehet a nappalim. 🙄",negative,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.7393777966499329,negative,0.9700319170951843,negative,False,True,True,True,False,True,False,False,False
+P10,Fényképes/szöveges poszt,P10K6,Ez sima vagyonadó becsomagolva szép szavakba. 👎,negative,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,negative,0.490896999835968,negative,0.971041738986969,negative,True,True,True,False,False,False,False,False,False
+P10,Fényképes/szöveges poszt,P10K7,"Mi számít üresnek? Ha valaki csak hétvégente használja, az már adóköteles?",neutral,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,negative,0.5966362357139587,neutral,0.9861645102500916,neutral,False,True,True,True,False,True,False,False,False
+P10,Fényképes/szöveges poszt,P10K8,"A bérlakásprogram jó cél, csak nem biztos, hogy ez a legjobb finanszírozás.",neutral,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.5815304517745972,neutral,0.9741734862327576,neutral,True,True,True,False,False,False,False,False,False
+P10,Fényképes/szöveges poszt,P10K9,"Ha valóban üresen áll évekig, értem az ötletet. Ha egy örökölt lakás felújítás alatt van, már más.",neutral,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.5764883160591125,neutral,0.8783167004585266,neutral,True,True,True,False,False,False,False,False,False
+P10,Fényképes/szöveges poszt,P10K10,"🏠💸 két emoji, és nagyjából le is írtuk az egész vitát.",neutral,,szintetikus komment,"Lakások állnak üresen, miközben sokan alig találnak megfizethető albérletet. 🏠
+
+A tartósan üresen álló második és további lakásokra különadót vezetnék be, a bevételt pedig önkormányzati bérlakások felújítására és építésére fordítanám.
+
+A lakás ne csak befektetés legyen, hanem otthon is.","A képen egy társasház több sötét, üres ablakkal, előtte pedig egy lakást kereső fiatal pár vagy család látható. A vizuális kontraszt az üres ingatlanok és a lakhatási nehézségek közötti feszültséget jeleníti meg.",,Képes/szöveges poszt; a tartósan üres második és további lakások megadóztatását támogatja.,,,,,,,,,,,,neutral,0.7268109917640686,neutral,0.450946569442749,neutral,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K1,"Próbálják ki! Ha ugyanaz a munka elkészül, miért ne? 👏",positive,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,positive,0.7192924618721008,positive,0.9379478693008423,positive,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K2,A kipihent dolgozó kevesebbet hibázik. Szerintem jó irány. 🙂,positive,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,positive,0.7920732498168945,positive,0.9605100750923157,positive,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K3,"Pilotnak teljesen rendben van, legalább lesz róla valós adat. 👍",positive,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,positive,0.5113868117332458,positive,0.9581640958786011,positive,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K4,Négynapos hét ugyanannyi pénzért? A versenyszférában ezt meséljék el. 🤡,negative,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,neutral,0.6931739449501038,negative,0.5476511120796204,neutral,False,True,False,True,False,False,False,False,True
+P11,Szöveges poszt,P11K5,"A hivatal most sem a gyorsaságáról híres, erre még rövidítsünk is rajta…",negative,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,negative,0.7239290475845337,negative,0.9742456674575806,negative,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K6,Ez csak újabb kedvezmény a közszférának a mi pénzünkből. 👎,negative,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,negative,0.4945386052131653,negative,0.9746692776679993,negative,True,True,True,False,False,False,False,False,False
+P11,Szöveges poszt,P11K7,"Ha az ügyfélfogadás tényleg öt nap marad, akkor kívülről lehet, hogy semmit nem érzünk belőle.",neutral,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,negative,0.643629789352417,negative,0.7391713857650757,negative,False,False,False,False,False,False,False,False,False
+P11,Szöveges poszt,P11K8,"36 óra négy nap alatt napi 9 óra, az azért nem feltétlenül lazulás. 🤔",neutral,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,neutral,0.54084312915802,negative,0.6246486902236938,negative,True,False,False,False,True,False,True,False,False
+P11,Szöveges poszt,P11K9,"Kíváncsi lennék, mit mérnek majd: ügyintézési időt, hibát, betegszabit vagy elégedettséget?",neutral,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,negative,0.5205910801887512,neutral,0.9868926405906677,neutral,False,True,True,True,False,True,False,False,False
+P11,Szöveges poszt,P11K10,"Négynapos hét jól hangzik, a hétfő reggel ettől még hétfő reggel marad 😅",neutral,,szintetikus komment,"Próbáljuk ki, nem csak beszéljünk róla. ⏱️
+
+Az önkormányzati hivatalban 6 hónapos kísérleti programot indítanék négynapos, heti 36 órás munkarenddel, változatlan fizetés mellett.
+
+Ha a szolgáltatások színvonala nem romlik, érdemes lehet hosszabb távon is megtartani.",,,Szöveges poszt; egy önkormányzati négynapos munkahét pilotprogramját támogatja.,,,,,,,,,,,,positive,0.4488639831542969,negative,0.9729347229003906,negative,False,False,False,False,False,False,False,False,False
+P12,Videós poszt,P12K1,"Ez sokkal igazságosabb lenne, ne csak az árak után kullogjanak a nyugdíjak. ❤️",positive,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,neutral,0.5016832947731018,positive,0.8405282497406006,positive,False,True,True,True,False,True,False,False,False
+P12,Videós poszt,P12K2,A nyugdíjasok is részesedjenek a gazdasági növekedésből. Teljesen egyetértek. 👍,positive,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,positive,0.4624994695186615,positive,0.9496049880981445,positive,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K3,"Vissza kell hozni egy kis kiszámíthatóságot, ez jó irány. 👏",positive,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,positive,0.7214674949645996,positive,0.9233015179634094,positive,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K4,Megint ígérgetés számok nélkül. Ki fogja ezt kifizetni?,negative,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,negative,0.5344159007072449,negative,0.9538214802742004,negative,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K5,"A béremelkedés nem automatikusan jelent több pénzt a kasszában, ez így felelőtlen.",negative,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,negative,0.64565110206604,negative,0.96418696641922,negative,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K6,Mindig választás előtt lesz hirtelen fontos a nyugdíjas. 🙄,negative,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,neutral,0.38906699419021606,negative,0.9772082567214966,negative,False,True,True,True,False,True,False,False,False
+P12,Videós poszt,P12K7,Milyen arányban számítana az infláció és a bérnövekedés? 50-50?,neutral,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,neutral,0.7955617308616638,neutral,0.9877403378486633,neutral,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K8,"Ha a bérek esnek, akkor lefelé is követné őket a nyugdíj, vagy csak felfelé?",neutral,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,neutral,0.7004356384277344,neutral,0.9873844385147095,neutral,True,True,True,False,False,False,False,False,False
+P12,Videós poszt,P12K9,"Jól hangzik, de a képlet részletei nélkül nehéz eldönteni, kinek lenne jobb.",neutral,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,negative,0.4847312569618225,neutral,0.9826827049255371,neutral,False,True,True,True,False,True,False,False,False
+P12,Videós poszt,P12K10,"Anyukám szerint végre, apukám szerint választási matek. Én meg hallgatom őket 😅",neutral,,szintetikus komment,"A nyugdíjaknak nemcsak az árakat, hanem az országban növekvő béreket is követniük kellene. 👵👴
+
+Olyan vegyes nyugdíjindexálást támogatok, amely az infláció mellett a béremelkedést is figyelembe veszi.
+
+Aki egy életen át dolgozott, ne maradjon le évről évre az aktív keresőkhöz képest.",,"A videó egyszerű grafikonokon mutatja be az infláció, a bérek és a nyugdíjak alakulását, majd példákon keresztül ismerteti, hogyan működne egy vegyes indexálási rendszer. A narráció a nyugdíjak értékének és relatív életszínvonalának megőrzése mellett érvel.",Videós poszt; az inflációt és béremelkedést egyaránt figyelembe vevő nyugdíjindexálást támogatja.,,,,,,,,,,,,positive,0.6869352459907532,negative,0.9735711216926575,negative,False,False,False,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K1,"Szél van, energia kell, használjuk végre. 🌬️⚡",positive,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,positive,0.5031620860099792,positive,0.9209879636764526,positive,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K2,"Minél több hazai megújuló, annál kevésbé függünk másoktól. 👍",positive,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,neutral,0.5311824083328247,positive,0.9168254137039185,positive,False,True,True,True,False,True,False,False,False
+P13,Fényképes/szöveges poszt,P13K3,"Ha normálisan kijelölik a helyeket, én támogatom. 💚",positive,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,positive,0.6526365280151367,positive,0.9580509662628174,positive,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K4,Nem akarok óriási lapátokat látni minden dombtetőn. 👎,negative,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,negative,0.6422921419143677,negative,0.9760746359825134,negative,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K5,A madaraknak biztos nagyon fog tetszeni… persze. 🙄,negative,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,positive,0.8090449571609497,negative,0.9484255909919739,negative,False,True,True,True,False,True,False,False,False
+P13,Fényképes/szöveges poszt,P13K6,"Drága, kiszámíthatatlan és tönkreteszi a tájat. Nekem ebből nem kell.",negative,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,negative,0.5267394781112671,negative,0.9713223576545715,negative,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K7,Mit jelent pontosan a megfelelő távolság? 1 km? 5 km?,neutral,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,neutral,0.8381087779998779,neutral,0.9879010915756226,neutral,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K8,"Nappal nem zavarna, az éjszakai zajról viszont hallottam mindenfélét. 🤔",neutral,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,neutral,0.48665955662727356,neutral,0.8366215229034424,neutral,True,True,True,False,False,False,False,False,False
+P13,Fényképes/szöveges poszt,P13K9,"Szélenergia igen, de azért ne az legyen, hogy minden engedélyt automatikusan átengednek.",neutral,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,neutral,0.7175168395042419,negative,0.8271740078926086,negative,True,False,False,False,True,False,True,False,False
+P13,Fényképes/szöveges poszt,P13K10,"🌬️⚡🤷 majd a számok eldöntik, nem a kommentmező.",neutral,,szintetikus komment,"Több hazai, tiszta energiára van szükségünk. 🌬️⚡
+
+Ésszerű védőtávolságok és helyi egyeztetés mellett enyhíteni kellene a szélerőművek telepítésének szabályait.
+
+Nem mindenhová kell szélturbina, de ahol alkalmas a terület, ne tiltások akadályozzák a fejlesztést.","A képen mezőgazdasági terület mellett több szélturbina látható távolabbról, rendezett tájképi környezetben. A kép a megújuló energiatermelést és a vidéki térségekben elhelyezett szélerőművek témáját jeleníti meg.",,Képes/szöveges poszt; a szélerőművek telepítési szabályainak enyhítését támogatja megfelelő korlátok mellett.,,,,,,,,,,,,neutral,0.8213316202163696,neutral,0.923233151435852,neutral,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K1,Ez rengeteg felesleges telefonálást megspórolna. 👏,positive,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.5117756724357605,positive,0.8586859703063965,positive,False,True,True,True,False,True,False,False,False
+P14,Fényképes poszt,P14K2,"Végre látnánk, mire számítsunk, nem csak annyit, hogy majd hívjuk vissza őket. 👍",positive,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.5496153831481934,positive,0.9546918272972107,positive,False,True,True,True,False,True,False,False,False
+P14,Fényképes poszt,P14K3,"Átláthatóbb lenne az egész, támogatom. ❤️",positive,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,positive,0.5213629007339478,positive,0.7862702012062073,positive,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K4,"Még egy informatikai rendszer, ami pont akkor nem működik majd, amikor kell. 🙃",negative,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.7670629620552063,negative,0.9799220561981201,negative,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K5,"Előbb legyen elég orvos, aztán mutogassuk online, hogy nincs időpont. 👎",negative,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.6829898953437805,negative,0.9787262678146362,negative,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K6,A várólista kijelzése nem rövidíti meg a várólistát. Ez csak kirakatintézkedés.,negative,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.66371089220047,negative,0.955984354019165,negative,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K7,"Ha valaki telefonon foglal, az is azonnal bekerülne ugyanebbe a rendszerbe?",neutral,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.479739785194397,neutral,0.9871994853019714,neutral,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K8,"Hasznos lehet, bár attól még rossz érzés lesz azt látni, hogy 74 nap. 😕",neutral,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.48523277044296265,negative,0.5437684655189514,neutral,False,False,True,False,False,True,False,True,False
+P14,Fényképes poszt,P14K9,"Technikailag jó ötlet, csak legyen pontos, különben még több vita lesz belőle.",neutral,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,neutral,0.7133433818817139,neutral,0.9635497331619263,neutral,True,True,True,False,False,False,False,False,False
+P14,Fényképes poszt,P14K10,"Legalább előre tudnánk, mennyi ideig kell türelmesnek lenni… ez most pozitív vagy szomorú? 😅",neutral,,szintetikus komment,"A betegnek joga van tudni, mennyit kell várnia. 🏥
+
+A kórházak és szakrendelők tegyék közzé online az aktuális várakozási időket és a következő szabad időpontokat.
+
+Egy átlátható rendszerben könnyebb tervezni, és az is látszik, hol van szükség több kapacitásra.","A képen egy egészségügyi időpontfoglaló felület látható monitoron vagy telefonon, mellette várótermi környezet. A felületen szakrendelések, várakozási idők és szabad időpontok jelennek meg. A kép a beteg-tájékoztatást és az egészségügyi átláthatóságot hangsúlyozza.",,Képes poszt; a kórházi és szakrendelési várólisták online nyilvánosságát támogatja.,,,,,,,,,,,,negative,0.48352375626564026,neutral,0.9540122747421265,neutral,False,True,True,True,False,True,False,False,False
+P15,Videós poszt,P15K1,"Adjunk nekik valódi beleszólást, ne csak beszéljünk a fiatalok bevonásáról. 👏",positive,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,positive,0.5359799265861511,positive,0.8722139000892639,positive,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K2,"Nagyon jó ötlet, így talán többen érzik majd sajátjuknak a várost. 💙",positive,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,positive,0.8336198329925537,positive,0.9681917428970337,positive,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K3,100 millióból már látható dolgokat is lehet csinálni. Hajrá! 👍,positive,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.4544936418533325,positive,0.950482964515686,positive,False,True,True,True,False,True,False,False,False
+P15,Videós poszt,P15K4,"16 évesen én még azt sem tudtam, mire költsem a zsebpénzem. Ez komolytalan.",negative,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,negative,0.5984618067741394,negative,0.9723995327949524,negative,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K5,Közpénzről ne TikTok-szavazás döntsön. 👎,negative,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.6793708801269531,negative,0.9278252124786377,negative,False,True,True,True,False,True,False,False,False
+P15,Videós poszt,P15K6,Ez csak drága népszerűségi játék a fiataloknak. 🤦,negative,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,negative,0.7208643555641174,negative,0.966528594493866,negative,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K7,"Ki állítaná össze, hogy milyen projektek közül lehet szavazni?",neutral,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.7867991924285889,neutral,0.9870391488075256,neutral,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K8,"Az ötlet jópofa, csak a 16 és 25 évesek problémái azért elég különbözők.",neutral,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.6227998733520508,neutral,0.9759740233421326,neutral,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K9,"Ha tízezren szavaznak, érdekes. Ha háromszázan, akkor azért más a helyzet. 🤔",neutral,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.6974894404411316,neutral,0.5954683423042297,neutral,True,True,True,False,False,False,False,False,False
+P15,Videós poszt,P15K10,"Én 24 évesen örülnék neki, a 26 éves haverom meg már hirtelen túl öreg lenne 😅",neutral,,szintetikus komment,"A fiatalokról ne csak beszéljünk, kapjanak valódi döntési lehetőséget is. 🗳️
+
+Évente 100 millió forintos ifjúsági részvételi költségvetést hoznék létre, amelynek felhasználásáról a 16–25 év közötti helyiek szavazhatnának.
+
+Sportpálya, közösségi tér, rendezvény vagy más ötlet? Döntsék el ők.",,"A videó fiatalokat mutat közösségi eseményen és online szavazási felületen. Példaként sportpálya, közösségi tér, kulturális rendezvény és városi fejlesztés jelenik meg. A narráció bemutatja, hogy a 16–25 évesek közvetlenül dönthetnének egy elkülönített önkormányzati keret felhasználásáról.",Videós poszt; a 16–25 évesek számára létrehozott ifjúsági részvételi költségvetést támogatja.,,,,,,,,,,,,neutral,0.6397322416305542,negative,0.9766958355903625,negative,True,False,False,False,True,False,True,False,False

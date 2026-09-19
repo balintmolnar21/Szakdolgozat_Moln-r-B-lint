@@ -1,0 +1,7 @@
+﻿dataset,emoji_mode,record_count,records_with_unk,records_with_unk_ratio,total_unk_tokens,average_token_length,maximum_token_length,records_over_max_length,records_over_max_length_ratio
+train,raw,400,400,100.0,525,82.25,109,0,0.0
+validation,raw,100,100,100.0,126,75.64,88,0,0.0
+train,text,400,0,0.0,0,87.25,113,0,0.0
+validation,text,100,0,0.0,0,79.89,96,0,0.0
+train,bracketed,400,0,0.0,0,90.84,117,0,0.0
+validation,bracketed,100,0,0.0,0,83.15,104,0,0.0

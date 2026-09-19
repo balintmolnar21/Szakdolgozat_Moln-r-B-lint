@@ -305,28 +305,144 @@ def get_emoji_category_token(emoji_character: str) -> str | None:
     return None
 
 
-def emoji_to_token(emoji_character: str) -> str:
-    if emoji_character in CUSTOM_EMOJI_TOKEN_MAP:
-        return CUSTOM_EMOJI_TOKEN_MAP[emoji_character]
+SUPPORTED_EMOJI_MODES = {
+    "raw",
+    "text",
+    "bracketed",
+}
 
-    category_token = get_emoji_category_token(emoji_character)
+
+def validate_emoji_mode(
+    mode: str,
+) -> str:
+    """
+    Ellenőrzi az emoji-feldolgozás módját.
+    """
+
+    normalized_mode = str(mode).strip().lower()
+
+    if normalized_mode not in SUPPORTED_EMOJI_MODES:
+        raise ValueError(
+            "Nem támogatott emoji-feldolgozási mód: "
+            f"{mode!r}. "
+            "Engedélyezett értékek: "
+            + ", ".join(sorted(SUPPORTED_EMOJI_MODES))
+        )
+
+    return normalized_mode
+
+
+def convert_token_representation(
+    token: str,
+    mode: str,
+) -> str:
+    """
+    A meglévő szögletes zárójeles emoji-tokenből
+    előállítja a kívánt reprezentációt.
+
+    Példa:
+        [nevetős emoji] -> [nevetős emoji]
+        [nevetős emoji] -> nevetős emoji
+    """
+
+    mode = validate_emoji_mode(mode)
+
+    if mode == "bracketed":
+        return token
+
+    cleaned_token = token.strip()
+
+    if (
+        cleaned_token.startswith("[")
+        and cleaned_token.endswith("]")
+    ):
+        cleaned_token = cleaned_token[1:-1].strip()
+
+    return f" {cleaned_token} "
+
+
+def emoji_to_token(
+    emoji_character: str,
+    mode: str = "bracketed",
+) -> str:
+    """
+    Egy emoji szöveges reprezentációját állítja elő.
+    """
+
+    mode = validate_emoji_mode(mode)
+
+    if mode == "raw":
+        return emoji_character
+
+    if emoji_character in CUSTOM_EMOJI_TOKEN_MAP:
+        token = CUSTOM_EMOJI_TOKEN_MAP[
+            emoji_character
+        ]
+
+        return convert_token_representation(
+            token,
+            mode,
+        )
+
+    category_token = get_emoji_category_token(
+        emoji_character
+    )
 
     if category_token is not None:
-        return category_token
+        return convert_token_representation(
+            category_token,
+            mode,
+        )
 
-    return " [emoji] "
+    return convert_token_representation(
+        " [emoji] ",
+        mode,
+    )
 
 
-def replace_emojis(text: str | None) -> str:
+def replace_emojis(
+    text: str | None,
+    mode: str = "bracketed",
+) -> str:
+    """
+    A szövegben található emojikat a megadott
+    stratégia alapján kezeli.
+
+    Támogatott módok:
+
+    raw:
+        Az eredeti Unicode emoji változatlan marad.
+
+    text:
+        Az emoji zárójelek nélküli szöveges
+        leírásra cserélődik.
+
+    bracketed:
+        Az emoji a korábban használt szögletes
+        zárójeles tokenre cserélődik.
+    """
+
     if text is None:
         return ""
 
+    mode = validate_emoji_mode(
+        mode
+    )
+
     text = str(text)
+
+    if mode == "raw":
+        return text
 
     if emoji_lib is not None:
         return emoji_lib.replace_emoji(
             text,
-            replace=lambda emoji_character, data: emoji_to_token(emoji_character),
+            replace=lambda emoji_character, data: (
+                emoji_to_token(
+                    emoji_character,
+                    mode=mode,
+                )
+            ),
         )
 
     converted_text = text
@@ -336,7 +452,15 @@ def replace_emojis(text: str | None) -> str:
         key=lambda item: len(item[0]),
         reverse=True,
     ):
-        converted_text = converted_text.replace(emoji_character, token)
+        converted_token = convert_token_representation(
+            token,
+            mode,
+        )
+
+        converted_text = converted_text.replace(
+            emoji_character,
+            converted_token,
+        )
 
     return converted_text
 
