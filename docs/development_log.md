@@ -1148,3 +1148,700 @@ Az új kommentek nyers formában kerültek eltárolásra, az eredeti Unicode emo
 A kibővített adathalmaz minden kommentje kézi sentimentcímkét kap pozitív, negatív vagy semleges kategóriában. Az így létrejött nagyobb, egységesen címkézett adathalmaz szolgál majd alapul a tanító-, validációs- és teszthalmaz kialakításához, valamint a huBERT modell későbbi domain-specifikus finomhangolásához.
 
 
+Persze. Az alábbi részt közvetlenül a jelenlegi **12. iteráció után** tudod beilleszteni a `docs/development_log.md` fájlba. A megfogalmazást a meglévő fejlesztési napló szerkezetéhez és részletességéhez igazítottam. 
+
+## 13. iteráció – Kontextusérzékeny huBERT modell domain-specifikus finomhangolása
+
+### Cél
+
+A tizenharmadik fejlesztési iteráció célja az előre betanított magyar nyelvű huBERT sentiment modell domain-specifikus finomhangolása volt.
+
+A korábbi fejlesztési iterációk során a rendszer az előre betanított `NYTK/sentiment-hts5-hubert-hungarian` modellt közvetlenül használta a kommentek hangulatelemzésére. A modell megfelelő kiindulási alapot biztosított a magyar nyelvű sentiment elemzéshez, azonban nem kifejezetten a szakdolgozatban vizsgált, informális Facebook-kommentekre és azok posztkontextusára lett optimalizálva.
+
+A továbbfejlesztés célja ezért egy olyan domain-specifikusan finomhangolt modell kialakítása volt, amely a komment szövege mellett a hozzá tartozó Facebook-bejegyzés szövegét is bemenetként használja.
+
+A modell továbbra is három sentiment kategóriát különböztet meg:
+
+```text
+negative
+neutral
+positive
+```
+
+A célcímke minden esetben a komment érzelmi polaritását jelenti. A poszt szövege kiegészítő kontextusként szolgál, és nem képez külön osztályozási célt.
+
+### Adathalmazok kialakítása
+
+A modellfinomhangoláshoz a korábban kibővített és kézzel címkézett kommentállomány külön tanító-, validációs- és teszthalmazokra került szétválasztásra.
+
+A fejlesztési folyamatban alkalmazott fő adathalmazok:
+
+```text
+train_comments.csv
+train_post_context.csv
+
+validation_comments.csv
+validation_post_context.csv
+
+test_comments.csv
+test_post_context.csv
+```
+
+A tanítóhalmaz 400 kézzel címkézett kommentet tartalmaz.
+
+A validációs halmaz 100 kommentből áll, és a modellfejlesztési döntések, a hiperparaméterek összehasonlítása, valamint a confidence threshold vizsgálata során került felhasználásra.
+
+A validációs halmaz végleges címkeeloszlása:
+
+```text
+negative: 45
+neutral:  40
+positive: 15
+```
+
+A végső teszthalmaz 230 kézzel címkézett kommentet tartalmaz:
+
+```text
+positive: 83
+neutral:  75
+negative: 72
+```
+
+A teszthalmaz szerepe a végleges modell teljesítményének kiértékelése volt, ezért a modell hiperparamétereinek kiválasztása alapvetően a tanító- és validációs halmaz alapján történt.
+
+### Új training modulok
+
+A finomhangolás megvalósításához a projekt új training komponensekkel bővült.
+
+A főbb fájlok:
+
+```text
+src/training/
+├── __init__.py
+├── training_dataset.py
+├── training_config.py
+├── context_aware_dataset.py
+├── context_aware_model.py
+├── tokenization_diagnostics.py
+├── training_metrics.py
+└── context_aware_trainer.py
+```
+
+A tanítás futtatásához és ellenőrzéséhez külön segédprogramok is készültek:
+
+```text
+tools/test_training_dataset.py
+tools/test_context_aware_tokenization.py
+tools/test_tokenization_diagnostics.py
+tools/train_context_aware_model.py
+tools/analyze_context_aware_validation.py
+```
+
+A training logika külön modulba szervezése lehetővé teszi, hogy a modellfinomhangolás elkülönüljön a rendszer általános sentiment elemzési és felhasználói felületi komponenseitől.
+
+### Kontextusérzékeny modellbemenet
+
+A korábbi baseline modell a komment szövegét önálló bemenetként dolgozta fel.
+
+A továbbfejlesztett modell ezzel szemben két szöveget kap:
+
+```text
+post_text
+comment_text
+```
+
+A tokenizer a két szöveget szövegpárként dolgozza fel.
+
+A tokenizálás elvi formája:
+
+```python
+tokenizer(
+    post_text,
+    comment_text,
+    truncation="longest_first",
+    max_length=128,
+)
+```
+
+A maximális bemeneti hossz 128 token.
+
+A `longest_first` csonkolási stratégia alkalmazása biztosítja, hogy túl hosszú szövegpár esetén a tokenizer a hosszabb szekvenciából távolítson el tokeneket.
+
+A modell tanítási címkéje továbbra is kizárólag a kommenthez tartozó:
+
+```text
+manual_label
+```
+
+érték.
+
+A poszt szövege tehát nem külön sentiment címkét határoz meg, hanem kontextuális információt biztosít a komment értelmezéséhez.
+
+### A klasszifikációs réteg módosítása
+
+A kiindulási `NYTK/sentiment-hts5-hubert-hungarian` modell eredetileg öt sentiment kategóriával működik.
+
+A szakdolgozatban alkalmazott rendszer három kategóriát használ:
+
+```text
+negative
+neutral
+positive
+```
+
+Emiatt a finomhangolás során az eredeti ötosztályos klasszifikációs fej helyére új, három kimenettel rendelkező osztályozó réteg került.
+
+A modell betöltése során az eltérő klasszifikációs réteg kezelése szándékosan történik az alábbi beállítással:
+
+```python
+ignore_mismatched_sizes=True
+```
+
+Ennek eredményeként a korábban megtanult nyelvi reprezentációkat tartalmazó Transformer-rétegek felhasználhatók maradnak, miközben a három célosztályhoz tartozó új klasszifikációs réteg a finomhangolás során tanulható meg.
+
+### Emoji-kezelési stratégia vizsgálata
+
+A Facebook-kommentek jelentős része tartalmaz emojikat, ezért a finomhangolás előtt külön tokenizálási vizsgálat készült.
+
+Három feldolgozási mód került összehasonlításra:
+
+```text
+raw
+text
+bracketed
+```
+
+A `raw` mód megtartja az eredeti Unicode-emojikat.
+
+A `text` mód az emojikat szöveges jelentésre alakítja, például:
+
+```text
+😂 → nevetős emoji
+❤️ → szív emoji
+```
+
+A `bracketed` mód a korábbi előfeldolgozási megoldást követi:
+
+```text
+😂 → [nevetős emoji]
+❤️ → [szív emoji]
+```
+
+A tokenizálási diagnosztika alapján a nyers Unicode-emojikat tartalmazó rekordoknál ismeretlen tokenek jelentek meg, míg a szöveges és bracketed reprezentáció ezt a problémát megszüntette.
+
+A finomhangolt modellhez ezért a következő beállítás került kiválasztásra:
+
+```text
+emoji_mode = text
+```
+
+Ez a megoldás az emojik szemantikai jelentését szöveges formában teszi elérhetővé a modell számára.
+
+### Tanítási konfiguráció
+
+A végleges tanítási konfiguráció főbb paraméterei:
+
+```text
+Base model: NYTK/sentiment-hts5-hubert-hungarian
+
+max_length: 128
+num_labels: 3
+emoji_mode: text
+
+learning_rate: 2e-5
+num_train_epochs: 4
+
+train_batch_size: 8
+eval_batch_size: 8
+
+weight_decay: 0.01
+warmup_ratio: 0.10
+
+seed: 42
+```
+
+A négy epochos tanítás során minden epoch után validáció történt.
+
+A modellválasztás elsődleges mérőszáma a Macro F1 volt. Ennek alkalmazását az indokolta, hogy a három sentiment kategória elemszáma nem teljesen kiegyensúlyozott, a Macro F1 pedig mindhárom kategória teljesítményét azonos súllyal veszi figyelembe.
+
+### Reprodukálhatóság biztosítása
+
+A finomhangolási kísérletek során külön figyelmet kapott a reprodukálhatóság.
+
+A fejlesztés során megállapítható volt, hogy a háromosztályos klasszifikációs fej inicializálása a modell létrehozásakor történik. Emiatt önmagában a Trainer konfigurációban megadott seed nem biztosította teljes mértékben a modell inicializálásának reprodukálhatóságát.
+
+A training folyamat ezért kiegészült a seed modellbetöltés előtti beállításával:
+
+```python
+from transformers import set_seed
+
+set_seed(config.seed)
+```
+
+A `set_seed()` meghívása a tokenizer és a modell létrehozása előtt történik.
+
+A végleges kísérletekben alkalmazott seed:
+
+```text
+42
+```
+
+Ezzel biztosíthatóvá vált, hogy az új háromosztályos klasszifikációs fej inicializálása is kontrollált módon történjen.
+
+### Learning-rate kísérlet
+
+A megfelelő learning rate meghatározásához kontrollált kísérletsorozat készült.
+
+A vizsgált értékek:
+
+```text
+1e-5
+1.5e-5
+2e-5
+2.5e-5
+```
+
+A reprodukálhatósági javítás után minden konfiguráció azonos seed, adathalmaz és egyéb tanítási paraméter mellett került újrafuttatásra.
+
+A legjobb validációs eredmények:
+
+| Learning rate | Legjobb epoch |  Accuracy | Macro Precision | Macro Recall |   Macro F1 | Validation loss |
+| ------------: | ------------: | --------: | --------------: | -----------: | ---------: | --------------: |
+|          1e-5 |             2 |     0.740 |          0.7397 |       0.7602 |     0.7197 |          0.6178 |
+|        1.5e-5 |             2 |     0.750 |          0.7461 |       0.7694 |     0.7247 |          0.6953 |
+|      **2e-5** |         **2** | **0.780** |      **0.7840** |   **0.7630** | **0.7573** |      **0.6241** |
+|        2.5e-5 |             2 |     0.750 |          0.7381 |       0.6824 |     0.6920 |          0.8222 |
+
+A kontrollált kísérletsorozat alapján a legjobb Macro F1 értéket a `2e-5` learning rate érte el.
+
+A végleges modellhez ezért:
+
+```text
+learning_rate = 2e-5
+```
+
+került kiválasztásra.
+
+### A legjobb checkpoint kiválasztása
+
+Mind a négy kontrollált learning-rate futás esetében a második epoch környékén alakult ki a legjobb validációs teljesítmény.
+
+A további epochok során a tanítási veszteség tovább csökkent, azonban a validációs teljesítmény már nem javult, ami túlilleszkedés kialakulására utalt.
+
+A tanítás ezért továbbra is négy epochra volt konfigurálva, azonban a rendszer a validációs Macro F1 alapján automatikusan a legjobb checkpointot töltötte vissza.
+
+A végleges modell esetében:
+
+```text
+tervezett epochok száma: 4
+legjobb checkpoint: 2. epoch
+```
+
+A négy epochos konfiguráció megtartásának oka, hogy a learning-rate scheduler működése a teljes előre meghatározott tanítási lépésszámhoz igazodik. Emiatt a két epochos és a négy epochra tervezett, de a második epochból visszatöltött modell tanítási folyamata nem tekinthető teljesen azonosnak.
+
+### Modell mentése
+
+A kiválasztott kontextusérzékeny modell mentési helye:
+
+```text
+models/context_aware_hubert_text/
+```
+
+Ez a modell került felhasználásra a további confidence-threshold vizsgálatokhoz és a végső tesztkiértékeléshez.
+
+### Eredmény
+
+A tizenharmadik iteráció eredményeként elkészült egy domain-specifikusan finomhangolt, kontextusérzékeny huBERT-alapú sentiment modell.
+
+A továbbfejlesztett modell:
+
+```text
+magyar nyelvű Facebook-kommentekre került finomhangolásra,
+
+a komment mellett a kapcsolódó poszt szövegét is felhasználja,
+
+három sentiment kategóriát különböztet meg,
+
+szöveges emoji-reprezentációt alkalmaz,
+
+reprodukálható tanítási konfigurációval rendelkezik,
+
+a validációs Macro F1 alapján választja ki a legjobb checkpointot.
+```
+
+A végleges modellkonfiguráció a következő fejlesztési iterációban confidence-threshold vizsgálaton és végső tesztkiértékelésen került ellenőrzésre.
+
+## 14. iteráció – Confidence threshold vizsgálata és végső modellkiértékelés
+
+### Cél
+
+A tizennegyedik fejlesztési iteráció célja a finomhangolt kontextusérzékeny modell döntési bizonyosságának vizsgálata, valamint a végleges rendszer teljesítményének összehasonlítása volt az eredeti baseline huBERT modellel.
+
+A vizsgálat két fő részből állt:
+
+```text
+confidence threshold elemzése a validációs halmazon
+
+végleges modellkiértékelés a teszthalmazon
+```
+
+A confidence threshold alkalmazásának célja az volt, hogy a modell kevésbé biztos pozitív vagy negatív predikcióit semleges kategóriába lehessen átsorolni.
+
+Ez különösen a rövid, bizonytalan, vegyes vagy nehezen értelmezhető közösségimédia-kommentek esetében lehet hasznos.
+
+### Confidence threshold működése
+
+A finomhangolt modell három kategóriára ad predikciót:
+
+```text
+negative
+neutral
+positive
+```
+
+A threshold szabály kizárólag a pozitív és negatív predikciókra vonatkozik.
+
+Az alkalmazott logika:
+
+```text
+ha prediction = positive vagy negative
+ÉS
+confidence < threshold
+
+→ final_prediction = neutral
+```
+
+A már eleve semlegesnek prediktált kommentek címkéje nem változik.
+
+A megoldás tehát nem módosítja magát a neurális hálózatot, hanem a modell predikcióját követő döntési utófeldolgozási lépésként működik.
+
+### Validációs threshold vizsgálat
+
+A confidence threshold kiválasztásához több előre meghatározott érték került összehasonlításra a validációs halmazon.
+
+A vizsgált konfigurációk:
+
+```text
+threshold nélkül
+0.50
+0.55
+0.60
+0.65
+0.70
+```
+
+Az eredmények:
+
+| Threshold | Accuracy | Macro Precision | Macro Recall | Macro F1 |
+| --------: | -------: | --------------: | -----------: | -------: |
+|     nincs |     0.78 |          0.7840 |       0.7630 |   0.7573 |
+|      0.50 |     0.82 |          0.8162 |       0.7963 |   0.7978 |
+|      0.55 |     0.82 |          0.8162 |       0.7963 |   0.7978 |
+|      0.60 |     0.83 |          0.8217 |       0.8046 |   0.8063 |
+|      0.65 |     0.84 |          0.8398 |       0.8130 |   0.8202 |
+|      0.70 |     0.85 |          0.8564 |       0.8213 |   0.8337 |
+
+A vizsgálat alapján a threshold alkalmazása a validációs halmazon minden vizsgált beállítás esetében javította a threshold nélküli modell Macro F1 értékét.
+
+A magasabb threshold ugyan több bizonytalan pozitív vagy negatív predikciót sorol semleges kategóriába, ezért a küszöbérték megválasztásánál nem kizárólag a legmagasabb validációs pontszám, hanem a rendszer kívánt működése is szempont.
+
+A végleges prototípushoz **0,60-as confidence threshold** került alkalmazásra. Ez a validációs halmazon 0,83 accuracy és 0,8063 Macro F1 értéket ért el, miközben kevésbé agresszíven módosítja a pozitív és negatív predikciókat, mint a magasabb küszöbértékek.
+
+### Végső teszthalmaz
+
+A végleges modellértékelés egy 230 kézzel címkézett kommentből álló teszthalmazon történt.
+
+A címkeeloszlás:
+
+```text
+positive: 83
+neutral:  75
+negative: 72
+```
+
+A teszt során három rendszer került összehasonlításra:
+
+```text
+1. eredeti baseline huBERT
+
+2. kontextusérzékeny fine-tuned huBERT
+
+3. kontextusérzékeny fine-tuned huBERT
+   + 0.60 confidence threshold
+```
+
+A baseline modell a korábban kialakított működésnek megfelelően kizárólag a komment szövegét használta a komment sentimentjének meghatározására.
+
+A továbbfejlesztett modell ezzel szemben a poszt és a komment szövegét szövegpárként dolgozta fel.
+
+Fontos, hogy az összehasonlítás ezért nem kizárólag a posztkontextus hatását vizsgálja. A továbbfejlesztett rendszer egyszerre tartalmaz domain-specifikus finomhangolást és posztkontextust, így a teljesítményváltozás e két fejlesztés együttes hatásaként értelmezhető.
+
+### Baseline modell eredménye
+
+Az eredeti baseline huBERT modell eredménye:
+
+```text
+Accuracy:        0.6565
+Macro Precision: 0.6614
+Macro Recall:    0.6577
+Macro F1:        0.6561
+```
+
+Osztályonként:
+
+| Osztály  | Precision | Recall |     F1 | Support |
+| -------- | --------: | -----: | -----: | ------: |
+| negative |    0.6548 | 0.7639 | 0.7051 |      72 |
+| neutral  |    0.5325 | 0.5467 | 0.5395 |      75 |
+| positive |    0.7971 | 0.6627 | 0.7237 |      83 |
+
+A baseline modell 230 tesztrekordból 151-et osztályozott helyesen.
+
+### Kontextusérzékeny fine-tuned modell eredménye
+
+A threshold nélküli finomhangolt modell eredménye:
+
+```text
+Accuracy:        0.6957
+Macro Precision: 0.7485
+Macro Recall:    0.6938
+Macro F1:        0.6767
+```
+
+Osztályonként:
+
+| Osztály  | Precision | Recall |     F1 | Support |
+| -------- | --------: | -----: | -----: | ------: |
+| negative |    0.5470 | 0.8889 | 0.6772 |      72 |
+| neutral  |    0.8485 | 0.3733 | 0.5185 |      75 |
+| positive |    0.8500 | 0.8193 | 0.8344 |      83 |
+
+A finomhangolt modell 160 tesztkommentet osztályozott helyesen.
+
+A baseline modellhez képest:
+
+```text
+javított esetek: 38
+rontott esetek: 29
+nettó változás: +9
+```
+
+A finomhangolás különösen a pozitív osztály esetében eredményezett jelentős javulást. Ugyanakkor a semleges osztály recall értéke 0,3733-ra csökkent, ami arra utalt, hogy a modell a ténylegesen semleges kommentek jelentős részét negatív vagy pozitív kategóriába sorolta.
+
+### A 0,60-as confidence threshold eredménye
+
+A 0,60-as confidence threshold alkalmazásával a végleges rendszer eredménye:
+
+```text
+Accuracy:        0.7130
+Macro Precision: 0.7405
+Macro Recall:    0.7136
+Macro F1:        0.7081
+```
+
+Osztályonként:
+
+| Osztály  | Precision | Recall |     F1 | Support |
+| -------- | --------: | -----: | -----: | ------: |
+| negative |    0.5780 | 0.8750 | 0.6961 |      72 |
+| neutral  |    0.7170 | 0.5067 | 0.5938 |      75 |
+| positive |    0.9265 | 0.7590 | 0.8344 |      83 |
+
+A confusion matrix:
+
+```text
+              predicted
+              neg  neu  pos
+
+actual neg     63    7    2
+actual neu     34   38    3
+actual pos     12    8   63
+```
+
+A végleges rendszer 230 kommentből 164-et osztályozott helyesen.
+
+### A threshold közvetlen hatása
+
+A 0,60-as confidence threshold összesen 20 predikciót módosított.
+
+A módosítások eredménye:
+
+```text
+threshold által módosított predikciók: 20
+
+hibás → helyes: 10
+helyes → hibás: 6
+
+nettó változás: +4 helyes predikció
+```
+
+A threshold nélküli fine-tuned modell 160 helyes predikciójához képest a threshold alkalmazása 164 helyes predikciót eredményezett.
+
+A threshold különösen a semleges osztály felismerésére volt hatással.
+
+Threshold nélkül:
+
+```text
+neutral precision: 0.8485
+neutral recall:    0.3733
+neutral F1:        0.5185
+```
+
+0,60-as threshold mellett:
+
+```text
+neutral precision: 0.7170
+neutral recall:    0.5067
+neutral F1:        0.5938
+```
+
+A recall jelentős növekedése azt mutatja, hogy a rendszer több ténylegesen semleges kommentet ismert fel. Ezzel párhuzamosan a precision csökkent, mivel bizonyos valódi pozitív és negatív kommentek is semleges kategóriába kerültek.
+
+A threshold alkalmazása ezért precision–recall kompromisszumként értelmezhető.
+
+### A baseline és a végleges rendszer összehasonlítása
+
+A három vizsgált konfiguráció fő eredményei:
+
+| Modell                                           |   Accuracy | Macro Precision | Macro Recall |   Macro F1 |
+| ------------------------------------------------ | ---------: | --------------: | -----------: | ---------: |
+| Baseline huBERT                                  |     0.6565 |          0.6614 |       0.6577 |     0.6561 |
+| Context-aware fine-tuned huBERT                  |     0.6957 |          0.7485 |       0.6938 |     0.6767 |
+| Context-aware fine-tuned huBERT + 0.60 threshold | **0.7130** |      **0.7405** |   **0.7136** | **0.7081** |
+
+A baseline és a végleges rendszer közötti accuracy változás:
+
+```text
+65.65% → 71.30%
+```
+
+Ez:
+
+```text
++5.65 százalékpont
+```
+
+javulást jelent.
+
+A Macro F1 változása:
+
+```text
+0.6561 → 0.7081
+```
+
+A végleges thresholdos rendszer a baseline modellhez képest:
+
+```text
+javított esetek: 42
+rontott esetek: 29
+nettó változás: +13
+```
+
+A baseline modell 151, míg a végleges rendszer 164 tesztkommentet osztályozott helyesen.
+
+### Hibák elemzése
+
+A végső confusion matrix alapján a rendszer egyik legjelentősebb fennmaradó problémája a semleges és negatív kategória elkülönítése.
+
+A 75 ténylegesen semleges kommentből:
+
+```text
+38 → neutral
+34 → negative
+3  → positive
+```
+
+A legnagyobb egyedi tévesztési kategóriát tehát a következő esetek jelentik:
+
+```text
+manual_label = neutral
+prediction   = negative
+```
+
+Ez 34 tesztkommentet érint.
+
+A hibaelemzés alapján a semleges közösségimédia-kommentek felismerése továbbra is nehéz feladat. Ennek lehetséges okai közé tartoznak a rövid vagy implicit megfogalmazások, a kontextusfüggőség, az informális nyelvhasználat, valamint azok az esetek, amelyekben a komment tartalmaz kritikus vagy negatív hangvételű kifejezést anélkül, hogy teljes sentimentje egyértelműen negatív lenne.
+
+A teszthalmazon azonosított hibák ebben a fejlesztési szakaszban elsősorban a rendszer korlátainak feltárását szolgálják, és nem kerülnek felhasználásra a már kiértékelt modell további hiperparaméter-optimalizálására.
+
+### Létrehozott kiértékelési kimenetek
+
+A végleges kiértékelés eredményei külön kimeneti fájlokban kerülnek tárolásra.
+
+A főbb fájlok:
+
+```text
+outputs/evaluation/final_test/
+
+test_predictions.csv
+model_comparison.csv
+
+baseline_classification_report.csv
+finetuned_classification_report.csv
+finetuned_threshold_classification_report.csv
+
+baseline_confusion_matrix.csv
+finetuned_confusion_matrix.csv
+finetuned_threshold_confusion_matrix.csv
+
+finetuned_improved_cases.csv
+finetuned_worsened_cases.csv
+
+threshold_changed_cases.csv
+threshold_improved_cases.csv
+threshold_worsened_cases.csv
+```
+
+A `test_predictions.csv` rekord szinten tartalmazza a kézi referencia-címkét, a baseline modell predikcióját, a finomhangolt modell predikcióját, a confidence értéket, valamint a threshold alkalmazása utáni végleges predikciót.
+
+Ez lehetővé teszi az egyes modellek közötti eltérések és a konkrét hibás kommentek részletes vizsgálatát.
+
+### Eredmény
+
+A tizennegyedik fejlesztési iteráció eredményeként lezárult a kontextusérzékeny huBERT modell fejlesztési és kiértékelési szakasza.
+
+A végleges prototípushoz alkalmazott modellbeállítások:
+
+```text
+base model:
+NYTK/sentiment-hts5-hubert-hungarian
+
+input:
+post_text + comment_text
+
+output:
+negative / neutral / positive
+
+emoji_mode:
+text
+
+max_length:
+128
+
+learning_rate:
+2e-5
+
+seed:
+42
+
+tervezett epochok:
+4
+
+kiválasztott checkpoint:
+2. epoch
+
+confidence threshold:
+0.60
+```
+
+A végleges teszteredmény:
+
+```text
+Accuracy: 71.30%
+Macro F1: 0.7081
+```
+
+A baseline modell eredményéhez képest mind az accuracy, mind a Macro F1 javult.
+
+Az eredmények ugyanakkor azt is megmutatták, hogy a semleges és negatív kategóriák elkülönítése továbbra is a rendszer egyik fő korlátja.
+
