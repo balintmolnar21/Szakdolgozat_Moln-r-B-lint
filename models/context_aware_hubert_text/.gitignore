@@ -1,1 +1,14 @@
-**/checkpoint-*/
+# Fine-tuned modell nagy bináris állományai
+model.safetensors
+training_args.bin
+
+# Trainer checkpoint könyvtárak
+checkpoint-*/
+
+# Esetleges alternatív PyTorch modellmentések
+pytorch_model.bin
+
+# Esetleges optimizer / scheduler állományok
+optimizer.pt
+scheduler.pt
+rng_state.pth
