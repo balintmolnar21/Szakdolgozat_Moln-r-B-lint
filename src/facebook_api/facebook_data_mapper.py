@@ -6,17 +6,7 @@ import pandas as pd
 def create_post_context_dataframe(
     post_data: dict[str, Any],
 ) -> pd.DataFrame:
-    """
-    Egy Facebook-poszt adataiból létrehozza
-    a pipeline számára használható posztkontextus DataFrame-et.
-
-    Args:
-        post_data:
-            A FacebookPostFetcher által normalizált posztadat.
-
-    Returns:
-        Egyetlen sort tartalmazó DataFrame.
-    """
+    
     post_id = post_data.get("post_id")
 
     if not post_id:
@@ -50,20 +40,7 @@ def create_post_context_dataframe(
 def create_comments_dataframe(
     comments: list[dict[str, Any]],
 ) -> pd.DataFrame:
-    """
-    A FacebookCommentFetcher által visszaadott kommentlistát
-    a validációs adatszerkezethez illeszkedő DataFrame-mé alakítja.
-
-    A valós Facebook-kommentekhez nincs kézi címke,
-    ezért a manual_label mező üres marad.
-
-    Args:
-        comments:
-            Normalizált Facebook-kommentek listája.
-
-    Returns:
-        Kommentadatokat tartalmazó DataFrame.
-    """
+    
     columns = [
         "post_id",
         "post_type",

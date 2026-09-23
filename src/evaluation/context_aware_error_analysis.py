@@ -23,9 +23,7 @@ ID_TO_LABEL = {
 
 @dataclass
 class ContextAwareErrorAnalysisResult:
-    """
-    A context-aware modell validációs hibaanalízisének eredménye.
-    """
+   
 
     predictions: pd.DataFrame
     misclassified_comments: pd.DataFrame
@@ -36,10 +34,7 @@ class ContextAwareErrorAnalysisResult:
 
 
 def load_fine_tuned_model(model_directory: str):
-    """
-    Betölti a korábban finomhangolt context-aware modellt
-    és a hozzá tartozó tokenizert.
-    """
+    
 
     tokenizer = AutoTokenizer.from_pretrained(model_directory)
 
@@ -64,15 +59,7 @@ def predict_validation_dataframe(
     device,
     max_length: int = 128,
 ) -> pd.DataFrame:
-    """
-    A validation DataFrame minden rekordjára predikciót készít.
-
-    A modell bemenete:
-        post_text + comment_text
-
-    A predikció célja:
-        a komment sentiment címkéje.
-    """
+    
 
     required_columns = {
         "post_id",
@@ -158,9 +145,7 @@ def predict_validation_dataframe(
 def create_error_analysis(
     predictions: pd.DataFrame,
 ) -> ContextAwareErrorAnalysisResult:
-    """
-    Elkészíti a modell részletes validációs kiértékelését.
-    """
+   
 
     y_true = predictions["manual_label"]
     y_pred = predictions["predicted_label"]
@@ -232,9 +217,7 @@ def export_error_analysis(
     result: ContextAwareErrorAnalysisResult,
     output_directory: str,
 ):
-    """
-    CSV és Excel formátumban elmenti a hibaanalízis eredményeit.
-    """
+    
 
     from pathlib import Path
 

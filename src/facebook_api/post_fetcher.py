@@ -6,9 +6,7 @@ from facebook_api.graph_api_client import (
 
 
 class FacebookPostFetcher:
-    """
-    Facebook-bejegyzések adatainak lekéréséért felelős osztály.
-    """
+    
 
     DEFAULT_FIELDS = [
         "id",
@@ -27,16 +25,7 @@ class FacebookPostFetcher:
         self,
         post_id: str,
     ) -> dict[str, Any]:
-        """
-        Lekéri egy Facebook-bejegyzés alapadatait.
-
-        Args:
-            post_id:
-                A Facebook-bejegyzés egyedi azonosítója.
-
-        Returns:
-            A normalizált posztadatok.
-        """
+        
         normalized_post_id = post_id.strip()
 
         if not normalized_post_id:
@@ -61,10 +50,7 @@ class FacebookPostFetcher:
     def normalize_post(
         post_data: dict[str, Any],
     ) -> dict[str, Any]:
-        """
-        A Graph API válaszát a projekt belső
-        adatszerkezetére alakítja.
-        """
+        
         return {
             "post_id": post_data.get("id"),
             "post_text": post_data.get(

@@ -9,9 +9,7 @@ from facebook_api.config import (
 
 
 class FacebookGraphAPIClient:
-    """
-    Alap kliens a Facebook Graph API GET kéréseinek kezelésére.
-    """
+    
 
     BASE_URL = "https://graph.facebook.com"
 
@@ -21,18 +19,7 @@ class FacebookGraphAPIClient:
         api_version: str | None = None,
         timeout: int = 30,
     ) -> None:
-        """
-        Inicializálja a Graph API klienst.
-
-        Args:
-            access_token:
-                Facebook Graph API access token.
-                Ha nincs megadva, a .env fájlból töltődik be.
-            api_version:
-                A használni kívánt Graph API verzió.
-            timeout:
-                HTTP kérés maximális várakozási ideje másodpercben.
-        """
+        
         self.access_token = (
             access_token
             if access_token is not None
@@ -52,22 +39,7 @@ class FacebookGraphAPIClient:
         endpoint: str,
         params: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """
-        GET kérést küld a Facebook Graph API számára.
-
-        Args:
-            endpoint:
-                A Graph API végpontja.
-            params:
-                Opcionális query paraméterek.
-
-        Returns:
-            Az API JSON válasza Python dictionary formában.
-
-        Raises:
-            RuntimeError:
-                API- vagy hálózati hiba esetén.
-        """
+        
         request_params = dict(params or {})
 
         request_params["access_token"] = self.access_token
@@ -121,11 +93,7 @@ class FacebookGraphAPIClient:
             self,
             url: str,
         ) -> dict[str, Any]:
-            """
-            Teljes Graph API URL alapján hajt végre GET kérést.
-
-            Elsősorban pagination kezelésére használható.
-            """
+            
             try:
                 response = requests.get(
                     url,
@@ -160,13 +128,7 @@ class FacebookGraphAPIClient:
             return response_data
 
     def test_connection(self) -> dict[str, Any]:
-        """
-        Egyszerű Graph API kéréssel ellenőrzi,
-        hogy az access token használható-e.
-
-        Returns:
-            Az API által visszaadott alapvető azonosító adatok.
-        """
+        
         return self.get(
             endpoint="me",
             params={

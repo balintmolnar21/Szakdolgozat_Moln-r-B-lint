@@ -72,10 +72,7 @@ def create_evaluation_summary(
     evaluation_result: ModelEvaluationResult,
     output_file: Path,
 ) -> None:
-    """
-    Rövid szöveges összefoglalót készít
-    a modell teljesítményéről.
-    """
+    
     evaluated_count = len(
         evaluation_result.evaluated_data
     )

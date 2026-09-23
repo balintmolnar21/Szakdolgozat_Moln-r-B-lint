@@ -4,9 +4,7 @@ from facebook_api.graph_api_client import FacebookGraphAPIClient
 
 
 class FacebookCommentFetcher:
-    """
-    Facebook-bejegyzések kommentjeinek lekéréséért felelős osztály.
-    """
+   
 
     DEFAULT_FIELDS = [
         "id",
@@ -25,20 +23,7 @@ class FacebookCommentFetcher:
         post_id: str,
         limit: int = 100,
     ) -> list[dict[str, Any]]:
-        """
-        Lekéri egy Facebook-poszt kommentjeit.
-
-        A metódus a Graph API lapozását is kezeli.
-
-        Args:
-            post_id:
-                A Facebook-bejegyzés azonosítója.
-            limit:
-                Egy API-kérésben lekért kommentek maximális száma.
-
-        Returns:
-            A normalizált kommentek listája.
-        """
+        
         normalized_post_id = post_id.strip()
 
         if not normalized_post_id:
@@ -95,10 +80,7 @@ class FacebookCommentFetcher:
         comment_data: dict[str, Any],
         post_id: str,
     ) -> dict[str, Any]:
-        """
-        A Graph API kommentválaszát a projekt belső
-        adatszerkezetére alakítja.
-        """
+        
         return {
             "post_id": post_id,
             "comment_id": comment_data.get("id"),

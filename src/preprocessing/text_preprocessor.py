@@ -11,10 +11,7 @@ from preprocessing.emoji_lib import (
 def normalize_whitespace(
     text: str,
 ) -> str:
-    """
-    Az egymást követő whitespace karaktereket
-    egyetlen szóközre normalizálja.
-    """
+    
 
     text = re.sub(
         r"\s+",
@@ -28,9 +25,7 @@ def normalize_whitespace(
 def replace_urls(
     text: str,
 ) -> str:
-    """
-    Az URL-eket egységes [URL] tokenre cseréli.
-    """
+    
 
     url_pattern = (
         r"https?://\S+|www\.\S+"
@@ -47,21 +42,7 @@ def clean_text(
     text: str | None,
     emoji_mode: str = "bracketed",
 ) -> str:
-    """
-    Egy szöveg általános előfeldolgozását végzi.
-
-    emoji_mode:
-        raw
-            Az Unicode emojik változatlanul maradnak.
-
-        text
-            Az emojik zárójelek nélküli
-            szöveges leírásra cserélődnek.
-
-        bracketed
-            Az emojik szögletes zárójeles
-            tokenre cserélődnek.
-    """
+    
 
     if text is None:
         return ""
@@ -100,9 +81,7 @@ def preprocess_text_column(
     target_column: str,
     emoji_mode: str = "bracketed",
 ) -> pd.DataFrame:
-    """
-    Egy DataFrame-oszlop szövegeit dolgozza fel.
-    """
+    
 
     df = df.copy()
 
@@ -126,10 +105,7 @@ def preprocess_text_fields(
     df: pd.DataFrame,
     emoji_mode: str = "bracketed",
 ) -> pd.DataFrame:
-    """
-    A rendszer összes releváns szöveges
-    mezőjét előfeldolgozza.
-    """
+    
 
     validate_emoji_mode(
         emoji_mode

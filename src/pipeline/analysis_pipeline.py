@@ -77,10 +77,7 @@ EMOJI_MODE = "text"
 
 @dataclass
 class AnalysisPipelineResult:
-    """
-    A teljes elemzési pipeline eredményeit összefogó
-    adatszerkezet.
-    """
+    
 
     comments_df: pd.DataFrame
     post_context_df: pd.DataFrame
@@ -107,33 +104,7 @@ def run_analysis_pipeline(
     analyzer: ContextAwareSentimentAnalyzer | None = None,
     limit: int | None = None,
 ) -> AnalysisPipelineResult:
-    """
-    A teljes sentiment elemzési pipeline futtatása.
-
-    A kommentek sentimentjét a domain-specifikusan
-    finomhangolt context-aware huBERT modell határozza meg.
-
-    A context-aware modell bemenete:
-
-        sequence A = poszt szövege
-        sequence B = komment szövege
-
-    A modell három sentiment kategóriát használ:
-
-        negative
-        neutral
-        positive
-
-    Az alacsony konfidenciájú pozitív és negatív
-    predikciókra 0.60 confidence threshold kerül
-    alkalmazásra. Ezek a predikciók semleges
-    kategóriába kerülnek.
-
-    A poszt önálló sentimentjének meghatározásához
-    továbbra is az eredeti baseline huBERT modellt
-    használjuk, mivel a szabályalapú kontextuselemző
-    modul erre az információra épül.
-    """
+    
 
     # ---------------------------------------------------------
     # 1. Kimeneti útvonalak normalizálása
