@@ -1845,3 +1845,139 @@ A baseline modell eredményéhez képest mind az accuracy, mind a Macro F1 javul
 
 Az eredmények ugyanakkor azt is megmutatták, hogy a semleges és negatív kategóriák elkülönítése továbbra is a rendszer egyik fő korlátja.
 
+## 15. fejlesztési iteráció – A finomhangolt context-aware modell integrálása az alkalmazásba
+
+### Cél
+
+Az iteráció célja a korábban elkészített és kiértékelt context-aware huBERT-alapú sentimentmodell beépítése volt a projekt központi elemzési folyamatába és a Streamlit felhasználói felületbe.
+
+A fejlesztés során a korábbi baseline sentimentmodell helyett a domain-specifikusan finomhangolt, a poszt szövegét és a hozzá tartozó kommentet együttesen feldolgozó modell került a kommentek sentimentjének meghatározására.
+
+A modell további tanítása vagy hiperparamétereinek módosítása ebben az iterációban már nem történt. A cél a korábban kiválasztott modell alkalmazásszintű integrációja volt.
+
+
+### Context-aware sentiment analyzer kialakítása
+
+A finomhangolt modell alkalmazáson belüli használatához létrejött a `ContextAwareSentimentAnalyzer` komponens.
+
+A komponens a következő fő bemeneteket használja:
+
+- a poszt előfeldolgozott szövege,
+- a komment előfeldolgozott szövege.
+
+A két szöveg tokenizer szinten szövegpárként kerül a modellhez. A modell közvetlenül három sentimentkategória valamelyikét adja vissza:
+
+- `negative`,
+- `neutral`,
+- `positive`.
+
+A predikció mellett eltárolásra kerül a modell konfidenciaértéke is.
+
+
+### Confidence threshold integrálása
+
+A korábbi validációs vizsgálatok alapján confidence threshold alapú utófeldolgozás került be az alkalmazásba.
+
+Az alkalmazásban használt operatív küszöbérték:
+
+`0.60`
+
+A szabály szerint, ha a modell eredeti predikciója pozitív vagy negatív, de a hozzá tartozó konfidenciaérték kisebb 0,60-nál, akkor a rendszer a végleges sentimentcímkét semlegesre módosítja.
+
+A semleges modellpredikciókat a küszöbérték nem módosítja.
+
+A feldolgozás során ezért külön tárolásra kerül:
+
+- `finetuned_label` – a finomhangolt modell közvetlen predikciója,
+- `finetuned_confidence` – a predikció konfidenciaértéke,
+- `final_sentiment_label` – a threshold alkalmazása utáni végleges címke,
+- `threshold_applied` – jelzi, hogy történt-e címkemódosítás.
+
+A projekt korábbi komponenseivel való kompatibilitás érdekében a végleges sentimenteredmény `model_label`, a konfidenciaérték pedig `confidence` néven is elérhető.
+
+
+### A központi elemzési pipeline módosítása
+
+A `pipeline/analysis_pipeline.py` feldolgozási folyamata átállításra került az új context-aware modell használatára.
+
+A kommentek feldolgozásának fő folyamata:
+
+1. komment- és posztkontextus-adatok betöltése,
+2. kommentek és posztszövegek előfeldolgozása,
+3. az emojik szöveges reprezentációvá alakítása,
+4. a posztszöveg és a komment együttes átadása a finomhangolt modellnek,
+5. háromosztályos sentimentpredikció előállítása,
+6. a 0,60-as confidence threshold alkalmazása,
+7. végleges sentimentcímkék létrehozása,
+8. statisztikai összesítés,
+9. kontextuselemzés,
+10. modellkiértékelés,
+11. Excel-, grafikon- és szöveges riportkimenetek létrehozása.
+
+Az előfeldolgozás során az emoji-kezelés explicit módon `text` üzemmódban történik, amely megfelel a finomhangolt modell tanításakor alkalmazott reprezentációnak.
+
+A korábbi baseline huBERT modell a kommentek végleges sentimentjének meghatározásában már nem vesz részt. A rendszer ugyanakkor továbbra is használja a poszt önálló sentimentjének meghatározására, mivel a szabályalapú kontextuselemző komponens számára szükséges a `post_sentiment_label` érték.
+
+
+### Modellfájlok kezelése
+
+A finomhangolt modell betöltési helye egységesítésre került:
+
+`models/context_aware_hubert_text/`
+
+Az inference futtatásához szükséges modellkonfiguráció és tokenizerfájlok mellett a modell súlyait a `model.safetensors` állomány tartalmazza.
+
+Mivel a modell bináris állománya nagy méretű, a nagy modellfájlok Git repository-ba történő feltöltése nem szükséges. A `.gitignore` ennek megfelelően módosításra került. A modell nagy méretű állományai külön fájlmegosztáson keresztül adhatók át, míg a projekt forráskódja és a kisebb konfigurációs állományok továbbra is verziókezelhetők.
+
+A modell telepítésének és elhelyezésének pontos menete a projekt végleges README dokumentációjában kerül rögzítésre.
+
+
+### A központi pipeline ellenőrzése
+
+Az új elemzési pipeline a független teszthalmazon sikeresen lefutott.
+
+A futtatás során:
+
+- 230 komment került feldolgozásra,
+- 15 posztkontextus került felhasználásra,
+- mind a 230 kommenthez létrejött sentimentpredikció,
+- 15 poszthoz készültek összesített statisztikák,
+- elkészült az Excel-eredményfájl,
+- elkészült a szöveges riport,
+- elkészültek a statisztikai és modellkiértékelési grafikonok.
+
+A 0,60-as confidence threshold összesen 20 komment esetében módosította a modell eredeti pozitív vagy negatív predikcióját semleges kategóriára.
+
+Ez megegyezett a korábbi, külön végzett tesztkiértékelés során tapasztalt működéssel, így ellenőrizhető volt, hogy a központi alkalmazási pipeline ugyanazt a modell- és threshold-logikát alkalmazza.
+
+
+### Streamlit felület integrációja
+
+A központi pipeline sikeres ellenőrzése után a Streamlit felület is átállításra került a finomhangolt context-aware modell használatára.
+
+A korábbi `HuBERTSentimentAnalyzer` helyett a felület a `ContextAwareSentimentAnalyzer` példányát tölti be.
+
+A modell betöltése `st.cache_resource` használatával történik, így a nagyméretű modell nem töltődik újra minden Streamlit-interakció során.
+
+A Streamlit felület részletes kommentnézetében az új modell működéséhez kapcsolódó adatok is megjelennek:
+
+- kézi sentimentcímke,
+- nyers modellcímke,
+- modell konfidenciaértéke,
+- threshold alkalmazása utáni végleges sentiment,
+- a threshold alkalmazásának ténye.
+
+Ez lehetővé teszi annak közvetlen szemléltetését is, hogy egy alacsony konfidenciájú pozitív vagy negatív predikció milyen esetben kerül semleges kategóriába.
+
+
+### Eredmény
+
+Az iteráció végére a korábban külön fejlesztett context-aware sentimentmodell az alkalmazás működő részévé vált.
+
+A teljes jelenlegi feldolgozási folyamat:
+
+`CSV → előfeldolgozás → poszt + komment → context-aware fine-tuned huBERT → confidence threshold → végleges sentiment → statisztikai összesítés → kontextuselemzés → modellkiértékelés → riportok és grafikonok → Streamlit`
+
+A CSV-alapú tesztmód a Streamlit felületen sikeresen működik.
+
+A következő fejlesztési lépés a Facebook Graph API adatforrás bekötése a központi pipeline-ba és a Streamlit felületbe. Az API-ból származó éles adatok esetében a modellkiértékelési funkciókat opcionálissá kell tenni, mivel ezek az adatok nem rendelkeznek ember által megadott `manual_label` címkékkel.
