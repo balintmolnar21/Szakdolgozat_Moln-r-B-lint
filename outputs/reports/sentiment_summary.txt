@@ -6,38 +6,38 @@ Feldolgozott posztok száma: 15
 Feldolgozott kommentek száma: 230
 
 2. Összesített sentimentmegoszlás
-Pozitív kommentek: 69 db (30.00%)
-Negatív kommentek: 84 db (36.52%)
-Semleges kommentek: 77 db (33.48%)
+Pozitív kommentek: 68 db (29.57%)
+Negatív kommentek: 109 db (47.39%)
+Semleges kommentek: 53 db (23.04%)
 Domináns összesített sentiment: negatív
 
 3. Posztonkénti kiemelt eredmények
-Legpozitívabb fogadtatású poszt: P3 (72.22% pozitív komment)
-Legnegatívabb fogadtatású poszt: P14 (60.00% negatív komment)
+Legpozitívabb fogadtatású poszt: P2 (65.00% pozitív komment)
+Legnegatívabb fogadtatású poszt: P4 (78.57% negatív komment)
 
 4. Modellbizonyosság
-A kommentpredikciók átlagos konfidenciaértéke: 0.614
+A kommentpredikciók átlagos konfidenciaértéke: 0.853
 
 5. Kontextuselemzés
-Leggyakoribb kontextusilleszkedés: nem egyértelmű
-Előfordulások száma: 8
+Leggyakoribb kontextusilleszkedés: eltérő
+Előfordulások száma: 7
 
 6. Posztonkénti kontextuális értelmezések
-- P1: A poszt pozitív hangvételű, de a kommentek között a negatív kategória dominál. Ez kritikus vagy elutasító fogadtatásra utalhat. A kommentek megoszlása: 40.00% pozitív, 50.00% negatív és 10.00% semleges.
+- P1: A kommentek között nem alakult ki egyértelműen domináns hangulati irány, ezért a poszt fogadtatása vegyesnek tekinthető. A kommentek megoszlása: 40.00% pozitív, 40.00% negatív és 20.00% semleges.
 - P2: A poszt pozitív hangvételű, és a kommentek között is a pozitív kategória dominál. Ez azonos irányú, támogató reakcióra utalhat. A kommentek megoszlása: 65.00% pozitív, 20.00% negatív és 15.00% semleges.
-- P3: A poszt semleges hangvételű, miközben a kommentek között a pozitív kategória dominál. Ez kedvező közönségreakcióra utalhat. A kommentek megoszlása: 72.22% pozitív, 5.56% negatív és 22.22% semleges.
-- P4: A poszt negatív hangvételű, és a kommentek között is a negatív kategória dominál. Ez azonos irányú kritikus reakciót vagy problémaérzékelést jelezhet, de önmagában nem bizonyítja, hogy a kommentelők egyetértenek a poszt állításával. A kommentek megoszlása: 15.71% pozitív, 57.14% negatív és 27.14% semleges.
-- P5: A poszt negatív hangvételű, miközben a kommentek között a pozitív kategória dominál. Ez támogató vagy pozitív visszacsatolásra utalhat egy kritikus témával kapcsolatban. A kommentek megoszlása: 41.67% pozitív, 25.00% negatív és 33.33% semleges.
-- P6: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 20.00% negatív és 50.00% semleges.
-- P7: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 20.00% pozitív, 30.00% negatív és 50.00% semleges.
-- P8: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 10.00% pozitív, 40.00% negatív és 50.00% semleges.
-- P9: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 20.00% negatív és 50.00% semleges.
-- P10: A poszt negative hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 10.00% pozitív, 30.00% negatív és 60.00% semleges.
-- P11: A kommentek között nem alakult ki egyértelműen domináns hangulati irány, ezért a poszt fogadtatása vegyesnek tekinthető. A kommentek megoszlása: 40.00% pozitív, 40.00% negatív és 20.00% semleges.
-- P12: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 30.00% negatív és 40.00% semleges.
-- P13: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 20.00% negatív és 50.00% semleges.
-- P14: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 10.00% pozitív, 60.00% negatív és 30.00% semleges.
-- P15: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 20.00% pozitív, 20.00% negatív és 60.00% semleges.
+- P3: A poszt semleges hangvételű, miközben a kommentek között a pozitív kategória dominál. Ez kedvező közönségreakcióra utalhat. A kommentek megoszlása: 61.11% pozitív, 22.22% negatív és 16.67% semleges.
+- P4: A poszt negatív hangvételű, és a kommentek között is a negatív kategória dominál. Ez azonos irányú kritikus reakciót vagy problémaérzékelést jelezhet, de önmagában nem bizonyítja, hogy a kommentelők egyetértenek a poszt állításával. A kommentek megoszlása: 7.14% pozitív, 78.57% negatív és 14.29% semleges.
+- P5: A poszt negatív hangvételű, miközben a kommentek között a pozitív kategória dominál. Ez támogató vagy pozitív visszacsatolásra utalhat egy kritikus témával kapcsolatban. A kommentek megoszlása: 50.00% pozitív, 33.33% negatív és 16.67% semleges.
+- P6: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 30.00% pozitív, 50.00% negatív és 20.00% semleges.
+- P7: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 10.00% pozitív, 50.00% negatív és 40.00% semleges.
+- P8: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 20.00% negatív és 50.00% semleges.
+- P9: A kommentek között nem alakult ki egyértelműen domináns hangulati irány, ezért a poszt fogadtatása vegyesnek tekinthető. A kommentek megoszlása: 40.00% pozitív, 40.00% negatív és 20.00% semleges.
+- P10: A poszt negative hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 20.00% negatív és 50.00% semleges.
+- P11: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 30.00% pozitív, 50.00% negatív és 20.00% semleges.
+- P12: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 30.00% pozitív, 40.00% negatív és 30.00% semleges.
+- P13: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 30.00% pozitív, 40.00% negatív és 30.00% semleges.
+- P14: A poszt neutral hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 30.00% pozitív, 30.00% negatív és 40.00% semleges.
+- P15: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 30.00% pozitív, 40.00% negatív és 30.00% semleges.
 
 7. Értelmezési korlát
 A riport sentiment címkékből, statisztikai mutatókból és szabályalapú kontextuselemzésből készül. Az eredmények nem tekinthetők teljes álláspont-felismerésnek, ezért a posztok és kommentek közötti kapcsolat csak óvatosan értelmezhető.

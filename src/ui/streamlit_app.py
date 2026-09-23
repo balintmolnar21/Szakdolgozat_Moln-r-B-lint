@@ -5,20 +5,34 @@ import streamlit as st
 from pandas.errors import EmptyDataError, ParserError
 
 
+# ============================================================
+# Projektútvonalak
+# ============================================================
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIRECTORY = PROJECT_ROOT / "src" 
+SRC_DIRECTORY = PROJECT_ROOT / "src"
 
 if str(SRC_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SRC_DIRECTORY))
 
 
-from sentiment.hubert_sentiment_analyzer import (
-    HuBERTSentimentAnalyzer,
+# ============================================================
+# Projektmodulok importálása
+# ============================================================
+
+from sentiment.context_aware_sentiment_analyzer import (
+    ContextAwareSentimentAnalyzer,
 )
+
 from pipeline.analysis_pipeline import (
     AnalysisPipelineResult,
     run_analysis_pipeline,
 )
+
+
+# ============================================================
+# Bemeneti és kimeneti útvonalak
+# ============================================================
 
 DEFAULT_TEST_COMMENTS_FILE = (
     PROJECT_ROOT
@@ -33,6 +47,7 @@ DEFAULT_TEST_POST_CONTEXT_FILE = (
     / "validation"
     / "test_post_context.csv"
 )
+
 EXCEL_OUTPUT_FILE = (
     PROJECT_ROOT
     / "data"
@@ -54,19 +69,61 @@ REPORT_OUTPUT_FILE = (
 )
 
 EVALUATION_OUTPUT_DIRECTORY = (
-    PROJECT_ROOT / "outputs" / "evaluation"
+    PROJECT_ROOT
+    / "outputs"
+    / "evaluation"
 )
 
-@st.cache_resource(show_spinner=False)
-def load_sentiment_analyzer() -> HuBERTSentimentAnalyzer:
-    print("HU­BERT MODELL TÉNYLEGES BETÖLTÉSE")
-    return HuBERTSentimentAnalyzer()
 
+# ============================================================
+# Context-aware modell beállításai
+# ============================================================
+
+CONTEXT_AWARE_MODEL_PATH = (
+    PROJECT_ROOT
+    / "models"
+    / "context_aware_hubert_text"
+)
+
+CONTEXT_AWARE_MAX_LENGTH = 128
+
+CONFIDENCE_THRESHOLD = 0.60
+
+
+# ============================================================
+# Modell betöltése
+# ============================================================
+
+@st.cache_resource(show_spinner=False)
+def load_sentiment_analyzer() -> ContextAwareSentimentAnalyzer:
+    """
+    A finomhangolt context-aware huBERT modell betöltése.
+
+    A Streamlit resource cache használatával a modell
+    nem töltődik újra minden felületi interakció során.
+    """
+
+    print(
+        "CONTEXT-AWARE FINE-TUNED HUBERT "
+        "MODELL TÉNYLEGES BETÖLTÉSE"
+    )
+
+    return ContextAwareSentimentAnalyzer(
+        model_path=CONTEXT_AWARE_MODEL_PATH,
+        max_length=CONTEXT_AWARE_MAX_LENGTH,
+        confidence_threshold=CONFIDENCE_THRESHOLD,
+    )
+
+
+# ============================================================
+# Streamlit oldal konfigurációja
+# ============================================================
 
 def configure_page() -> None:
     """
     Beállítja a Streamlit oldal alapvető tulajdonságait.
     """
+
     st.set_page_config(
         page_title="Social media hangulatelemző",
         page_icon="📊",
@@ -74,56 +131,99 @@ def configure_page() -> None:
     )
 
 
+# ============================================================
+# Fejléc
+# ============================================================
+
 def display_header() -> None:
-    
+    """
+    Megjeleníti az alkalmazás fejlécét és rövid leírását.
+    """
+
     st.title("Social media hangulatelemző szoftver")
 
     st.write(
-        "Magyar nyelvű Facebook-kommentek huBERT-alapú "
-        "sentimentelemzése, statisztikai összesítése és "
-        "kontextuális értelmezése."
+        "Magyar nyelvű Facebook-kommentek context-aware, "
+        "finomhangolt huBERT-alapú sentimentelemzése, "
+        "statisztikai összesítése és kontextuális értelmezése."
     )
 
     st.info(
-        "A jelenlegi tesztmód a független test adathalmazt használja. "
-        "A train és validation halmazok a modell finomhangolásához "
-        "és annak ellenőrzéséhez szolgálnak."
+        "A jelenlegi tesztmód a test adathalmazt használja. "
+        "A train és validation halmazok a modell finomhangolásához, "
+        "modellválasztásához és fejlesztés közbeni ellenőrzéséhez "
+        "szolgálnak."
     )
 
 
+# ============================================================
+# Bemeneti fájlok megjelenítése
+# ============================================================
+
 def display_input_files() -> None:
-    
+    """
+    Megjeleníti a teszteléshez használt bemeneti fájlokat.
+    """
+
     st.subheader("Bemeneti fájlok")
 
-    test_comments_exists = DEFAULT_TEST_COMMENTS_FILE.exists()
-    test_context_exists = DEFAULT_TEST_POST_CONTEXT_FILE.exists()
+    test_comments_exists = (
+        DEFAULT_TEST_COMMENTS_FILE.exists()
+    )
+
+    test_context_exists = (
+        DEFAULT_TEST_POST_CONTEXT_FILE.exists()
+    )
 
     first_column, second_column = st.columns(2)
 
     with first_column:
         st.write("Teszt kommentadatok")
-        st.code(str(DEFAULT_TEST_COMMENTS_FILE))
+
+        st.code(
+            str(DEFAULT_TEST_COMMENTS_FILE)
+        )
 
         if test_comments_exists:
-            st.success("A teszt kommentfájl elérhető.")
+            st.success(
+                "A teszt kommentfájl elérhető."
+            )
         else:
-            st.error("A teszt kommentfájl nem található.")
+            st.error(
+                "A teszt kommentfájl nem található."
+            )
 
     with second_column:
         st.write("Teszt posztkontextus-adatok")
-        st.code(str(DEFAULT_TEST_POST_CONTEXT_FILE))
+
+        st.code(
+            str(DEFAULT_TEST_POST_CONTEXT_FILE)
+        )
 
         if test_context_exists:
-            st.success("A teszt posztkontextus-fájl elérhető.")
+            st.success(
+                "A teszt posztkontextus-fájl elérhető."
+            )
         else:
-            st.error("A teszt posztkontextus-fájl nem található.")
+            st.error(
+                "A teszt posztkontextus-fájl nem található."
+            )
 
+
+# ============================================================
+# Kimeneti információk
+# ============================================================
 
 def display_output_information() -> None:
-    
+    """
+    Megjeleníti a feldolgozás fő kimeneti helyeit.
+    """
+
     st.subheader("Kimenetek")
 
-    st.write("A feldolgozás után létrejövő fő kimenetek:")
+    st.write(
+        "A feldolgozás után létrejövő fő kimenetek:"
+    )
 
     st.code(
         "\n".join(
@@ -131,12 +231,22 @@ def display_output_information() -> None:
                 str(EXCEL_OUTPUT_FILE),
                 str(CHARTS_OUTPUT_DIRECTORY),
                 str(REPORT_OUTPUT_FILE),
+                str(EVALUATION_OUTPUT_DIRECTORY),
             ]
         )
     )
 
+
+# ============================================================
+# Session state kezelése
+# ============================================================
+
 def clear_previous_analysis() -> None:
-    
+    """
+    Törli a korábbi elemzéshez kapcsolódó
+    Streamlit session state értékeket.
+    """
+
     session_keys_to_delete = [
         "analysis_result",
         "analysis_success",
@@ -147,12 +257,24 @@ def clear_previous_analysis() -> None:
             del st.session_state[key]
 
 
-def display_analysis_error(error: Exception) -> None:
-    
+# ============================================================
+# Hibakezelés
+# ============================================================
+
+def display_analysis_error(
+    error: Exception,
+) -> None:
+    """
+    Felhasználóbarát hibaüzenetet jelenít meg,
+    miközben a technikai részletek külön
+    lenyitható panelen elérhetők.
+    """
+
     if isinstance(error, FileNotFoundError):
         st.error(
             "A feldolgozáshoz szükséges egyik bemeneti fájl "
-            "nem található. Ellenőrizd a CSV-fájlok helyét."
+            "vagy modellfájl nem található. Ellenőrizd a "
+            "CSV-fájlok és a finomhangolt modell helyét."
         )
 
     elif isinstance(error, EmptyDataError):
@@ -210,8 +332,16 @@ def display_analysis_error(error: Exception) -> None:
         st.exception(error)
 
 
+# ============================================================
+# Elemzés indítása
+# ============================================================
+
 def display_analysis_button() -> None:
-    
+    """
+    Megjeleníti az elemzés indítására és a korábbi
+    eredmények törlésére szolgáló vezérlőket.
+    """
+
     st.subheader("Elemzés vezérlése")
 
     input_files_available = (
@@ -239,12 +369,17 @@ def display_analysis_button() -> None:
             use_container_width=True,
         )
 
-    if st.session_state.get("analysis_success", False):
+    if st.session_state.get(
+        "analysis_success",
+        False,
+    ):
         st.success(
             "Az elemzés sikeresen befejeződött."
         )
 
-        st.session_state["analysis_success"] = False
+        st.session_state[
+            "analysis_success"
+        ] = False
 
     if not input_files_available:
         st.warning(
@@ -255,52 +390,84 @@ def display_analysis_button() -> None:
     if clear_button_clicked:
         clear_previous_analysis()
 
-        st.session_state["clear_success"] = True
+        st.session_state[
+            "clear_success"
+        ] = True
 
         st.rerun()
 
-    if st.session_state.get("clear_success", False):
+    if st.session_state.get(
+        "clear_success",
+        False,
+    ):
         st.success(
             "A korábbi elemzési eredmények törlésre kerültek."
         )
 
-        st.session_state["clear_success"] = False
+        st.session_state[
+            "clear_success"
+        ] = False
 
     if analysis_button_clicked:
         try:
             with st.spinner(
-                "A huBERT-modell betöltése és az elemzés "
-                "futtatása folyamatban..."
+                "A finomhangolt context-aware huBERT modell "
+                "betöltése és az elemzés futtatása "
+                "folyamatban..."
             ):
-                analyzer = load_sentiment_analyzer()
+                analyzer = (
+                    load_sentiment_analyzer()
+                )
 
                 result = run_analysis_pipeline(
-                    validation_file=DEFAULT_TEST_COMMENTS_FILE,
-                    post_context_file=DEFAULT_TEST_POST_CONTEXT_FILE,
-                    excel_output_file=EXCEL_OUTPUT_FILE,
+                    validation_file=(
+                        DEFAULT_TEST_COMMENTS_FILE
+                    ),
+                    post_context_file=(
+                        DEFAULT_TEST_POST_CONTEXT_FILE
+                    ),
+                    excel_output_file=(
+                        EXCEL_OUTPUT_FILE
+                    ),
                     charts_output_directory=(
                         CHARTS_OUTPUT_DIRECTORY
                     ),
                     reports_output_directory=(
                         REPORT_OUTPUT_FILE.parent
                     ),
-                    evaluation_output_directory=Path(
-                        "outputs/evaluation"
+                    evaluation_output_directory=(
+                        EVALUATION_OUTPUT_DIRECTORY
                     ),
                     analyzer=analyzer,
                     limit=None,
                 )
 
-                st.session_state["analysis_result"] = result
-                st.session_state["analysis_success"] = True
+                st.session_state[
+                    "analysis_result"
+                ] = result
+
+                st.session_state[
+                    "analysis_success"
+                ] = True
 
             st.rerun()
 
         except Exception as error:
             display_analysis_error(error)
 
-def translate_sentiment_label(value) -> str:
-    
+
+# ============================================================
+# Fordítási segédfüggvények
+# ============================================================
+
+def translate_sentiment_label(
+    value,
+) -> str:
+    """
+    A belső angol sentiment címkéket magyar
+    megjelenítési értékekre alakítja.
+    """
+
     translations = {
         "positive": "Pozitív",
         "negative": "Negatív",
@@ -309,7 +476,11 @@ def translate_sentiment_label(value) -> str:
         "no_data": "Nincs adat",
     }
 
-    normalized_value = str(value).strip().lower()
+    normalized_value = (
+        str(value)
+        .strip()
+        .lower()
+    )
 
     return translations.get(
         normalized_value,
@@ -317,8 +488,14 @@ def translate_sentiment_label(value) -> str:
     )
 
 
-def translate_context_alignment(value) -> str:
-    
+def translate_context_alignment(
+    value,
+) -> str:
+    """
+    A kontextusilleszkedés belső címkéit
+    magyar megjelenítési értékekre alakítja.
+    """
+
     translations = {
         "aligned": "Azonos irányú",
         "opposite": "Ellentétes",
@@ -327,7 +504,11 @@ def translate_context_alignment(value) -> str:
         "unclear": "Nem egyértelmű",
     }
 
-    normalized_value = str(value).strip().lower()
+    normalized_value = (
+        str(value)
+        .strip()
+        .lower()
+    )
 
     return translations.get(
         normalized_value,
@@ -339,7 +520,11 @@ def create_display_dataframe(
     dataframe,
     column_translations: dict[str, str],
 ):
-    
+    """
+    A belső oszlopneveket a felhasználói
+    felület számára magyar elnevezésekre alakítja.
+    """
+
     display_df = dataframe.copy()
 
     available_translations = {
@@ -353,8 +538,17 @@ def create_display_dataframe(
         columns=available_translations
     )
 
+
+# ============================================================
+# Mérőszámok magyarázata
+# ============================================================
+
 def display_metric_explanations() -> None:
-    
+    """
+    Röviden bemutatja a modellkiértékelés során
+    alkalmazott fő mérőszámokat.
+    """
+
     st.markdown(
         """
         **Accuracy:** Megmutatja, hogy az összes kiértékelt komment
@@ -371,51 +565,85 @@ def display_metric_explanations() -> None:
 
         **Konfidencia:** A modell becsült bizonyossága arra vonatkozóan,
         hogy az adott kommenthez kiválasztott sentimentcímke helyes.
-        A magasabb érték nagyobb modellbizonyosságot jelez, de nem garantálja
-        a predikció tényleges helyességét.
+        A magasabb érték nagyobb modellbizonyosságot jelez, de nem
+        garantálja a predikció tényleges helyességét.
+
+        **Confidence threshold:** A rendszer a 0,60 alatti
+        konfidenciájú pozitív vagy negatív predikciókat semleges
+        kategóriába sorolja át. A semleges predikciókat a küszöbérték
+        nem módosítja.
         """
     )
 
 
-def display_chart_explanation(chart_file: Path) -> None:
-   
+# ============================================================
+# Grafikonmagyarázatok
+# ============================================================
+
+def display_chart_explanation(
+    chart_file: Path,
+) -> None:
+    """
+    Rövid magyarázatot jelenít meg az egyes
+    generált grafikonokhoz.
+    """
+
     chart_explanations = {
         "overall_sentiment_distribution.png": (
-            "A diagram az összes vizsgált komment pozitív, negatív és "
-            "semleges megoszlását mutatja."
+            "A diagram az összes vizsgált komment pozitív, "
+            "negatív és semleges megoszlását mutatja."
         ),
         "post_sentiment_distribution.png": (
-            "A diagram posztonként hasonlítja össze a pozitív, negatív "
-            "és semleges kommentek arányát."
+            "A diagram posztonként hasonlítja össze a pozitív, "
+            "negatív és semleges kommentek arányát."
         ),
         "average_confidence_by_post.png": (
-            "A diagram azt mutatja meg, hogy a modell átlagosan mennyire "
-            "volt biztos az egyes posztok kommentjeinek besorolásában."
+            "A diagram azt mutatja meg, hogy a modell átlagosan "
+            "mennyire volt biztos az egyes posztok kommentjeinek "
+            "besorolásában."
         ),
         "context_alignment_distribution.png": (
-            "A diagram a poszt tartalma és a kommentek domináns hangulata "
-            "közötti illeszkedés megoszlását szemlélteti."
+            "A diagram a poszt tartalma és a kommentek domináns "
+            "hangulata közötti illeszkedés megoszlását "
+            "szemlélteti."
         ),
         "confusion_matrix.png": (
-            "A confusion matrix sorai a kézi címkéket, oszlopai a modell "
-            "predikcióit mutatják. A főátlóban találhatók a helyes találatok."
+            "A confusion matrix sorai a kézi címkéket, oszlopai "
+            "a modell végleges predikcióit mutatják. A főátlóban "
+            "találhatók a helyes találatok."
         ),
         "classification_metrics.png": (
-            "A diagram sentimentkategóriánként hasonlítja össze a "
-            "precision, recall és F1-score értékeket."
+            "A diagram sentimentkategóriánként hasonlítja össze "
+            "a precision, recall és F1-score értékeket."
         ),
     }
 
     explanation = chart_explanations.get(
         chart_file.name,
-        "A grafikon az elemzés egyik összesített eredményét szemlélteti.",
+        (
+            "A grafikon az elemzés egyik összesített "
+            "eredményét szemlélteti."
+        ),
     )
 
     st.caption(explanation)
 
-def display_model_evaluation(result) -> None:
-    
-    evaluation_result = result.evaluation_result
+
+# ============================================================
+# Modellkiértékelés megjelenítése
+# ============================================================
+
+def display_model_evaluation(
+    result: AnalysisPipelineResult,
+) -> None:
+    """
+    Megjeleníti a kézzel címkézett teszthalmazon
+    végzett modellkiértékelés eredményeit.
+    """
+
+    evaluation_result = (
+        result.evaluation_result
+    )
 
     st.subheader("Modellkiértékelés")
 
@@ -431,12 +659,18 @@ def display_model_evaluation(result) -> None:
         evaluation_result.low_confidence_comments
     )
 
-    metric_column_1, metric_column_2, metric_column_3 = st.columns(3)
+    (
+        metric_column_1,
+        metric_column_2,
+        metric_column_3,
+    ) = st.columns(3)
 
     with metric_column_1:
         st.metric(
             label="Accuracy",
-            value=f"{evaluation_result.accuracy:.2%}",
+            value=(
+                f"{evaluation_result.accuracy:.2%}"
+            ),
         )
 
     with metric_column_2:
@@ -447,7 +681,7 @@ def display_model_evaluation(result) -> None:
 
     with metric_column_3:
         st.metric(
-            label="Alacsony konfidenciájú esetek",
+            label="0,60 alatti konfidenciájú esetek",
             value=low_confidence_count,
         )
 
@@ -456,21 +690,33 @@ def display_model_evaluation(result) -> None:
         "került bevonásra a modell kiértékelésébe."
     )
 
-    with st.expander("A mérőszámok rövid magyarázata"):
+    with st.expander(
+        "A mérőszámok rövid magyarázata"
+    ):
         display_metric_explanations()
 
-    st.subheader("Osztályonkénti eredmények")
+    # --------------------------------------------------------
+    # Osztályonkénti eredmények
+    # --------------------------------------------------------
 
-    metrics_display_df = evaluation_result.metrics.copy()
+    st.subheader(
+        "Osztályonkénti eredmények"
+    )
 
-    metrics_display_df = metrics_display_df.rename(
-        columns={
-            "category": "Kategória",
-            "precision": "Precision",
-            "recall": "Recall",
-            "f1_score": "F1-score",
-            "support": "Esetszám",
-        }
+    metrics_display_df = (
+        evaluation_result.metrics.copy()
+    )
+
+    metrics_display_df = (
+        metrics_display_df.rename(
+            columns={
+                "category": "Kategória",
+                "precision": "Precision",
+                "recall": "Recall",
+                "f1_score": "F1-score",
+                "support": "Esetszám",
+            }
+        )
     )
 
     category_translations = {
@@ -481,34 +727,48 @@ def display_model_evaluation(result) -> None:
         "weighted_avg": "Súlyozott átlag",
     }
 
-    metrics_display_df["Kategória"] = (
-        metrics_display_df["Kategória"].replace(
+    if "Kategória" in metrics_display_df.columns:
+        metrics_display_df[
+            "Kategória"
+        ] = metrics_display_df[
+            "Kategória"
+        ].replace(
             category_translations
         )
-    )
 
     st.dataframe(
         metrics_display_df,
         use_container_width=True,
         hide_index=True,
         column_config={
-            "Precision": st.column_config.NumberColumn(
-                format="%.3f"
+            "Precision": (
+                st.column_config.NumberColumn(
+                    format="%.3f"
+                )
             ),
-            "Recall": st.column_config.NumberColumn(
-                format="%.3f"
+            "Recall": (
+                st.column_config.NumberColumn(
+                    format="%.3f"
+                )
             ),
-            "F1-score": st.column_config.NumberColumn(
-                format="%.3f"
+            "F1-score": (
+                st.column_config.NumberColumn(
+                    format="%.3f"
+                )
             ),
         },
     )
 
+    # --------------------------------------------------------
+    # Confusion matrix
+    # --------------------------------------------------------
+
     st.subheader("Confusion matrix")
 
     st.caption(
-        "A sorok az ember által megadott címkéket, az oszlopok a modell "
-        "által előre jelzett kategóriákat jelentik."
+        "A sorok az ember által megadott címkéket, "
+        "az oszlopok a modell végleges, threshold "
+        "alkalmazása utáni predikcióit jelentik."
     )
 
     st.dataframe(
@@ -516,60 +776,101 @@ def display_model_evaluation(result) -> None:
         use_container_width=True,
     )
 
+    # --------------------------------------------------------
+    # Hibás predikciók
+    # --------------------------------------------------------
+
     st.subheader("Hibás predikciók")
 
-    if evaluation_result.misclassified_comments.empty:
+    if (
+        evaluation_result
+        .misclassified_comments
+        .empty
+    ):
         st.success(
-            "A kiértékelt adatok között nem található hibás predikció."
+            "A kiértékelt adatok között nem található "
+            "hibás predikció."
         )
+
     else:
         misclassified_columns = [
             column
             for column in [
                 "comment_text",
                 "manual_label",
+                "finetuned_label",
+                "finetuned_confidence",
+                "final_sentiment_label",
+                "threshold_applied",
                 "model_label",
                 "confidence",
             ]
             if column
-            in evaluation_result.misclassified_comments.columns
+            in (
+                evaluation_result
+                .misclassified_comments
+                .columns
+            )
         ]
 
         st.dataframe(
-            evaluation_result.misclassified_comments[
+            evaluation_result
+            .misclassified_comments[
                 misclassified_columns
             ],
             use_container_width=True,
             hide_index=True,
         )
 
-    st.subheader("Alacsony konfidenciájú predikciók")
+    # --------------------------------------------------------
+    # Alacsony konfidenciájú esetek
+    # --------------------------------------------------------
 
-    st.caption(
-        "Ide azok a kommentek kerülnek, amelyeknél a modell "
-        "konfidenciaértéke 0,60 alatti. Ezek a predikciók "
-        "bizonytalanabbnak tekinthetők, ezért külön ellenőrzésük indokolt."
+    st.subheader(
+        "Alacsony konfidenciájú predikciók"
     )
 
-    if evaluation_result.low_confidence_comments.empty:
+    st.caption(
+        "Ide azok a kommentek kerülnek, amelyeknél "
+        "a modell nyers predikciójának konfidenciaértéke "
+        "0,60 alatti. A pozitív vagy negatív nyers "
+        "predikciók ilyen esetben semleges végleges "
+        "címkére módosulhatnak."
+    )
+
+    if (
+        evaluation_result
+        .low_confidence_comments
+        .empty
+    ):
         st.info(
-            "Nem található 0,60 alatti konfidenciájú predikció."
+            "Nem található 0,60 alatti "
+            "konfidenciájú predikció."
         )
+
     else:
         low_confidence_columns = [
             column
             for column in [
                 "comment_text",
                 "manual_label",
-                "model_label",
+                "finetuned_label",
+                "finetuned_confidence",
+                "final_sentiment_label",
+                "threshold_applied",
                 "confidence",
             ]
             if column
-            in evaluation_result.low_confidence_comments.columns
+            in (
+                evaluation_result
+                .low_confidence_comments
+                .columns
+            )
         ]
 
         st.dataframe(
-            evaluation_result.low_confidence_comments[
+            evaluation_result
+            .low_confidence_comments[
                 low_confidence_columns
             ],
             use_container_width=True,
@@ -577,10 +878,17 @@ def display_model_evaluation(result) -> None:
         )
 
 
+# ============================================================
+# Elemzési eredmények
+# ============================================================
+
 def display_analysis_results(
     result: AnalysisPipelineResult,
 ) -> None:
-    
+    """
+    Megjeleníti a teljes elemzési pipeline eredményeit.
+    """
+
     st.header("Elemzési eredmények")
 
     if result.overall_statistics_df.empty:
@@ -590,7 +898,9 @@ def display_analysis_results(
         )
         return
 
-    overall_row = result.overall_statistics_df.iloc[0]
+    overall_row = (
+        result.overall_statistics_df.iloc[0]
+    )
 
     post_count = int(
         overall_row["post_count"]
@@ -600,17 +910,26 @@ def display_analysis_results(
         overall_row["total_comment_count"]
     )
 
-    dominant_sentiment = translate_sentiment_label(
-        overall_row["overall_dominant_sentiment"]
+    dominant_sentiment = (
+        translate_sentiment_label(
+            overall_row[
+                "overall_dominant_sentiment"
+            ]
+        )
     )
 
     average_confidence = float(
-        overall_row["overall_average_confidence"]
+        overall_row[
+            "overall_average_confidence"
+        ]
     )
 
-    first_column, second_column, third_column, fourth_column = (
-        st.columns(4)
-    )
+    (
+        first_column,
+        second_column,
+        third_column,
+        fourth_column,
+    ) = st.columns(4)
 
     with first_column:
         st.metric(
@@ -636,8 +955,6 @@ def display_analysis_results(
             f"{average_confidence:.3f}",
         )
 
-    
-
     st.divider()
 
     (
@@ -660,36 +977,56 @@ def display_analysis_results(
         ]
     )
 
+    # ========================================================
+    # Összegzés
+    # ========================================================
+
     with summary_tab:
-        st.subheader("Összesített sentimenteredmények")
+        st.subheader(
+            "Összesített sentimenteredmények"
+        )
 
         positive_count = int(
-            overall_row["total_positive_count"]
+            overall_row[
+                "total_positive_count"
+            ]
         )
 
         negative_count = int(
-            overall_row["total_negative_count"]
+            overall_row[
+                "total_negative_count"
+            ]
         )
 
         neutral_count = int(
-            overall_row["total_neutral_count"]
+            overall_row[
+                "total_neutral_count"
+            ]
         )
 
         positive_ratio = float(
-            overall_row["total_positive_ratio"]
+            overall_row[
+                "total_positive_ratio"
+            ]
         )
 
         negative_ratio = float(
-            overall_row["total_negative_ratio"]
+            overall_row[
+                "total_negative_ratio"
+            ]
         )
 
         neutral_ratio = float(
-            overall_row["total_neutral_ratio"]
+            overall_row[
+                "total_neutral_ratio"
+            ]
         )
 
-        positive_column, negative_column, neutral_column = (
-            st.columns(3)
-        )
+        (
+            positive_column,
+            negative_column,
+            neutral_column,
+        ) = st.columns(3)
 
         with positive_column:
             st.metric(
@@ -712,47 +1049,69 @@ def display_analysis_results(
                 f"{neutral_ratio:.2f}%",
             )
 
-    
+        # ----------------------------------------------------
+        # Kimeneti fájlok
+        # ----------------------------------------------------
 
         st.subheader("Kimeneti fájlok")
 
         if result.excel_output_file.exists():
             excel_file_bytes = (
-                result.excel_output_file.read_bytes()
+                result
+                .excel_output_file
+                .read_bytes()
             )
 
             st.download_button(
-                label="Excel-eredményfájl letöltése",
+                label=(
+                    "Excel-eredményfájl letöltése"
+                ),
                 data=excel_file_bytes,
-                file_name=result.excel_output_file.name,
+                file_name=(
+                    result.excel_output_file.name
+                ),
                 mime=(
-                    "application/vnd.openxmlformats-officedocument."
-                    "spreadsheetml.sheet"
+                    "application/vnd.openxmlformats-"
+                    "officedocument.spreadsheetml.sheet"
                 ),
                 use_container_width=True,
             )
+
         else:
             st.warning(
                 "Az Excel-eredményfájl nem található."
             )
 
         if result.report_file.exists():
-            report_file_bytes = result.report_file.read_bytes()
+            report_file_bytes = (
+                result.report_file.read_bytes()
+            )
 
             st.download_button(
-                label="Szöveges riport letöltése",
+                label=(
+                    "Szöveges riport letöltése"
+                ),
                 data=report_file_bytes,
-                file_name=result.report_file.name,
+                file_name=(
+                    result.report_file.name
+                ),
                 mime="text/plain",
                 use_container_width=True,
             )
+
         else:
             st.warning(
                 "A szöveges riport nem található."
             )
 
+    # ========================================================
+    # Posztonkénti statisztikák
+    # ========================================================
+
     with post_statistics_tab:
-        st.subheader("Posztonkénti statisztikák")
+        st.subheader(
+            "Posztonkénti statisztikák"
+        )
 
         post_statistics_column_translations = {
             "post_id": "Posztazonosító",
@@ -770,31 +1129,41 @@ def display_analysis_results(
             "average_comment_confidence": (
                 "Átlagos modellbizonyosság"
             ),
-            "post_sentiment_label": "Poszt sentimentje",
+            "post_sentiment_label": (
+                "Poszt sentimentje"
+            ),
         }
 
-        post_statistics_display_df = create_display_dataframe(
-            result.post_statistics_df,
-            post_statistics_column_translations,
+        post_statistics_display_df = (
+            create_display_dataframe(
+                result.post_statistics_df,
+                post_statistics_column_translations,
+            )
         )
 
-        if "Domináns kommentsentiment" in (
-            post_statistics_display_df.columns
+        if (
+            "Domináns kommentsentiment"
+            in post_statistics_display_df.columns
         ):
             post_statistics_display_df[
                 "Domináns kommentsentiment"
             ] = post_statistics_display_df[
                 "Domináns kommentsentiment"
-            ].apply(translate_sentiment_label)
+            ].apply(
+                translate_sentiment_label
+            )
 
-        if "Poszt sentimentje" in (
-            post_statistics_display_df.columns
+        if (
+            "Poszt sentimentje"
+            in post_statistics_display_df.columns
         ):
             post_statistics_display_df[
                 "Poszt sentimentje"
             ] = post_statistics_display_df[
                 "Poszt sentimentje"
-            ].apply(translate_sentiment_label)
+            ].apply(
+                translate_sentiment_label
+            )
 
         st.dataframe(
             post_statistics_display_df,
@@ -802,53 +1171,86 @@ def display_analysis_results(
             hide_index=True,
         )
 
+    # ========================================================
+    # Kontextuselemzés
+    # ========================================================
+
     with context_tab:
-        st.subheader("Kontextuselemzési eredmények")
+        st.subheader(
+            "Kontextuselemzési eredmények"
+        )
 
         context_column_translations = {
             "post_id": "Posztazonosító",
             "post_type": "Poszttípus",
-            "post_sentiment_label": "Poszt sentimentje",
+            "post_sentiment_label": (
+                "Poszt sentimentje"
+            ),
             "dominant_comment_sentiment": (
                 "Domináns kommentsentiment"
             ),
-            "positive_ratio": "Pozitív arány (%)",
-            "negative_ratio": "Negatív arány (%)",
-            "neutral_ratio": "Semleges arány (%)",
-            "context_reaction_type": "Reakciótípus",
-            "context_alignment": "Kontextusilleszkedés",
-            "context_interpretation": "Értelmezés",
+            "positive_ratio": (
+                "Pozitív arány (%)"
+            ),
+            "negative_ratio": (
+                "Negatív arány (%)"
+            ),
+            "neutral_ratio": (
+                "Semleges arány (%)"
+            ),
+            "context_reaction_type": (
+                "Reakciótípus"
+            ),
+            "context_alignment": (
+                "Kontextusilleszkedés"
+            ),
+            "context_interpretation": (
+                "Értelmezés"
+            ),
         }
 
-        context_display_df = create_display_dataframe(
-            result.context_analysis_df,
-            context_column_translations,
+        context_display_df = (
+            create_display_dataframe(
+                result.context_analysis_df,
+                context_column_translations,
+            )
         )
 
-        if "Poszt sentimentje" in context_display_df.columns:
+        if (
+            "Poszt sentimentje"
+            in context_display_df.columns
+        ):
             context_display_df[
                 "Poszt sentimentje"
             ] = context_display_df[
                 "Poszt sentimentje"
-            ].apply(translate_sentiment_label)
+            ].apply(
+                translate_sentiment_label
+            )
 
-        if "Domináns kommentsentiment" in (
-            context_display_df.columns
+        if (
+            "Domináns kommentsentiment"
+            in context_display_df.columns
         ):
             context_display_df[
                 "Domináns kommentsentiment"
             ] = context_display_df[
                 "Domináns kommentsentiment"
-            ].apply(translate_sentiment_label)
+            ].apply(
+                translate_sentiment_label
+            )
 
-        if "Kontextusilleszkedés" in (
-            context_display_df.columns
+        if (
+            "Kontextusilleszkedés"
+            in context_display_df.columns
         ):
             context_display_df[
                 "Kontextusilleszkedés"
             ] = context_display_df[
                 "Kontextusilleszkedés"
-            ].apply(translate_context_alignment)
+            ].apply(
+                translate_context_alignment
+            )
 
         st.dataframe(
             context_display_df,
@@ -856,12 +1258,28 @@ def display_analysis_results(
             hide_index=True,
         )
 
+    # ========================================================
+    # Modellkiértékelés
+    # ========================================================
+
+    with evaluation_tab:
+        display_model_evaluation(
+            result
+        )
+
+    # ========================================================
+    # Grafikonok
+    # ========================================================
+
     with charts_tab:
-        st.subheader("Létrehozott grafikonok")
+        st.subheader(
+            "Létrehozott grafikonok"
+        )
 
         existing_chart_files = [
             chart_file
-            for chart_file in result.chart_files
+            for chart_file
+            in result.chart_files
             if chart_file.exists()
         ]
 
@@ -869,13 +1287,20 @@ def display_analysis_results(
             st.warning(
                 "Nem találhatók megjeleníthető grafikonok."
             )
+
         else:
-            for chart_file in result.chart_files:
+            for chart_file in existing_chart_files:
                 st.markdown(
-                    f"#### {chart_file.stem.replace('_', ' ').title()}"
+                    "#### "
+                    + chart_file
+                    .stem
+                    .replace("_", " ")
+                    .title()
                 )
 
-                display_chart_explanation(chart_file)
+                display_chart_explanation(
+                    chart_file
+                )
 
                 st.image(
                     str(chart_file),
@@ -884,12 +1309,20 @@ def display_analysis_results(
 
                 st.divider()
 
+    # ========================================================
+    # Szöveges riport
+    # ========================================================
+
     with report_tab:
-        st.subheader("Automatikusan létrehozott riport")
+        st.subheader(
+            "Automatikusan létrehozott riport"
+        )
 
         if result.report_file.exists():
-            report_text = result.report_file.read_text(
-                encoding="utf-8"
+            report_text = (
+                result.report_file.read_text(
+                    encoding="utf-8"
+                )
             )
 
             st.text_area(
@@ -900,36 +1333,75 @@ def display_analysis_results(
             )
 
             st.download_button(
-                label="Riport letöltése TXT-formátumban",
-                data=report_text.encode("utf-8"),
-                file_name=result.report_file.name,
+                label=(
+                    "Riport letöltése TXT-formátumban"
+                ),
+                data=report_text.encode(
+                    "utf-8"
+                ),
+                file_name=(
+                    result.report_file.name
+                ),
                 mime="text/plain",
                 use_container_width=True,
             )
+
         else:
             st.warning(
                 "A szöveges riport nem található."
             )
 
+    # ========================================================
+    # Részletes kommentek
+    # ========================================================
+
     with comments_tab:
-        st.subheader("Kommentenkénti sentimenteredmények")
+        st.subheader(
+            "Kommentenkénti sentimenteredmények"
+        )
+
+        st.caption(
+            "A nyers modellcímke a finomhangolt context-aware "
+            "modell közvetlen predikciója. A végleges sentiment "
+            "a 0,60-as confidence threshold alkalmazása utáni "
+            "eredményt mutatja."
+        )
 
         comment_column_translations = {
-            "post_id": "Posztazonosító",
-            "comment_id": "Kommentazonosító",
-            "comment_text": "Eredeti komment",
-            "cleaned_comment_text": "Tisztított komment",
-            "manual_label": "Kézi címke",
-            "model_label": "Modell címkéje",
-            "confidence": "Modellbizonyosság",
-            "original_model_label": (
-                "Eredeti modellcímke"
+            "post_id": (
+                "Posztazonosító"
+            ),
+            "comment_id": (
+                "Kommentazonosító"
+            ),
+            "comment_text": (
+                "Eredeti komment"
+            ),
+            "cleaned_comment_text": (
+                "Tisztított komment"
+            ),
+            "manual_label": (
+                "Kézi címke"
+            ),
+            "finetuned_label": (
+                "Nyers modellcímke"
+            ),
+            "finetuned_confidence": (
+                "Modellbizonyosság"
+            ),
+            "final_sentiment_label": (
+                "Végleges sentiment"
+            ),
+            "threshold_applied": (
+                "Threshold alkalmazva"
             ),
         }
 
-        comments_display_df = create_display_dataframe(
-            result.full_sentiment_df,
-            comment_column_translations,
+        comments_display_df = (
+            create_display_dataframe(
+                result.full_sentiment_df,
+                comment_column_translations,
+            )
         )
 
         preferred_comment_columns = [
@@ -938,57 +1410,109 @@ def display_analysis_results(
             "Eredeti komment",
             "Tisztított komment",
             "Kézi címke",
-            "Modell címkéje",
+            "Nyers modellcímke",
             "Modellbizonyosság",
-            "Eredeti modellcímke",
+            "Végleges sentiment",
+            "Threshold alkalmazva",
         ]
 
         available_comment_columns = [
             column
-            for column in preferred_comment_columns
-            if column in comments_display_df.columns
+            for column
+            in preferred_comment_columns
+            if column
+            in comments_display_df.columns
         ]
 
-        comments_display_df = comments_display_df[
-            available_comment_columns
-        ]
+        comments_display_df = (
+            comments_display_df[
+                available_comment_columns
+            ]
+        )
 
-        if "Kézi címke" in comments_display_df.columns:
+        if (
+            "Kézi címke"
+            in comments_display_df.columns
+        ):
             comments_display_df[
                 "Kézi címke"
             ] = comments_display_df[
                 "Kézi címke"
-            ].apply(translate_sentiment_label)
+            ].apply(
+                translate_sentiment_label
+            )
 
-        if "Modell címkéje" in comments_display_df.columns:
+        if (
+            "Nyers modellcímke"
+            in comments_display_df.columns
+        ):
             comments_display_df[
-                "Modell címkéje"
+                "Nyers modellcímke"
             ] = comments_display_df[
-                "Modell címkéje"
-            ].apply(translate_sentiment_label)
+                "Nyers modellcímke"
+            ].apply(
+                translate_sentiment_label
+            )
+
+        if (
+            "Végleges sentiment"
+            in comments_display_df.columns
+        ):
+            comments_display_df[
+                "Végleges sentiment"
+            ] = comments_display_df[
+                "Végleges sentiment"
+            ].apply(
+                translate_sentiment_label
+            )
 
         st.dataframe(
             comments_display_df,
             use_container_width=True,
             hide_index=True,
             height=550,
+            column_config={
+                "Modellbizonyosság": (
+                    st.column_config.NumberColumn(
+                        format="%.3f"
+                    )
+                ),
+                "Threshold alkalmazva": (
+                    st.column_config.CheckboxColumn()
+                ),
+            },
         )
 
-    with evaluation_tab:
-            display_model_evaluation(result)
 
+# ============================================================
+# Alkalmazás belépési pontja
+# ============================================================
 
 def main() -> None:
+    """
+    A Streamlit alkalmazás fő belépési pontja.
+    """
+
     configure_page()
+
     display_header()
+
     display_input_files()
+
     display_output_information()
+
     display_analysis_button()
 
-    if "analysis_result" in st.session_state:
+    if (
+        "analysis_result"
+        in st.session_state
+    ):
         display_analysis_results(
-            st.session_state["analysis_result"]
+            st.session_state[
+                "analysis_result"
+            ]
         )
+
 
 if __name__ == "__main__":
     main()

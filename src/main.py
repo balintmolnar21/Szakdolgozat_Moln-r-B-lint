@@ -1,259 +1,161 @@
-from data_input.csv_loader import (
-    load_validation_dataset,
-    load_post_context_csv,
-    merge_comments_with_post_context,
-)
+from pathlib import Path
 
-from preprocessing.text_preprocessor import preprocess_text_fields
-from sentiment.hubert_sentiment_analyzer import HuBERTSentimentAnalyzer
-
-from analytics.sentiment_statistics import (
-    calculate_post_statistics,
-    calculate_overall_statistics,
-    export_sentiment_workbook,
-)
-
-from context_analysis.context_analyzer import analyze_post_contexts
-
-from visualization.sentiment_visualizer import (
-    create_all_sentiment_charts,
-)
-
-from reporting.summary_report import create_summary_report
-
+from pipeline.analysis_pipeline import run_analysis_pipeline
 
 
 def main():
-    test_comments_file = "data/validation/test_comments.csv"
-    test_post_context_file = "data/validation/test_post_context.csv"
+    """
+    A teljes sentiment elemzési pipeline
+    parancssori indítása.
+    """
 
-    output_file = "data/processed/sentiment_analysis_results.xlsx"
-    charts_output_directory = "outputs/charts"
-    reports_output_directory = "outputs/reports"
+    project_root = Path(__file__).resolve().parent.parent
 
-    print("Teszt kommentadatok beolvasása...")
-    comments_df = load_validation_dataset(test_comments_file)
-
-    print("Teszt posztkontextus-adatok beolvasása...")
-    post_context_df = load_post_context_csv(test_post_context_file)
-
-    print("Kommentek és posztkontextus összekapcsolása...")
-    merged_df = merge_comments_with_post_context(
-        comments_df,
-        post_context_df,
+    test_comments_file = (
+        project_root
+        / "data"
+        / "validation"
+        / "test_comments.csv"
     )
 
-    print("Szöveg-előfeldolgozás futtatása...")
-    preprocessed_df = preprocess_text_fields(merged_df)
-
-    print("huBERT sentiment modell betöltése...")
-    analyzer = HuBERTSentimentAnalyzer()
-
-    sentiment_analysis_configs = [
-        {
-            "source_column": "cleaned_comment_text",
-            "label_column": "model_label",
-            "confidence_column": "confidence",
-            "original_label_column": "original_model_label",
-        },
-        {
-            "source_column": "cleaned_post_text",
-            "label_column": "post_sentiment_label",
-            "confidence_column": "post_sentiment_confidence",
-            "original_label_column": "post_original_model_label",
-        },
-        {
-            "source_column": "cleaned_image_context_text",
-            "label_column": "image_context_sentiment_label",
-            "confidence_column": "image_context_sentiment_confidence",
-            "original_label_column": "image_context_original_model_label",
-        },
-        {
-            "source_column": "cleaned_video_context_text",
-            "label_column": "video_context_sentiment_label",
-            "confidence_column": "video_context_sentiment_confidence",
-            "original_label_column": "video_context_original_model_label",
-        },
-    ]
-
-    print(
-        "Kommentek, posztszövegek, képi kontextusok és videós leiratok "
-        "sentiment elemzése..."
+    test_post_context_file = (
+        project_root
+        / "data"
+        / "validation"
+        / "test_post_context.csv"
     )
 
-    full_sentiment_df = analyzer.analyze_multiple_dataframe_columns(
-        df=preprocessed_df,
-        analysis_configs=sentiment_analysis_configs,
-        # limit=10,  # teszteléshez használható
+    excel_output_file = (
+        project_root
+        / "data"
+        / "processed"
+        / "sentiment_analysis_results.xlsx"
+    )
+
+    charts_output_directory = (
+        project_root
+        / "outputs"
+        / "charts"
+    )
+
+    reports_output_directory = (
+        project_root
+        / "outputs"
+        / "reports"
+    )
+
+    evaluation_output_directory = (
+        project_root
+        / "outputs"
+        / "evaluation"
+        / "pipeline_test"
+    )
+
+    print("=" * 70)
+    print("CONTEXT-AWARE SENTIMENT ELEMZÉSI PIPELINE")
+    print("=" * 70)
+
+    print("\nPipeline indítása...")
+
+    result = run_analysis_pipeline(
+        validation_file=test_comments_file,
+        post_context_file=test_post_context_file,
+        excel_output_file=excel_output_file,
+        charts_output_directory=charts_output_directory,
+        reports_output_directory=reports_output_directory,
+        evaluation_output_directory=evaluation_output_directory,
         limit=None,
     )
 
-    print("Posztonkénti statisztikák számítása...")
-    post_statistics_df = calculate_post_statistics(
-        full_sentiment_df
-    )
+    print("\n" + "=" * 70)
+    print("PIPELINE SIKERESEN LEFUTOTT")
+    print("=" * 70)
 
-    print("Teljes adathalmaz statisztikáinak számítása...")
-    overall_statistics_df = calculate_overall_statistics(
-        full_sentiment_df
-    )
-
-    print("Posztonkénti kontextuselemzés elkészítése...")
-    context_analysis_df = analyze_post_contexts(
-        post_statistics_df
-    )
-
-    print("Négy munkalapos Excel-fájl létrehozása...")
-    created_output_file = export_sentiment_workbook(
-        full_dataset_df=full_sentiment_df,
-        post_statistics_df=post_statistics_df,
-        overall_statistics_df=overall_statistics_df,
-        context_analysis_df=context_analysis_df,
-        output_file=output_file,
-    )
-
-    print("Sentimentgrafikonok létrehozása...")
-    created_chart_files = create_all_sentiment_charts(
-        post_statistics_df=post_statistics_df,
-        overall_statistics_df=overall_statistics_df,
-        context_analysis_df=context_analysis_df,
-        output_directory=charts_output_directory,
-    )
-
-    print("Szöveges összefoglaló riport létrehozása...")
-    created_report_file = create_summary_report(
-        post_statistics_df=post_statistics_df,
-        overall_statistics_df=overall_statistics_df,
-        context_analysis_df=context_analysis_df,
-        output_directory=reports_output_directory,
+    print(
+        f"\nKommentek száma: "
+        f"{len(result.comments_df)}"
     )
 
     print(
-        "Kommentek és posztkontextus sikeresen beolvasva, "
-        "összekapcsolva, előfeldolgozva, elemezve, összesítve, "
-        "kontextuálisan értelmezve és vizualizálva."
+        f"Posztkontextusok száma: "
+        f"{len(result.post_context_df)}"
     )
 
-    print(f"Kommentek száma: {len(comments_df)}")
-    print(f"Posztkontextusok száma: {len(post_context_df)}")
-    print(f"Összekapcsolt adatsorok száma: {len(merged_df)}")
-    print(f"Előfeldolgozott adatsorok száma: {len(preprocessed_df)}")
-    print(f"Teljes sentiment adatsorok száma: {len(full_sentiment_df)}")
+    print(
+        f"Elemzett kommentek száma: "
+        f"{len(result.full_sentiment_df)}"
+    )
 
     print(
         f"Posztonkénti statisztikai sorok száma: "
-        f"{len(post_statistics_df)}"
+        f"{len(result.post_statistics_df)}"
     )
 
     print(
-        f"Teljes adathalmaz statisztikai sorainak száma: "
-        f"{len(overall_statistics_df)}"
+        "\nExcel eredményfájl:"
+        f"\n{result.excel_output_file}"
     )
 
     print(
-        f"Kontextuselemzési sorok száma: "
-        f"{len(context_analysis_df)}"
-    )
-
-    print(
-        "\nAz egységes, négy munkalapos sentiment eredményfájl "
-        f"mentve ide: {created_output_file}"
+        "\nSzöveges riport:"
+        f"\n{result.report_file}"
     )
 
     print("\nLétrehozott grafikonok:")
 
-    for chart_file in created_chart_files:
+    for chart_file in result.chart_files:
         print(f"- {chart_file}")
 
-    print(
-        "\nA szöveges összefoglaló riport mentve ide: "
-        f"{created_report_file}"
-    )
+    # ---------------------------------------------------------
+    # Új context-aware eredmények ellenőrzése
+    # ---------------------------------------------------------
 
-    full_dataset_preview_columns = [
+    preview_columns = [
         "post_id",
-        "post_type",
-        "post_sentiment_label",
-        "post_sentiment_confidence",
-        "image_context_sentiment_label",
-        "image_context_sentiment_confidence",
-        "video_context_sentiment_label",
-        "video_context_sentiment_confidence",
         "comment_id",
         "manual_label",
+        "finetuned_label",
+        "finetuned_confidence",
+        "final_sentiment_label",
+        "threshold_applied",
         "model_label",
         "confidence",
-        "original_model_label",
-    ]
-
-    available_full_dataset_preview_columns = [
-        column
-        for column in full_dataset_preview_columns
-        if column in full_sentiment_df.columns
-    ]
-
-    post_statistics_preview_columns = [
-        "post_id",
-        "post_type",
-        "comment_count",
-        "positive_count",
-        "negative_count",
-        "neutral_count",
-        "positive_ratio",
-        "negative_ratio",
-        "neutral_ratio",
-        "dominant_comment_sentiment",
-        "average_comment_confidence",
-    ]
-
-    available_post_statistics_preview_columns = [
-        column
-        for column in post_statistics_preview_columns
-        if column in post_statistics_df.columns
-    ]
-
-    context_analysis_preview_columns = [
-        "post_id",
-        "post_type",
         "post_sentiment_label",
-        "dominant_comment_sentiment",
-        "positive_ratio",
-        "negative_ratio",
-        "neutral_ratio",
-        "context_reaction_type",
-        "context_alignment",
-        "context_interpretation",
     ]
 
-    available_context_analysis_preview_columns = [
+    available_columns = [
         column
-        for column in context_analysis_preview_columns
-        if column in context_analysis_df.columns
+        for column in preview_columns
+        if column in result.full_sentiment_df.columns
     ]
 
-    print("\nA teljes sentiment adathalmaz első 10 rekordja:")
     print(
-        full_sentiment_df[
-            available_full_dataset_preview_columns
-        ].head(10)
+        "\nAz új context-aware sentiment eredmények "
+        "első 10 rekordja:"
     )
 
-    print("\nPosztonkénti statisztikák:")
     print(
-        post_statistics_df[
-            available_post_statistics_preview_columns
-        ]
+        result.full_sentiment_df[
+            available_columns
+        ].head(10).to_string(index=False)
     )
 
-    print("\nTeljes adathalmaz statisztikája:")
-    print(overall_statistics_df)
-
-    print("\nPosztonkénti kontextuselemzés:")
     print(
-        context_analysis_df[
-            available_context_analysis_preview_columns
-        ]
+        "\nThreshold által módosított predikciók száma:"
     )
+
+    if "threshold_applied" in result.full_sentiment_df.columns:
+        threshold_count = int(
+            result.full_sentiment_df[
+                "threshold_applied"
+            ].fillna(False).sum()
+        )
+
+        print(threshold_count)
+    else:
+        print(
+            "A threshold_applied oszlop nem található."
+        )
 
 
 if __name__ == "__main__":

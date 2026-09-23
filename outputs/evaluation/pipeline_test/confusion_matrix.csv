@@ -1,0 +1,4 @@
+﻿,predicted_negative,predicted_neutral,predicted_positive
+actual_negative,63,7,2
+actual_neutral,34,38,3
+actual_positive,12,8,63
