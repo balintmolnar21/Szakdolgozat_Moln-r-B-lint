@@ -97,6 +97,26 @@ Parancssor használata esetén:
 .venv\Scripts\activate
 ```
 
+#### Fontos – modellfájlok letöltése
+
+A projektben használt finomhangolt huBERT-alapú sentimentmodell nagy méretű bináris állományai a GitHub fájlméret-korlátai és a repository méretének csökkentése miatt nem kerültek feltöltésre a Git repository-ba.
+
+A szükséges fájlok:
+
+- `model.safetensors`
+- `training_args.bin`
+
+A fájlok az alábbi OneDrive/SharePoint mappából tölthetők le:
+
+[Molnar_Balint_szakdoga – modellfájlok](https://laesze-my.sharepoint.com/\:f:/g/personal/molnar_balint_otto_hallgato_sze_hu/IgDs8n03EgZ-T7ZP3tdJ0vQhAcwaNnjKvLoHi_YbYXH9lF4?e=oeYMFm)
+
+A letöltött fájlokat a projekt következő könyvtárába kell elhelyezni:
+
+```text
+models/context_aware_hubert_text/
+```
+---
+
 ### 4. A pip frissítése
 
 ```powershell
@@ -183,26 +203,6 @@ Szakdolgozat_Moln-r-B-lint/
 └── requirements.txt
 ```
 
----
-
-## Fontos – modellfájlok letöltése
-
-A projektben használt finomhangolt huBERT-alapú sentimentmodell nagy méretű bináris állományai a GitHub fájlméret-korlátai és a repository méretének csökkentése miatt nem kerültek feltöltésre a Git repository-ba.
-
-A szükséges fájlok:
-
-- `model.safetensors`
-- `training_args.bin`
-
-A fájlok az alábbi OneDrive/SharePoint mappából tölthetők le:
-
-[Molnar_Balint_szakdoga – modellfájlok](https://laesze-my.sharepoint.com/\:f:/g/personal/molnar_balint_otto_hallgato_sze_hu/IgDs8n03EgZ-T7ZP3tdJ0vQhAcwaNnjKvLoHi_YbYXH9lF4?e=oeYMFm)
-
-A letöltött fájlokat a projekt következő könyvtárába kell elhelyezni:
-
-```text
-models/context_aware_hubert_text/
-```
 ---
 
 ## Fő modulok
