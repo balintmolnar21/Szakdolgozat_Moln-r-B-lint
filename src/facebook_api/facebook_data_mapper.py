@@ -6,16 +6,56 @@ import pandas as pd
 def create_post_context_dataframe(
     post_data: dict[str, Any],
 ) -> pd.DataFrame:
-    
-    post_id = post_data.get("post_id")
+    """
+    Egyetlen Facebook-posztból létrehozza
+    a pipeline által használt posztkontextus DataFrame-et.
 
-    if not post_id:
-        raise ValueError(
-            "A Facebook-poszt nem tartalmaz post_id értéket."
+    A függvény kompatibilitási okból megmarad,
+    például egy konkrét poszt külön elemzéséhez.
+    """
+
+    return create_posts_context_dataframe(
+        [post_data]
+    )
+
+
+def create_posts_context_dataframe(
+    posts: list[dict[str, Any]],
+) -> pd.DataFrame:
+    """
+    Több Facebook-posztból létrehozza a pipeline
+    által használt posztkontextus DataFrame-et.
+    """
+
+    columns = [
+        "post_id",
+        "post_type",
+        "post_link",
+        "post_text",
+        "image_context_text",
+        "video_context_text",
+        "note",
+    ]
+
+    if not posts:
+        return pd.DataFrame(
+            columns=columns
         )
 
-    return pd.DataFrame(
-        [
+    rows: list[dict[str, Any]] = []
+
+    for post_data in posts:
+        post_id = post_data.get(
+            "post_id"
+        )
+
+        if not post_id:
+            raise ValueError(
+                "Az egyik Facebook-poszt nem tartalmaz "
+                "post_id értéket."
+            )
+
+        rows.append(
             {
                 "post_id": post_id,
                 "post_type": "facebook_post",
@@ -29,18 +69,27 @@ def create_post_context_dataframe(
                 ),
                 "image_context_text": "",
                 "video_context_text": "",
-                "post_context_note": (
-                    "Facebook Graph API-ból lekért bejegyzés."
+                "note": (
+                    "Facebook Graph API-ból "
+                    "lekért bejegyzés."
                 ),
             }
-        ]
+        )
+
+    return pd.DataFrame(
+        rows,
+        columns=columns,
     )
 
 
 def create_comments_dataframe(
     comments: list[dict[str, Any]],
 ) -> pd.DataFrame:
-    
+    """
+    Facebook-kommentekből létrehozza a pipeline
+    által használt komment DataFrame-et.
+    """
+
     columns = [
         "post_id",
         "post_type",
@@ -72,12 +121,14 @@ def create_comments_dataframe(
 
         if not post_id:
             raise ValueError(
-                "Az egyik Facebook-kommenthez nem tartozik post_id."
+                "Az egyik Facebook-kommenthez "
+                "nem tartozik post_id."
             )
 
         if not comment_id:
             raise ValueError(
-                "Az egyik Facebook-komment nem tartalmaz comment_id-t."
+                "Az egyik Facebook-komment nem "
+                "tartalmaz comment_id-t."
             )
 
         rows.append(
@@ -90,10 +141,13 @@ def create_comments_dataframe(
                     "comment_text",
                     "",
                 ),
+                # Facebook API módban nincs
+                # ember által megadott sentimentcímke.
                 "manual_label": None,
                 "model_label": None,
                 "note": (
-                    "Facebook Graph API-ból lekért komment."
+                    "Facebook Graph API-ból "
+                    "lekért komment."
                 ),
                 "confidence": None,
                 "original_model_label": None,

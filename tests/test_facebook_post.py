@@ -1,8 +1,6 @@
 import sys
 from pathlib import Path
 
-import requests
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIRECTORY = PROJECT_ROOT / "src"
@@ -15,97 +13,44 @@ if str(SRC_DIRECTORY) not in sys.path:
 
 
 from facebook_api.config import (
-    get_facebook_access_token,
-    get_facebook_graph_api_version,
     get_facebook_page_id,
+)
+
+from facebook_api.graph_api_client import (
+    FacebookGraphAPIClient,
+)
+
+from facebook_api.post_fetcher import (
+    FacebookPostFetcher,
 )
 
 
 def main() -> None:
     print("Facebook-posztok lekérése...")
 
-    api_version = get_facebook_graph_api_version()
-    page_id = get_facebook_page_id()
-    access_token = get_facebook_access_token()
-
-    url = (
-        f"https://graph.facebook.com/"
-        f"{api_version}/"
-        f"{page_id}/posts"
-    )
-
-    params = {
-        "fields": (
-            "id,"
-            "message,"
-            "created_time,"
-            "permalink_url"
-        ),
-        "limit": 10,
-        "access_token": access_token,
-    }
-
     try:
-        response = requests.get(
-            url,
-            params=params,
-            timeout=30,
+        # Facebook Graph API kliens létrehozása
+        client = FacebookGraphAPIClient()
+
+        # Posztlekérő komponens létrehozása
+        post_fetcher = FacebookPostFetcher(
+            client=client
         )
 
-    except requests.Timeout:
-        print(
-            "HIBA: A Facebook Graph API kérés időtúllépés "
-            "miatt megszakadt."
-        )
-        return
+        # Facebook-oldal azonosítójának betöltése
+        page_id = get_facebook_page_id()
 
-    except requests.ConnectionError:
-        print(
-            "HIBA: Nem sikerült kapcsolódni a Facebook "
-            "Graph API-hoz."
+        # A legutóbbi 10 poszt lekérése
+        posts = post_fetcher.fetch_latest_posts(
+            page_id=page_id,
+            limit=10,
         )
-        return
 
-    except requests.RequestException as error:
-        print(
-            "HIBA: Hálózati hiba történt:"
-        )
+    except (ValueError, RuntimeError) as error:
+        print()
+        print("HIBA:")
         print(error)
         return
-
-    try:
-        response_data = response.json()
-
-    except ValueError:
-        print(
-            "HIBA: A Meta nem JSON formátumú választ adott."
-        )
-        return
-
-    if not response.ok:
-        print(
-            f"HIBA: HTTP {response.status_code}"
-        )
-
-        error_data = response_data.get(
-            "error",
-            {},
-        )
-
-        print(
-            "Meta hibaüzenet:",
-            error_data.get(
-                "message",
-                "Ismeretlen hiba.",
-            ),
-        )
-
-        return
-
-    posts = response_data.get(
-        "data",
-        [],
-    )
 
     print()
     print(
@@ -129,7 +74,7 @@ def main() -> None:
 
         print(
             "Post ID:",
-            post.get("id"),
+            post.get("post_id"),
         )
 
         print(
@@ -139,12 +84,15 @@ def main() -> None:
 
         print(
             "Link:",
-            post.get("permalink_url"),
+            post.get("post_link"),
         )
 
-        message = post.get(
-            "message",
-            "",
+        message = (
+            post.get(
+                "post_text",
+                "",
+            )
+            or ""
         )
 
         print(
