@@ -1,0 +1,29 @@
+SENTIMENTELEMZÉSI ÖSSZEFOGLALÓ RIPORT
+==========================================
+
+1. Feldolgozott adatok
+Feldolgozott posztok száma: 1
+Feldolgozott kommentek száma: 17
+
+2. Összesített sentimentmegoszlás
+Pozitív kommentek: 4 db (23.53%)
+Negatív kommentek: 9 db (52.94%)
+Semleges kommentek: 4 db (23.53%)
+Domináns összesített sentiment: negatív
+
+3. Posztonkénti kiemelt eredmények
+Legpozitívabb fogadtatású poszt: 102836921087152_1499275952247172 (23.53% pozitív komment)
+Legnegatívabb fogadtatású poszt: 102836921087152_1499275952247172 (52.94% negatív komment)
+
+4. Modellbizonyosság
+A kommentpredikciók átlagos konfidenciaértéke: 0.913
+
+5. Kontextuselemzés
+Leggyakoribb kontextusilleszkedés: ellentétes
+Előfordulások száma: 1
+
+6. Posztonkénti kontextuális értelmezések
+- 102836921087152_1499275952247172: A poszt pozitív hangvételű, de a kommentek között a negatív kategória dominál. Ez kritikus vagy elutasító fogadtatásra utalhat. A kommentek megoszlása: 23.53% pozitív, 52.94% negatív és 23.53% semleges.
+
+7. Értelmezési korlát
+A riport sentiment címkékből, statisztikai mutatókból és szabályalapú kontextuselemzésből készül. Az eredmények nem tekinthetők teljes álláspont-felismerésnek, ezért a posztok és kommentek közötti kapcsolat csak óvatosan értelmezhető.

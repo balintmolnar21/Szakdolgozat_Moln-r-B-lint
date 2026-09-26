@@ -13,7 +13,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_DIRECTORY = PROJECT_ROOT / "src"
 
 if str(SRC_DIRECTORY) not in sys.path:
-    sys.path.insert(0, str(SRC_DIRECTORY))
+    sys.path.insert(
+        0,
+        str(SRC_DIRECTORY),
+    )
 
 
 # ============================================================
@@ -27,11 +30,33 @@ from sentiment.context_aware_sentiment_analyzer import (
 from pipeline.analysis_pipeline import (
     AnalysisPipelineResult,
     run_analysis_pipeline,
+    run_analysis_pipeline_from_dataframes,
+)
+
+from facebook_api.config import (
+    get_facebook_page_id,
+)
+
+from facebook_api.graph_api_client import (
+    FacebookGraphAPIClient,
+)
+
+from facebook_api.post_fetcher import (
+    FacebookPostFetcher,
+)
+
+from facebook_api.comment_fetcher import (
+    FacebookCommentFetcher,
+)
+
+from facebook_api.facebook_data_mapper import (
+    create_posts_context_dataframe,
+    create_comments_dataframe,
 )
 
 
 # ============================================================
-# Bemeneti és kimeneti útvonalak
+# CSV tesztadatok
 # ============================================================
 
 DEFAULT_TEST_COMMENTS_FILE = (
@@ -48,30 +73,60 @@ DEFAULT_TEST_POST_CONTEXT_FILE = (
     / "test_post_context.csv"
 )
 
-EXCEL_OUTPUT_FILE = (
+
+# ============================================================
+# CSV mód kimenetei
+# ============================================================
+
+CSV_EXCEL_OUTPUT_FILE = (
     PROJECT_ROOT
     / "data"
     / "processed"
     / "sentiment_analysis_results.xlsx"
 )
 
-CHARTS_OUTPUT_DIRECTORY = (
+CSV_CHARTS_OUTPUT_DIRECTORY = (
     PROJECT_ROOT
     / "outputs"
     / "charts"
 )
 
-REPORT_OUTPUT_FILE = (
+CSV_REPORTS_OUTPUT_DIRECTORY = (
     PROJECT_ROOT
     / "outputs"
     / "reports"
-    / "sentiment_summary.txt"
 )
 
-EVALUATION_OUTPUT_DIRECTORY = (
+CSV_EVALUATION_OUTPUT_DIRECTORY = (
     PROJECT_ROOT
     / "outputs"
     / "evaluation"
+)
+
+
+# ============================================================
+# Facebook mód kimenetei
+# ============================================================
+
+FACEBOOK_EXCEL_OUTPUT_FILE = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "facebook_sentiment_analysis_results.xlsx"
+)
+
+FACEBOOK_CHARTS_OUTPUT_DIRECTORY = (
+    PROJECT_ROOT
+    / "outputs"
+    / "charts"
+    / "facebook"
+)
+
+FACEBOOK_REPORTS_OUTPUT_DIRECTORY = (
+    PROJECT_ROOT
+    / "outputs"
+    / "reports"
+    / "facebook"
 )
 
 
@@ -140,7 +195,9 @@ def display_header() -> None:
     Megjeleníti az alkalmazás fejlécét és rövid leírását.
     """
 
-    st.title("Social media hangulatelemző szoftver")
+    st.title(
+        "Social media hangulatelemző szoftver"
+    )
 
     st.write(
         "Magyar nyelvű Facebook-kommentek context-aware, "
@@ -149,91 +206,12 @@ def display_header() -> None:
     )
 
     st.info(
-        "A jelenlegi tesztmód a test adathalmazt használja. "
-        "A train és validation halmazok a modell finomhangolásához, "
-        "modellválasztásához és fejlesztés közbeni ellenőrzéséhez "
-        "szolgálnak."
-    )
-
-
-# ============================================================
-# Bemeneti fájlok megjelenítése
-# ============================================================
-
-def display_input_files() -> None:
-    """
-    Megjeleníti a teszteléshez használt bemeneti fájlokat.
-    """
-
-    st.subheader("Bemeneti fájlok")
-
-    test_comments_exists = (
-        DEFAULT_TEST_COMMENTS_FILE.exists()
-    )
-
-    test_context_exists = (
-        DEFAULT_TEST_POST_CONTEXT_FILE.exists()
-    )
-
-    first_column, second_column = st.columns(2)
-
-    with first_column:
-        st.write("Teszt kommentadatok")
-
-        st.code(
-            str(DEFAULT_TEST_COMMENTS_FILE)
-        )
-
-        if test_comments_exists:
-            st.success(
-                "A teszt kommentfájl elérhető."
-            )
-        else:
-            st.error(
-                "A teszt kommentfájl nem található."
-            )
-
-    with second_column:
-        st.write("Teszt posztkontextus-adatok")
-
-        st.code(
-            str(DEFAULT_TEST_POST_CONTEXT_FILE)
-        )
-
-        if test_context_exists:
-            st.success(
-                "A teszt posztkontextus-fájl elérhető."
-            )
-        else:
-            st.error(
-                "A teszt posztkontextus-fájl nem található."
-            )
-
-
-# ============================================================
-# Kimeneti információk
-# ============================================================
-
-def display_output_information() -> None:
-    """
-    Megjeleníti a feldolgozás fő kimeneti helyeit.
-    """
-
-    st.subheader("Kimenetek")
-
-    st.write(
-        "A feldolgozás után létrejövő fő kimenetek:"
-    )
-
-    st.code(
-        "\n".join(
-            [
-                str(EXCEL_OUTPUT_FILE),
-                str(CHARTS_OUTPUT_DIRECTORY),
-                str(REPORT_OUTPUT_FILE),
-                str(EVALUATION_OUTPUT_DIRECTORY),
-            ]
-        )
+        "Az alkalmazás két adatforrást támogat. "
+        "A kézzel címkézett CSV-teszthalmaz a modell "
+        "kiértékelésére használható, míg a Facebook API mód "
+        "az adminisztrált oldal legutóbbi bejegyzéseinek és "
+        "az azokhoz tartozó kommenteknek, illetve "
+        "válaszkommenteknek az elemzését teszi lehetővé."
     )
 
 
@@ -250,11 +228,204 @@ def clear_previous_analysis() -> None:
     session_keys_to_delete = [
         "analysis_result",
         "analysis_success",
+        "analysis_source",
+        "facebook_fetch_summary",
     ]
 
     for key in session_keys_to_delete:
         if key in st.session_state:
             del st.session_state[key]
+
+
+# ============================================================
+# CSV bemeneti fájlok megjelenítése
+# ============================================================
+
+def display_input_files() -> None:
+    """
+    Megjeleníti a CSV tesztmódban használt
+    bemeneti fájlokat.
+    """
+
+    st.subheader(
+        "Bemeneti fájlok"
+    )
+
+    test_comments_exists = (
+        DEFAULT_TEST_COMMENTS_FILE.exists()
+    )
+
+    test_context_exists = (
+        DEFAULT_TEST_POST_CONTEXT_FILE.exists()
+    )
+
+    first_column, second_column = st.columns(2)
+
+    with first_column:
+        st.write(
+            "Teszt kommentadatok"
+        )
+
+        st.code(
+            str(
+                DEFAULT_TEST_COMMENTS_FILE
+            )
+        )
+
+        if test_comments_exists:
+            st.success(
+                "A teszt kommentfájl elérhető."
+            )
+        else:
+            st.error(
+                "A teszt kommentfájl nem található."
+            )
+
+    with second_column:
+        st.write(
+            "Teszt posztkontextus-adatok"
+        )
+
+        st.code(
+            str(
+                DEFAULT_TEST_POST_CONTEXT_FILE
+            )
+        )
+
+        if test_context_exists:
+            st.success(
+                "A teszt posztkontextus-fájl elérhető."
+            )
+        else:
+            st.error(
+                "A teszt posztkontextus-fájl nem található."
+            )
+
+
+# ============================================================
+# Adatforrás kiválasztása
+# ============================================================
+
+def display_data_source_selection() -> tuple[str, int]:
+    """
+    Megjeleníti az adatforrás kiválasztását.
+
+    CSV módban a kézzel címkézett teszthalmaz,
+    Facebook módban az adminisztrált oldal legutóbbi
+    N bejegyzése kerül feldolgozásra.
+    """
+
+    st.subheader(
+        "Adatforrás"
+    )
+
+    source_mode = st.radio(
+        "Válaszd ki az elemzés adatforrását:",
+        options=[
+            "CSV tesztadatok",
+            "Facebook API",
+        ],
+        horizontal=True,
+        key="data_source_mode",
+        on_change=clear_previous_analysis,
+    )
+
+    facebook_post_limit = 10
+
+    if source_mode == "CSV tesztadatok":
+        display_input_files()
+
+    else:
+        st.write(
+            "A Facebook API mód az adminisztrált oldal "
+            "legutóbbi bejegyzéseit, valamint az azokhoz "
+            "tartozó kommenteket és válaszkommenteket "
+            "dolgozza fel."
+        )
+
+        facebook_post_limit = int(
+            st.number_input(
+                "Elemzendő legutóbbi Facebook-posztok száma",
+                min_value=1,
+                max_value=50,
+                value=10,
+                step=1,
+                key="facebook_post_limit",
+                on_change=clear_previous_analysis,
+            )
+        )
+
+        try:
+            page_id = get_facebook_page_id()
+
+            if page_id:
+                st.success(
+                    "A Facebook Page ID konfigurációja elérhető."
+                )
+
+        except ValueError:
+            st.warning(
+                "A Facebook Page ID nincs megfelelően "
+                "beállítva a .env fájlban."
+            )
+
+    return (
+        source_mode,
+        facebook_post_limit,
+    )
+
+
+# ============================================================
+# Kimeneti információk
+# ============================================================
+
+def display_output_information(
+    source_mode: str,
+) -> None:
+    """
+    Megjeleníti az aktuális adatforráshoz tartozó
+    fő kimeneti helyeket.
+    """
+
+    st.subheader(
+        "Kimenetek"
+    )
+
+    if source_mode == "CSV tesztadatok":
+        output_paths = [
+            CSV_EXCEL_OUTPUT_FILE,
+            CSV_CHARTS_OUTPUT_DIRECTORY,
+            CSV_REPORTS_OUTPUT_DIRECTORY,
+            CSV_EVALUATION_OUTPUT_DIRECTORY,
+        ]
+
+        st.write(
+            "A CSV-alapú feldolgozás fő kimenetei:"
+        )
+
+    else:
+        output_paths = [
+            FACEBOOK_EXCEL_OUTPUT_FILE,
+            FACEBOOK_CHARTS_OUTPUT_DIRECTORY,
+            FACEBOOK_REPORTS_OUTPUT_DIRECTORY,
+        ]
+
+        st.write(
+            "A Facebook API-alapú feldolgozás fő kimenetei:"
+        )
+
+        st.caption(
+            "Facebook API módban nem készül "
+            "modellkiértékelés, mert a lekért adatokhoz "
+            "nem tartozik ember által megadott referencia-címke."
+        )
+
+    st.code(
+        "\n".join(
+            str(path)
+            for path in output_paths
+        )
+    )
 
 
 # ============================================================
@@ -270,84 +441,220 @@ def display_analysis_error(
     lenyitható panelen elérhetők.
     """
 
-    if isinstance(error, FileNotFoundError):
+    if isinstance(
+        error,
+        FileNotFoundError,
+    ):
         st.error(
             "A feldolgozáshoz szükséges egyik bemeneti fájl "
             "vagy modellfájl nem található. Ellenőrizd a "
             "CSV-fájlok és a finomhangolt modell helyét."
         )
 
-    elif isinstance(error, EmptyDataError):
+    elif isinstance(
+        error,
+        EmptyDataError,
+    ):
         st.error(
             "Az egyik bemeneti CSV-fájl üres, ezért az elemzés "
             "nem indítható el."
         )
 
-    elif isinstance(error, ParserError):
+    elif isinstance(
+        error,
+        ParserError,
+    ):
         st.error(
             "A CSV-fájl szerkezete nem értelmezhető. "
-            "Ellenőrizd az elválasztó karaktereket, az oszlopokat "
-            "és az idézőjelek használatát."
+            "Ellenőrizd az elválasztó karaktereket, az "
+            "oszlopokat és az idézőjelek használatát."
         )
 
-    elif isinstance(error, UnicodeDecodeError):
+    elif isinstance(
+        error,
+        UnicodeDecodeError,
+    ):
         st.error(
             "A bemeneti fájl karakterkódolása nem megfelelő. "
             "A CSV-fájlt célszerű UTF-8 kódolással menteni."
         )
 
-    elif isinstance(error, PermissionError):
+    elif isinstance(
+        error,
+        PermissionError,
+    ):
         st.error(
-            "A program nem tudta megnyitni vagy felülírni az egyik "
-            "kimeneti fájlt. Ellenőrizd, hogy az Excel-fájl vagy "
-            "más kimenet nincs-e megnyitva egy másik programban."
+            "A program nem tudta megnyitni vagy felülírni "
+            "az egyik kimeneti fájlt. Ellenőrizd, hogy az "
+            "Excel-fájl vagy más kimenet nincs-e megnyitva "
+            "egy másik programban."
         )
 
-    elif isinstance(error, ValueError):
+    elif isinstance(
+        error,
+        ValueError,
+    ):
         st.error(
-            "A bemeneti adatok szerkezete vagy tartalma nem megfelelő. "
-            "Ellenőrizd a kötelező oszlopokat és azt, hogy az "
-            "adathalmaz tartalmaz-e feldolgozható rekordokat."
+            "A bemeneti adatok vagy a konfiguráció tartalma "
+            "nem megfelelő. Ellenőrizd a szükséges adatokat, "
+            "a Facebook-beállításokat és azt, hogy található-e "
+            "feldolgozható rekord."
         )
 
-    elif isinstance(error, RuntimeError):
+    elif isinstance(
+        error,
+        RuntimeError,
+    ):
         st.error(
-            "A modell betöltése vagy futtatása közben technikai "
-            "hiba történt. Ellenőrizd a PyTorch-, Transformers- "
-            "és modellbeállításokat."
+            "Technikai hiba történt a modell futtatása vagy "
+            "a Facebook Graph API-val történő kommunikáció "
+            "közben. Ellenőrizd a modellt, az API tokent, "
+            "a Page ID-t és az internetkapcsolatot."
         )
 
-    elif isinstance(error, OSError):
+    elif isinstance(
+        error,
+        OSError,
+    ):
         st.error(
-            "Fájl- vagy mappakezelési hiba történt. Ellenőrizd, "
-            "hogy a kimeneti könyvtárak elérhetők és írhatók-e."
+            "Fájl- vagy mappakezelési hiba történt. "
+            "Ellenőrizd, hogy a kimeneti könyvtárak "
+            "elérhetők és írhatók-e."
         )
 
     else:
         st.error(
-            "Az elemzés futtatása közben nem várt hiba történt."
+            "Az elemzés futtatása közben "
+            "nem várt hiba történt."
         )
 
-    with st.expander("Technikai részletek"):
-        st.exception(error)
+    with st.expander(
+        "Technikai részletek"
+    ):
+        st.exception(
+            error
+        )
+
+
+# ============================================================
+# Facebook adatok lekérése
+# ============================================================
+
+def load_facebook_analysis_data(
+    post_limit: int,
+):
+    """
+    Lekéri a Facebook oldal legutóbbi N posztját,
+    valamint az azokhoz tartozó kommenteket és
+    válaszkommenteket.
+
+    A visszaadott DataFrame-ek közvetlenül átadhatók
+    a közös sentiment pipeline-nak.
+    """
+
+    if post_limit < 1:
+        raise ValueError(
+            "Legalább egy Facebook-posztot "
+            "ki kell választani."
+        )
+
+    client = FacebookGraphAPIClient()
+
+    post_fetcher = FacebookPostFetcher(
+        client=client,
+    )
+
+    comment_fetcher = FacebookCommentFetcher(
+        client=client,
+    )
+
+    page_id = get_facebook_page_id()
+
+    posts = post_fetcher.fetch_latest_posts(
+        page_id=page_id,
+        limit=post_limit,
+    )
+
+    if not posts:
+        raise ValueError(
+            "A Facebook API nem adott vissza "
+            "feldolgozható posztot."
+        )
+
+    all_comments: list[dict] = []
+
+    for post in posts:
+        post_id = post.get(
+            "post_id"
+        )
+
+        if not post_id:
+            continue
+
+        comments = (
+            comment_fetcher.fetch_comments(
+                post_id=post_id,
+            )
+        )
+
+        all_comments.extend(
+            comments
+        )
+
+    if not all_comments:
+        raise ValueError(
+            "A kiválasztott Facebook-posztokhoz "
+            "nem található feldolgozható komment "
+            "vagy válaszkomment."
+        )
+
+    post_context_df = (
+        create_posts_context_dataframe(
+            posts
+        )
+    )
+
+    comments_df = (
+        create_comments_dataframe(
+            all_comments
+        )
+    )
+
+    return (
+        comments_df,
+        post_context_df,
+        len(posts),
+        len(all_comments),
+    )
 
 
 # ============================================================
 # Elemzés indítása
 # ============================================================
 
-def display_analysis_button() -> None:
+def display_analysis_button(
+    source_mode: str,
+    facebook_post_limit: int,
+) -> None:
     """
     Megjeleníti az elemzés indítására és a korábbi
     eredmények törlésére szolgáló vezérlőket.
+
+    CSV és Facebook API adatforrással egyaránt működik.
     """
 
-    st.subheader("Elemzés vezérlése")
-
-    input_files_available = (
-        DEFAULT_TEST_COMMENTS_FILE.exists()
-        and DEFAULT_TEST_POST_CONTEXT_FILE.exists()
+    st.subheader(
+        "Elemzés vezérlése"
     )
+
+    if source_mode == "CSV tesztadatok":
+        analysis_available = (
+            DEFAULT_TEST_COMMENTS_FILE.exists()
+            and DEFAULT_TEST_POST_CONTEXT_FILE.exists()
+        )
+
+    else:
+        analysis_available = True
 
     start_column, clear_column = st.columns(2)
 
@@ -355,7 +662,7 @@ def display_analysis_button() -> None:
         analysis_button_clicked = st.button(
             "Elemzés indítása",
             type="primary",
-            disabled=not input_files_available,
+            disabled=not analysis_available,
             use_container_width=True,
         )
 
@@ -381,7 +688,10 @@ def display_analysis_button() -> None:
             "analysis_success"
         ] = False
 
-    if not input_files_available:
+    if (
+        source_mode == "CSV tesztadatok"
+        and not analysis_available
+    ):
         st.warning(
             "Az elemzés indításához mindkét bemeneti "
             "CSV-fájlnak rendelkezésre kell állnia."
@@ -401,7 +711,8 @@ def display_analysis_button() -> None:
         False,
     ):
         st.success(
-            "A korábbi elemzési eredmények törlésre kerültek."
+            "A korábbi elemzési eredmények "
+            "törlésre kerültek."
         )
 
         st.session_state[
@@ -410,41 +721,106 @@ def display_analysis_button() -> None:
 
     if analysis_button_clicked:
         try:
+            # Korábbi eredmény eltávolítása,
+            # hogy hiba esetén ne maradjon régi adat.
+            clear_previous_analysis()
+
             with st.spinner(
-                "A finomhangolt context-aware huBERT modell "
-                "betöltése és az elemzés futtatása "
-                "folyamatban..."
+                "Az adatok betöltése, a finomhangolt "
+                "context-aware huBERT modell futtatása "
+                "és az eredmények előállítása folyamatban..."
             ):
                 analyzer = (
                     load_sentiment_analyzer()
                 )
 
-                result = run_analysis_pipeline(
-                    validation_file=(
-                        DEFAULT_TEST_COMMENTS_FILE
-                    ),
-                    post_context_file=(
-                        DEFAULT_TEST_POST_CONTEXT_FILE
-                    ),
-                    excel_output_file=(
-                        EXCEL_OUTPUT_FILE
-                    ),
-                    charts_output_directory=(
-                        CHARTS_OUTPUT_DIRECTORY
-                    ),
-                    reports_output_directory=(
-                        REPORT_OUTPUT_FILE.parent
-                    ),
-                    evaluation_output_directory=(
-                        EVALUATION_OUTPUT_DIRECTORY
-                    ),
-                    analyzer=analyzer,
-                    limit=None,
-                )
+                # =================================================
+                # CSV TESZTMÓD
+                # =================================================
+
+                if source_mode == "CSV tesztadatok":
+                    result = run_analysis_pipeline(
+                        validation_file=(
+                            DEFAULT_TEST_COMMENTS_FILE
+                        ),
+                        post_context_file=(
+                            DEFAULT_TEST_POST_CONTEXT_FILE
+                        ),
+                        excel_output_file=(
+                            CSV_EXCEL_OUTPUT_FILE
+                        ),
+                        charts_output_directory=(
+                            CSV_CHARTS_OUTPUT_DIRECTORY
+                        ),
+                        reports_output_directory=(
+                            CSV_REPORTS_OUTPUT_DIRECTORY
+                        ),
+                        evaluation_output_directory=(
+                            CSV_EVALUATION_OUTPUT_DIRECTORY
+                        ),
+                        analyzer=analyzer,
+                        limit=None,
+                    )
+
+                    analysis_source = "csv"
+                    facebook_fetch_summary = None
+
+                # =================================================
+                # FACEBOOK API MÓD
+                # =================================================
+
+                else:
+                    (
+                        comments_df,
+                        post_context_df,
+                        fetched_post_count,
+                        fetched_comment_count,
+                    ) = load_facebook_analysis_data(
+                        post_limit=facebook_post_limit
+                    )
+
+                    result = (
+                        run_analysis_pipeline_from_dataframes(
+                            comments_df=comments_df,
+                            post_context_df=post_context_df,
+                            excel_output_file=(
+                                FACEBOOK_EXCEL_OUTPUT_FILE
+                            ),
+                            charts_output_directory=(
+                                FACEBOOK_CHARTS_OUTPUT_DIRECTORY
+                            ),
+                            reports_output_directory=(
+                                FACEBOOK_REPORTS_OUTPUT_DIRECTORY
+                            ),
+                            evaluation_output_directory=None,
+                            analyzer=analyzer,
+                            limit=None,
+                        )
+                    )
+
+                    analysis_source = "facebook"
+
+                    facebook_fetch_summary = {
+                        "posts": fetched_post_count,
+                        "comments": fetched_comment_count,
+                    }
+
+                # =================================================
+                # Eredmények session state-be mentése
+                # =================================================
 
                 st.session_state[
                     "analysis_result"
                 ] = result
+
+                st.session_state[
+                    "analysis_source"
+                ] = analysis_source
+
+                if facebook_fetch_summary is not None:
+                    st.session_state[
+                        "facebook_fetch_summary"
+                    ] = facebook_fetch_summary
 
                 st.session_state[
                     "analysis_success"
@@ -453,7 +829,9 @@ def display_analysis_button() -> None:
             st.rerun()
 
         except Exception as error:
-            display_analysis_error(error)
+            display_analysis_error(
+                error
+            )
 
 
 # ============================================================
@@ -468,6 +846,9 @@ def translate_sentiment_label(
     megjelenítési értékekre alakítja.
     """
 
+    if value is None:
+        return ""
+
     translations = {
         "positive": "Pozitív",
         "negative": "Negatív",
@@ -481,6 +862,13 @@ def translate_sentiment_label(
         .strip()
         .lower()
     )
+
+    if normalized_value in {
+        "",
+        "nan",
+        "none",
+    }:
+        return ""
 
     return translations.get(
         normalized_value,
@@ -626,7 +1014,9 @@ def display_chart_explanation(
         ),
     )
 
-    st.caption(explanation)
+    st.caption(
+        explanation
+    )
 
 
 # ============================================================
@@ -639,13 +1029,34 @@ def display_model_evaluation(
     """
     Megjeleníti a kézzel címkézett teszthalmazon
     végzett modellkiértékelés eredményeit.
+
+    Facebook API módban nincs kézi referencia-címke,
+    ezért ott modellkiértékelés nem történik.
     """
+
+    st.subheader(
+        "Modellkiértékelés"
+    )
 
     evaluation_result = (
         result.evaluation_result
     )
 
-    st.subheader("Modellkiértékelés")
+    if evaluation_result is None:
+        st.info(
+            "A Facebook API-ból származó adatokhoz nem "
+            "tartozik ember által megadott referencia-címke, "
+            "ezért ezen az adathalmazon Accuracy, Precision, "
+            "Recall, F1-score és confusion matrix nem "
+            "számítható."
+        )
+
+        st.caption(
+            "A modell objektív teljesítményértékelése "
+            "a külön, kézzel címkézett teszthalmazon történik."
+        )
+
+        return
 
     evaluated_count = len(
         evaluation_result.evaluated_data
@@ -763,7 +1174,9 @@ def display_model_evaluation(
     # Confusion matrix
     # --------------------------------------------------------
 
-    st.subheader("Confusion matrix")
+    st.subheader(
+        "Confusion matrix"
+    )
 
     st.caption(
         "A sorok az ember által megadott címkéket, "
@@ -780,7 +1193,9 @@ def display_model_evaluation(
     # Hibás predikciók
     # --------------------------------------------------------
 
-    st.subheader("Hibás predikciók")
+    st.subheader(
+        "Hibás predikciók"
+    )
 
     if (
         evaluation_result
@@ -889,7 +1304,34 @@ def display_analysis_results(
     Megjeleníti a teljes elemzési pipeline eredményeit.
     """
 
-    st.header("Elemzési eredmények")
+    st.header(
+        "Elemzési eredmények"
+    )
+
+    # --------------------------------------------------------
+    # Facebook lekérés összefoglalása
+    # --------------------------------------------------------
+
+    analysis_source = st.session_state.get(
+        "analysis_source"
+    )
+
+    if analysis_source == "facebook":
+        fetch_summary = st.session_state.get(
+            "facebook_fetch_summary"
+        )
+
+        if fetch_summary:
+            st.info(
+                "Facebook API-adatlekérés: "
+                f"{fetch_summary['posts']} poszt és "
+                f"{fetch_summary['comments']} komment, illetve "
+                "válaszkomment került lekérésre."
+            )
+
+    # --------------------------------------------------------
+    # Alapstatisztikák
+    # --------------------------------------------------------
 
     if result.overall_statistics_df.empty:
         st.warning(
@@ -939,7 +1381,7 @@ def display_analysis_results(
 
     with second_column:
         st.metric(
-            "Feldolgozott kommentek",
+            "Feldolgozott hozzászólások",
             comment_count,
         )
 
@@ -1053,7 +1495,9 @@ def display_analysis_results(
         # Kimeneti fájlok
         # ----------------------------------------------------
 
-        st.subheader("Kimeneti fájlok")
+        st.subheader(
+            "Kimeneti fájlok"
+        )
 
         if result.excel_output_file.exists():
             excel_file_bytes = (
@@ -1404,6 +1848,38 @@ def display_analysis_results(
             )
         )
 
+        # ----------------------------------------------------
+        # Facebook módban nincs kézi címke, ezért az üres
+        # oszlopot nem jelenítjük meg.
+        # ----------------------------------------------------
+
+        if (
+            "Kézi címke"
+            in comments_display_df.columns
+        ):
+            manual_label_series = (
+                comments_display_df[
+                    "Kézi címke"
+                ]
+            )
+
+            has_manual_labels = (
+                manual_label_series.notna()
+                & manual_label_series
+                .astype(str)
+                .str.strip()
+                .ne("")
+            ).any()
+
+            if not has_manual_labels:
+                comments_display_df = (
+                    comments_display_df.drop(
+                        columns=[
+                            "Kézi címke"
+                        ]
+                    )
+                )
+
         preferred_comment_columns = [
             "Posztazonosító",
             "Kommentazonosító",
@@ -1497,11 +1973,19 @@ def main() -> None:
 
     display_header()
 
-    display_input_files()
+    (
+        source_mode,
+        facebook_post_limit,
+    ) = display_data_source_selection()
 
-    display_output_information()
+    display_output_information(
+        source_mode=source_mode
+    )
 
-    display_analysis_button()
+    display_analysis_button(
+        source_mode=source_mode,
+        facebook_post_limit=facebook_post_limit,
+    )
 
     if (
         "analysis_result"
