@@ -1,0 +1,35 @@
+SENTIMENTELEMZÉSI ÖSSZEFOGLALÓ RIPORT
+==========================================
+
+1. Feldolgozott adatok
+Feldolgozott posztok száma: 7
+Feldolgozott kommentek száma: 132
+
+2. Összesített sentimentmegoszlás
+Pozitív kommentek: 28 db (21.21%)
+Negatív kommentek: 56 db (42.42%)
+Semleges kommentek: 48 db (36.36%)
+Domináns összesített sentiment: negatív
+
+3. Posztonkénti kiemelt eredmények
+Legpozitívabb fogadtatású poszt: 102836921087152_1504389925069108 (100.00% pozitív komment)
+Legnegatívabb fogadtatású poszt: 102836921087152_1489386073236160 (54.39% negatív komment)
+
+4. Modellbizonyosság
+A kommentpredikciók átlagos konfidenciaértéke: 0.707
+
+5. Kontextuselemzés
+Leggyakoribb kontextusilleszkedés: azonos irányú
+Előfordulások száma: 3
+
+6. Posztonkénti kontextuális értelmezések
+- 102836921087152_1504462611728506: A poszt pozitív hangvételű, és a kommentek között is a pozitív kategória dominál. Ez azonos irányú, támogató reakcióra utalhat. A kommentek megoszlása: 53.85% pozitív, 15.38% negatív és 30.77% semleges.
+- 102836921087152_1504389925069108: A poszt pozitív hangvételű, és a kommentek között is a pozitív kategória dominál. Ez azonos irányú, támogató reakcióra utalhat. A kommentek megoszlása: 100.00% pozitív, 0.00% negatív és 0.00% semleges.
+- 102836921087152_1504322041742563: A poszt positive hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 38.46% pozitív, 0.00% negatív és 61.54% semleges.
+- 102836921087152_1503319681842799: A poszt positive hangvételű, miközben a kommentek között a semleges kategória dominál. Ez visszafogott, információközpontú vagy érzelmileg nem egyértelmű reakciókra utalhat. A kommentek megoszlása: 0.00% pozitív, 0.00% negatív és 100.00% semleges.
+- 102836921087152_1499275952247172: A poszt pozitív hangvételű, de a kommentek között a negatív kategória dominál. Ez kritikus vagy elutasító fogadtatásra utalhat. A kommentek megoszlása: 20.45% pozitív, 52.27% negatív és 27.27% semleges.
+- 102836921087152_1489386073236160: A poszt semleges hangvételű, miközben a kommentek között a negatív kategória dominál. Ez kritikus vagy kedvezőtlen közönségreakcióra utalhat. A kommentek megoszlása: 5.26% pozitív, 54.39% negatív és 40.35% semleges.
+- 102836921087152_1487388570102577: A poszt pozitív hangvételű, és a kommentek között is a pozitív kategória dominál. Ez azonos irányú, támogató reakcióra utalhat. A kommentek megoszlása: 100.00% pozitív, 0.00% negatív és 0.00% semleges.
+
+7. Értelmezési korlát
+A riport sentiment címkékből, statisztikai mutatókból és szabályalapú kontextuselemzésből készül. Az eredmények nem tekinthetők teljes álláspont-felismerésnek, ezért a posztok és kommentek közötti kapcsolat csak óvatosan értelmezhető.

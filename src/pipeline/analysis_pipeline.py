@@ -71,13 +71,20 @@ CONTEXT_AWARE_MAX_LENGTH = 128
 # A végleges alkalmazásban használt operatív küszöbérték.
 CONFIDENCE_THRESHOLD = 0.60
 
-# A fine-tuning során használt emoji-reprezentáció.
+# A fine-tuning során alkalmazott emoji-reprezentáció.
 EMOJI_MODE = "text"
 
 
 @dataclass
 class AnalysisPipelineResult:
-    
+    """
+    A teljes elemzési pipeline eredményeit tartalmazó
+    adatstruktúra.
+
+    Az evaluation_result Facebook API módban None lehet,
+    mivel az API-ból érkező adatokhoz nem tartozik
+    ember által megadott referencia-címke.
+    """
 
     comments_df: pd.DataFrame
     post_context_df: pd.DataFrame
@@ -86,7 +93,7 @@ class AnalysisPipelineResult:
     overall_statistics_df: pd.DataFrame
     context_analysis_df: pd.DataFrame
 
-    evaluation_result: ModelEvaluationResult
+    evaluation_result: ModelEvaluationResult | None
     evaluation_files: dict[str, Path]
 
     excel_output_file: Path
@@ -94,21 +101,96 @@ class AnalysisPipelineResult:
     report_file: Path
 
 
-def run_analysis_pipeline(
-    validation_file: str | Path,
-    post_context_file: str | Path,
+def _get_labeled_dataframe(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Visszaadja azokat a rekordokat, amelyekhez rendelkezésre
+    áll ember által megadott manual_label.
+
+    Facebook API módban a manual_label mező üres, ezért
+    a visszaadott DataFrame is üres lesz.
+    """
+
+    if "manual_label" not in dataframe.columns:
+        return dataframe.iloc[0:0].copy()
+
+    manual_labels = dataframe[
+        "manual_label"
+    ]
+
+    valid_label_mask = (
+        manual_labels.notna()
+        & manual_labels.astype(str).str.strip().ne("")
+    )
+
+    return dataframe.loc[
+        valid_label_mask
+    ].copy()
+
+
+def run_analysis_pipeline_from_dataframes(
+    comments_df: pd.DataFrame,
+    post_context_df: pd.DataFrame,
     excel_output_file: str | Path,
     charts_output_directory: str | Path,
     reports_output_directory: str | Path,
-    evaluation_output_directory: str | Path,
+    evaluation_output_directory: str | Path | None = None,
     analyzer: ContextAwareSentimentAnalyzer | None = None,
     limit: int | None = None,
 ) -> AnalysisPipelineResult:
-    
+    """
+    A központi sentiment elemzési pipeline.
+
+    A függvény már előkészített DataFrame-eket fogad,
+    ezért adatforrástól függetlenül használható.
+
+    Használható például:
+
+    - CSV-ből betöltött validációs/test adatokkal,
+    - Facebook Graph API-ból előállított adatokkal.
+
+    A modellkiértékelés csak akkor fut le, ha legalább
+    egy rekordhoz rendelkezésre áll manual_label.
+    """
 
     # ---------------------------------------------------------
-    # 1. Kimeneti útvonalak normalizálása
+    # 1. Alapvető bemenetellenőrzés
     # ---------------------------------------------------------
+
+    if comments_df is None:
+        raise ValueError(
+            "A comments_df nem lehet None."
+        )
+
+    if post_context_df is None:
+        raise ValueError(
+            "A post_context_df nem lehet None."
+        )
+
+    if comments_df.empty:
+        raise ValueError(
+            "Nincs feldolgozható komment az elemzéshez."
+        )
+
+    if post_context_df.empty:
+        raise ValueError(
+            "Nincs feldolgozható posztkontextus "
+            "az elemzéshez."
+        )
+
+    # Másolat készítése azért, hogy a pipeline ne módosítsa
+    # a hívó által átadott eredeti DataFrame-eket.
+    comments_df = comments_df.copy()
+    post_context_df = post_context_df.copy()
+
+    # ---------------------------------------------------------
+    # 2. Kimeneti útvonalak normalizálása
+    # ---------------------------------------------------------
+
+    excel_output_file = Path(
+        excel_output_file
+    )
 
     charts_output_directory = Path(
         charts_output_directory
@@ -118,34 +200,36 @@ def run_analysis_pipeline(
         reports_output_directory
     )
 
-    evaluation_output_directory = Path(
-        evaluation_output_directory
-    )
+    if evaluation_output_directory is not None:
+        evaluation_output_directory = Path(
+            evaluation_output_directory
+        )
 
     # ---------------------------------------------------------
-    # 2. Adatok betöltése
+    # 3. Kommentek és posztkontextus összekapcsolása
     # ---------------------------------------------------------
-
-    comments_df = load_validation_dataset(
-        validation_file
-    )
-
-    post_context_df = load_post_context_csv(
-        post_context_file
-    )
 
     merged_df = merge_comments_with_post_context(
         comments_df,
         post_context_df,
     )
 
+    if merged_df.empty:
+        raise ValueError(
+            "A kommentek és a posztkontextusok "
+            "összekapcsolása után nem maradt "
+            "feldolgozható rekord."
+        )
+
     # ---------------------------------------------------------
-    # 3. Szöveges előfeldolgozás
+    # 4. Szöveges előfeldolgozás
     # ---------------------------------------------------------
     #
     # A fine-tuning során az emojik szöveges
-    # reprezentációját használtuk. Inference során
-    # ugyanazt az előfeldolgozást kell alkalmazni.
+    # reprezentációját használtuk.
+    #
+    # Inference során ugyanazt az előfeldolgozást
+    # alkalmazzuk.
     # ---------------------------------------------------------
 
     preprocessed_df = preprocess_text_fields(
@@ -154,7 +238,17 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 4. Context-aware komment sentiment
+    # 5. Context-aware komment sentiment
+    # ---------------------------------------------------------
+    #
+    # A modell bemenete:
+    #
+    # cleaned_post_text
+    # +
+    # cleaned_comment_text
+    #
+    # Ez Facebook főkommenteknél és reply kommenteknél
+    # egyaránt változatlan.
     # ---------------------------------------------------------
 
     if analyzer is None:
@@ -171,16 +265,24 @@ def run_analysis_pipeline(
         limit=limit,
     )
 
+    if full_sentiment_df.empty:
+        raise ValueError(
+            "A sentiment elemzés nem adott vissza "
+            "feldolgozott rekordot."
+        )
+
     # ---------------------------------------------------------
-    # 5. Poszt önálló sentimentjének meghatározása
+    # 6. Poszt önálló sentimentjének meghatározása
     # ---------------------------------------------------------
     #
-    # A komment végleges sentimentjét NEM ez a modell
-    # határozza meg.
+    # Fontos:
     #
-    # A baseline huBERT itt kizárólag azért szükséges,
-    # hogy a szabályalapú context_analyzer számára
-    # rendelkezésre álljon a post_sentiment_label.
+    # a baseline huBERT NEM a komment végleges
+    # sentimentjét határozza meg.
+    #
+    # A modell kizárólag azért szükséges, hogy a
+    # szabályalapú context_analyzer számára rendelkezésre
+    # álljon a post_sentiment_label.
     # ---------------------------------------------------------
 
     post_analyzer = HuBERTSentimentAnalyzer(
@@ -201,52 +303,52 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 6. Modellkiértékelés
+    # 7. Opcionális modellkiértékelés
     # ---------------------------------------------------------
     #
-    # A context-aware analyzer az alábbi oszlopokat
-    # biztosítja:
+    # CSV validációs/test adatok:
     #
-    # finetuned_label
-    #     A háromosztályos modell nyers predikciója.
+    # manual_label rendelkezésre áll
+    # -> evaluation lefut
     #
-    # finetuned_confidence
-    #     A nyers predikció konfidenciaértéke.
+    # Facebook Graph API:
     #
-    # final_sentiment_label
-    #     A 0.60 threshold alkalmazása utáni címke.
+    # manual_label nincs
+    # -> evaluation kimarad
     #
-    # threshold_applied
-    #     Jelzi, hogy történt-e átcímkézés.
-    #
-    # model_label
-    #     Kompatibilitási oszlop, amely a végleges,
-    #     threshold utáni sentiment címkét tartalmazza.
-    #
-    # confidence
-    #     Kompatibilitási oszlop a meglévő statisztikai
-    #     és kiértékelési modulok számára.
-    #
-    # A model_evaluator confidence_threshold paramétere
-    # nem végez újabb sentiment-átcímkézést, hanem az
-    # alacsony konfidenciájú esetek azonosítására szolgál.
+    # Facebook adatokon ezért nem számítunk Accuracy,
+    # Precision, Recall, Macro F1 vagy confusion matrix
+    # értékeket.
     # ---------------------------------------------------------
 
-    evaluation_result = evaluate_sentiment_model(
-        dataframe=full_sentiment_df,
-        manual_label_column="manual_label",
-        model_label_column="model_label",
-        confidence_column="confidence",
-        confidence_threshold=CONFIDENCE_THRESHOLD,
+    evaluation_result: ModelEvaluationResult | None = None
+    evaluation_files: dict[str, Path] = {}
+
+    labeled_df = _get_labeled_dataframe(
+        full_sentiment_df
     )
 
-    evaluation_files = export_evaluation_results(
-        evaluation_result=evaluation_result,
-        output_directory=evaluation_output_directory,
-    )
+    if not labeled_df.empty:
+        evaluation_result = evaluate_sentiment_model(
+            dataframe=labeled_df,
+            manual_label_column="manual_label",
+            model_label_column="model_label",
+            confidence_column="confidence",
+            confidence_threshold=CONFIDENCE_THRESHOLD,
+        )
+
+        if evaluation_output_directory is not None:
+            evaluation_files = (
+                export_evaluation_results(
+                    evaluation_result=evaluation_result,
+                    output_directory=(
+                        evaluation_output_directory
+                    ),
+                )
+            )
 
     # ---------------------------------------------------------
-    # 7. Statisztikai összesítés
+    # 8. Statisztikai összesítés
     # ---------------------------------------------------------
 
     post_statistics_df = calculate_post_statistics(
@@ -258,7 +360,7 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 8. Posztonkénti kontextuselemzés
+    # 9. Posztonkénti kontextuselemzés
     # ---------------------------------------------------------
 
     context_analysis_df = analyze_post_contexts(
@@ -266,7 +368,7 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 9. Excel export
+    # 10. Excel export
     # ---------------------------------------------------------
 
     created_excel_file = export_sentiment_workbook(
@@ -278,7 +380,7 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 10. Sentimentgrafikonok
+    # 11. Általános sentimentgrafikonok
     # ---------------------------------------------------------
 
     created_chart_files = create_all_sentiment_charts(
@@ -289,41 +391,46 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 11. Kiértékelési grafikonok
+    # 12. Kiértékelési grafikonok
+    # ---------------------------------------------------------
+    #
+    # Ezek kizárólag kézzel címkézett adatok esetén
+    # értelmezhetők.
     # ---------------------------------------------------------
 
-    confusion_matrix_chart_file = (
-        create_confusion_matrix_chart(
-            confusion_matrix_df=(
-                evaluation_result.confusion_matrix
-            ),
-            output_file=(
-                charts_output_directory
-                / "confusion_matrix.png"
-            ),
+    if evaluation_result is not None:
+        confusion_matrix_chart_file = (
+            create_confusion_matrix_chart(
+                confusion_matrix_df=(
+                    evaluation_result.confusion_matrix
+                ),
+                output_file=(
+                    charts_output_directory
+                    / "confusion_matrix.png"
+                ),
+            )
         )
-    )
 
-    created_chart_files.append(
-        confusion_matrix_chart_file
-    )
-
-    classification_metrics_chart_file = (
-        create_classification_metrics_chart(
-            metrics_df=evaluation_result.metrics,
-            output_file=(
-                charts_output_directory
-                / "classification_metrics.png"
-            ),
+        created_chart_files.append(
+            confusion_matrix_chart_file
         )
-    )
 
-    created_chart_files.append(
-        classification_metrics_chart_file
-    )
+        classification_metrics_chart_file = (
+            create_classification_metrics_chart(
+                metrics_df=evaluation_result.metrics,
+                output_file=(
+                    charts_output_directory
+                    / "classification_metrics.png"
+                ),
+            )
+        )
+
+        created_chart_files.append(
+            classification_metrics_chart_file
+        )
 
     # ---------------------------------------------------------
-    # 12. Szöveges összefoglaló riport
+    # 13. Szöveges összefoglaló riport
     # ---------------------------------------------------------
 
     created_report_file = create_summary_report(
@@ -334,7 +441,7 @@ def run_analysis_pipeline(
     )
 
     # ---------------------------------------------------------
-    # 13. Pipeline eredmény összeállítása
+    # 14. Pipeline eredmény összeállítása
     # ---------------------------------------------------------
 
     return AnalysisPipelineResult(
@@ -349,4 +456,55 @@ def run_analysis_pipeline(
         excel_output_file=created_excel_file,
         chart_files=created_chart_files,
         report_file=created_report_file,
+    )
+
+
+def run_analysis_pipeline(
+    validation_file: str | Path,
+    post_context_file: str | Path,
+    excel_output_file: str | Path,
+    charts_output_directory: str | Path,
+    reports_output_directory: str | Path,
+    evaluation_output_directory: str | Path,
+    analyzer: ContextAwareSentimentAnalyzer | None = None,
+    limit: int | None = None,
+) -> AnalysisPipelineResult:
+    """
+    CSV-alapú kompatibilitási belépési pont.
+
+    A korábbi main.py és Streamlit implementáció
+    továbbra is ezt a függvényt használhatja.
+
+    A függvény kizárólag:
+    1. betölti a CSV-adatokat,
+    2. átadja őket a közös DataFrame-alapú pipeline-nak.
+    """
+
+    # ---------------------------------------------------------
+    # 1. CSV-adatok betöltése
+    # ---------------------------------------------------------
+
+    comments_df = load_validation_dataset(
+        validation_file
+    )
+
+    post_context_df = load_post_context_csv(
+        post_context_file
+    )
+
+    # ---------------------------------------------------------
+    # 2. Közös elemzési pipeline meghívása
+    # ---------------------------------------------------------
+
+    return run_analysis_pipeline_from_dataframes(
+        comments_df=comments_df,
+        post_context_df=post_context_df,
+        excel_output_file=excel_output_file,
+        charts_output_directory=charts_output_directory,
+        reports_output_directory=reports_output_directory,
+        evaluation_output_directory=(
+            evaluation_output_directory
+        ),
+        analyzer=analyzer,
+        limit=limit,
     )
