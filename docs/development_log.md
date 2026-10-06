@@ -1981,3 +1981,219 @@ A teljes jelenlegi feldolgozási folyamat:
 A CSV-alapú tesztmód a Streamlit felületen sikeresen működik.
 
 A következő fejlesztési lépés a Facebook Graph API adatforrás bekötése a központi pipeline-ba és a Streamlit felületbe. Az API-ból származó éles adatok esetében a modellkiértékelési funkciókat opcionálissá kell tenni, mivel ezek az adatok nem rendelkeznek ember által megadott `manual_label` címkékkel.
+
+
+## 16. iteráció – Facebook Graph API és Streamlit integráció, a fejlesztési szakasz lezárása
+
+### Cél
+
+Az iteráció célja a korábban elkészített Facebook Graph API adatlekérési réteg összekapcsolása volt a már működő context-aware sentiment pipeline-nal és a Streamlit felülettel. A fejlesztés során fontos követelmény volt, hogy a korábbi CSV-alapú tesztmód továbbra is változatlanul használható maradjon, miközben a rendszer valós Facebook-adatok feldolgozására is alkalmassá válik.
+
+### Több Facebook-poszt lekérése
+
+A `FacebookPostFetcher` kiegészült a legutóbbi N Facebook-bejegyzés lekérésének lehetőségével. A felhasználó így nem egyetlen konkrét posztot, hanem az adminisztrált oldal több legutóbbi bejegyzését is elemezheti.
+
+A fejlesztés során a 10 legutóbbi poszt lekérését külön teszteltük, amely sikeresen működött. A lekérés kezeli a Facebook Graph API lapozását is.
+
+### Kommentek és válaszkommentek kezelése
+
+A kommentlekérés ellenőrzése során eltérés jelentkezett a Facebook felületén megjelenített és az API-val első körben lekért hozzászólásszám között. Ennek oka az volt, hogy az eredeti implementáció csak a felső szintű kommenteket dolgozta fel, a kommentekre adott válaszokat nem.
+
+A `FacebookCommentFetcher` ezért kiegészült a főkommentekhez tartozó válaszkommentek lekérésével. A főkommentek és a válaszok egységes kommentlistába kerülnek, és minden rekord megtartja az eredeti `post_id` értéket.
+
+A sentiment elemzés szempontjából a főkommentek és a válaszkommentek azonos módon kerülnek feldolgozásra:
+
+```text
+post_text + comment_text
+```
+
+Ez azt jelenti, hogy egy válaszkomment sentimentje is az eredeti Facebook-poszt szövegének kontextusában kerül meghatározásra.
+
+### Facebook-adatok DataFrame formára alakítása
+
+A Facebook-adatlekérési réteg több poszt kezelésére is alkalmassá vált. A lekért adatokból két közös pandas DataFrame készül:
+
+```text
+post_context_df
+comments_df
+```
+
+A `post_context_df` a Facebook-posztok szöveges kontextusát, a `comments_df` pedig a hozzájuk tartozó főkommenteket és válaszkommenteket tartalmazza.
+
+A Facebook-adatoknál nincs ember által megadott `manual_label`, ezért ezek a rekordok nem használhatók közvetlenül objektív modellkiértékelésre.
+
+### A központi pipeline általánosítása
+
+A `src/pipeline/analysis_pipeline.py` módosításra került annak érdekében, hogy ne csak CSV-fájlokból betöltött adatokat, hanem már előkészített DataFrame-eket is fogadni tudjon.
+
+A közös elemzési belépési pont:
+
+```text
+run_analysis_pipeline_from_dataframes(...)
+```
+
+A korábbi CSV-alapú:
+
+```text
+run_analysis_pipeline(...)
+```
+
+függvény megmaradt, így a meglévő `main.py` és a címkézett tesztadatok feldolgozása továbbra is működik.
+
+A CSV-alapú pipeline módosítás utáni regressziós tesztje sikeresen lefutott. A 230 elemes teszthalmaz továbbra is feldolgozható, és a korábban validált context-aware modell, valamint a 0,60-as confidence threshold működése változatlan maradt.
+
+### Opcionális modellkiértékelés
+
+A pipeline modellkiértékelési része opcionálissá vált.
+
+Kézzel címkézett CSV-adatok esetén továbbra is elkészül:
+
+```text
+Accuracy
+Precision
+Recall
+F1-score
+confusion matrix
+```
+
+Facebook API módban a modellkiértékelés automatikusan kimarad, mert az API-ból lekért kommentekhez nem tartozik `manual_label`.
+
+Ez módszertanilag elkülöníti a két használati esetet:
+
+```text
+CSV tesztadatok
+→ sentiment elemzés + objektív modellkiértékelés
+
+Facebook API
+→ sentiment elemzés + statisztikai és kontextuális összesítés
+```
+
+### Facebook end-to-end teszt
+
+Külön end-to-end teszttel ellenőriztük a teljes Facebook-adatútvonalat:
+
+```text
+Facebook Graph API
+→ legutóbbi N poszt
+→ főkommentek + válaszkommentek
+→ pandas DataFrame-ek
+→ közös analysis pipeline
+→ context-aware fine-tuned huBERT
+→ 0.60 confidence threshold
+→ statisztikai összesítés
+→ kontextuselemzés
+→ Excel
+→ grafikonok
+→ szöveges riport
+```
+
+A teszt sikeresen lefutott, így igazolható, hogy a Facebook API-ból érkező valós adatok kompatibilisek a központi feldolgozási folyamattal.
+
+### Streamlit integráció
+
+A `src/ui/streamlit_app.py` kiegészült adatforrás-választási lehetőséggel.
+
+A felhasználó az alábbi módok közül választhat:
+
+```text
+CSV tesztadatok
+Facebook API
+```
+
+Facebook API módban megadható az elemzendő legutóbbi posztok száma. A felület alapértelmezés szerint 10 posztot ajánl fel, a jelenlegi beállítás szerint 1 és 50 közötti érték választható.
+
+A Facebook módban a Streamlit:
+
+```text
+lekéri a posztokat
+→ lekéri a főkommenteket és válaszkommenteket
+→ létrehozza a DataFrame-eket
+→ lefuttatja a közös sentiment pipeline-t
+→ megjeleníti az eredményeket
+```
+
+A címkézett CSV-adatoknál a modellkiértékelési fül továbbra is megjeleníti az Accuracy, Precision, Recall, F1-score és confusion matrix eredményeket. Facebook-adatok esetén a felület tájékoztatást jelenít meg arról, hogy referencia-címke hiányában objektív modellkiértékelés nem végezhető.
+
+A finomhangolt modell Streamlit alatt `st.cache_resource` használatával kerül gyorsítótárazásra.
+
+### Streamlit indításának ellenőrzése
+
+A felület indításakor ellenőrzésre került, hogy a Streamlit alkalmazást nem hagyományos Python-szkriptként, hanem a Streamlit futtatókörnyezetével kell elindítani:
+
+```powershell
+streamlit run src/ui/streamlit_app.py
+```
+
+vagy:
+
+```powershell
+python -m streamlit run src/ui/streamlit_app.py
+```
+
+A Streamlit-integráció végső tesztje sikeresen lefutott.
+
+### Dokumentáció és modellfájlok
+
+A README dokumentáció frissítésre került a végleges rendszerállapotnak megfelelően. Belekerült többek között:
+
+- a CSV és Facebook API adatforrások működése;
+- a főkommentek és válaszkommentek kezelése;
+- a context-aware modell és a 0,60-as operatív threshold;
+- a train, validation és test adathalmazok szerepe;
+- a végső teszteredmények;
+- a Facebook Graph API konfiguráció;
+- a Streamlit indítása;
+- a kimeneti fájlok;
+- a rendszer korlátai;
+- a biztonsági és verziókezelési tudnivalók.
+
+A nagy modellállományok nem kerülnek Git-verziókezelés alá:
+
+```text
+model.safetensors
+training_args.bin
+```
+
+Ezek külön OneDrive/SharePoint tárhelyről tölthetők le, majd a következő könyvtárba helyezendők:
+
+```text
+models/context_aware_hubert_text/
+```
+
+A normál inference működéséhez a `model.safetensors` szükséges; a `training_args.bin` elsősorban a tanítási beállítások dokumentálását és reprodukálhatóságát támogatja.
+
+### Végleges rendszerállapot
+
+Az iteráció végére a rendszer fő feldolgozási folyamata:
+
+```text
+Facebook API / CSV
+        ↓
+adatok normalizálása
+        ↓
+magyar szöveg-előfeldolgozás
+        ↓
+post_text + comment_text
+        ↓
+context-aware fine-tuned huBERT
+        ↓
+0.60 confidence threshold
+        ↓
+positive / negative / neutral
+        ↓
+statisztikai összesítés
+        ↓
+szabályalapú kontextuselemzés
+        ↓
+Excel + grafikonok + riport
+        ↓
+Streamlit felület
+```
+
+### Eredmény
+
+A fejlesztési szakasz fő funkcionális céljai teljesültek. A prototípus képes mind kézzel címkézett CSV-adatok, mind egy szabályosan elérhető adminisztrált Facebook-oldal valós adatainak feldolgozására.
+
+A Facebook-adatútvonal, a központi sentiment pipeline és a Streamlit felület összekapcsolása sikeresen megtörtént. A főkommentek mellett a kommentekre adott válaszok is bekerülnek az elemzésbe.
+
+A rendszer ezen a ponton működő, bemutatható szakdolgozati prototípusnak tekinthető. A következő szakasz elsődlegesen a végső stabilitásellenőrzésre, a szakdolgozati dokumentáció elkészítésére, az eredmények bemutatására és a korlátok, illetve továbbfejlesztési lehetőségek összefoglalására koncentrál.
