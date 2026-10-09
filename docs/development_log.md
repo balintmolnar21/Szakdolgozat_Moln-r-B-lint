@@ -1229,10 +1229,10 @@ src/training/
 A tanítás futtatásához és ellenőrzéséhez külön segédprogramok is készültek:
 
 ```text
-tools/test_training_dataset.py
-tools/test_context_aware_tokenization.py
-tools/test_tokenization_diagnostics.py
-tools/train_context_aware_model.py
+test/test_training_dataset.py
+test/test_context_aware_tokenization.py
+test/test_tokenization_diagnostics.py
+test/train_context_aware_model.py
 tools/analyze_context_aware_validation.py
 ```
 
