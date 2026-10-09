@@ -1148,7 +1148,6 @@ Az új kommentek nyers formában kerültek eltárolásra, az eredeti Unicode emo
 A kibővített adathalmaz minden kommentje kézi sentimentcímkét kap pozitív, negatív vagy semleges kategóriában. Az így létrejött nagyobb, egységesen címkézett adathalmaz szolgál majd alapul a tanító-, validációs- és teszthalmaz kialakításához, valamint a huBERT modell későbbi domain-specifikus finomhangolásához.
 
 
-Persze. Az alábbi részt közvetlenül a jelenlegi **12. iteráció után** tudod beilleszteni a `docs/development_log.md` fájlba. A megfogalmazást a meglévő fejlesztési napló szerkezetéhez és részletességéhez igazítottam. 
 
 ## 13. iteráció – Kontextusérzékeny huBERT modell domain-specifikus finomhangolása
 
